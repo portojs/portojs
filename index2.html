@@ -120,8 +120,19 @@ lines as needed -->
         Isn't it beautiful!
          </p>
     <h5 style="color: yellow; background-color: darkblue">Table Example</h5>
-        <table border="1" cellpadding="5" cellspacing="5" width="400" height="100">
+        <table border="1" cellpadding="1" cellspacing="1" width="400" height="100">
             <caption>This is a caption</caption>
+            <thead>
+            <tr>
+                <td colspan="3">This is the header</td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="3">This is the footer</td>
+            </tr>
+            </tfoot>
+            <tbody>
             <tr>
                 <th bgcolor="#f0f8ff">Color</th>
                 <th bgcolor="#90ee90">Vegetables</th>
@@ -139,6 +150,7 @@ lines as needed -->
             <tr>
                 <td colspan="3">Results</td>
             </tr>
+            </tbody>
         </table>
 </div>
 
