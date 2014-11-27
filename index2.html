@@ -281,13 +281,83 @@
             </td></tr>
         </table>
     <h5 style="color=white; background-color: deepskyblue">Font Examples</h5>
-        <font size="1">Font size 1</font><br />
-        <font size="2">Font size 2</font><br />
-        <font size="3">Font size 3</font><br />
-        <font size="4">Font size 4</font><br />
+        <font size="-1">Font size -1</font><br />
+        <font size="+2">Font size +2</font><br />
+        <font size="+3">Font size +3</font><br />
+        <font size="+4">Font size +4</font><br />
         <font size="5">Font size 5</font><br />
         <font size="6">Font size 6</font><br />
         <font size="7">Font size 7</font><br />
+        <font face="Times New Roman">Times New Roman</font><br />
+        <font face="Verdana">Verdana</font><br />
+        <font face="Comic Sans MS">Comic Sans MS</font><br />
+        <font face="Arial">Arial</font><br />
+        <font face="Bedrock,Comic Sans MS">Bedrock</font><br />
+    <h5 style="color: black; background-color: greenyellow">Basefont Tag Examples</h5>
+        <!-- LOCKED <basefont face="arial,courier,sans-serif" size="2" color="#ff0000"> -->
+        <p>This is the default font.</p>
+        <h2>Examples of the &lt;basefont&gt; Element</h2>
+        <p><font size="+2" color="#a9a9a9">
+            This is darkgray text with two sizes larger
+        </font></p>
+        <p><font face="courier" size="-1" color="#000000">
+            It is a courier font, a size smaller and black in color
+        </font></p>
+    <h5 style="color:white; background-color: indigo">Text Input Example</h5>
+        <form>
+            First name: <input type="text" name="first_name"
+                               value="John" size="20" maxlength="12"/>
+            Last name: <input type="text" name="last_name"
+                              value="Dow" size="20" maxlength="12"/>
+        </form>
+    <h5 style="color: #ffff00; background-color: blue">Password Input Example</h5>
+        <form>
+            User ID <input type="text" name="user_id"/>
+            <br>
+            Pssword <input type="password" name="password"/>
+        </form>
+    <h5 style="color: white; background-color: limegreen">Multiple-line Input Example</h5>
+        <form>
+            Description: <br />
+            <textarea rows="5" cols="50" name="description">
+                Enter description here
+            </textarea>
+        </form>
+    <h5 style="color: white; background-color: #b92c28">Checkbox Control Example</h5>
+        <form>
+            Choose your subject:<br />
+            <input type="checkbox" name="maths" value="on"/> Maths
+            <input type="checkbox" name="physics" value="on"/> Physics
+            <input type="checkbox" name="history" value="on" checked="checked"> History
+        </form>
+    <h5 style="color: white; background-color: #444444">Radio Button Control Example</h5>
+        Choose the correct answer:<br/>
+        <input type="radio" name="verb" value="verb"/> Verb
+        <input type="radio" name="adverb" value="adverb"/> Adverb
+        <input type="radio" name="adjective" value="adjective"/> Adjective<br/>
+    <h5 style="color: white; background-color: royalblue">Select Box Control</h5>
+        <form>
+            <select name="dropdown" multiple="multiple">
+                <option value="Maths" selected>Maths</option>
+                <option value="Physics">Physics</option>
+                <option value="History">History</option>
+            </select>
+        </form>
+    <h5 style="color: white; background-color: burlywood">File Upload Box</h5>
+        <form>
+            <input type="file" name="fileupload" accept="image/*"/><br />
+            This is page 10.<br />
+            <input type="hidden" name="pagenumber" value="10"/>
+            <input type="submit" name="submit" value="Submit"/>
+            <input type="reset" name="reset" value="Reset"/>
+            <input type="button" name="ok" value="OK"/>
+            <input type="image" name="imagebutton" src="imagess\PANO.jpg"/>
+        </form>
+    <h5 style="color: white; background-color: crimson">Embed Tag</h5>
+        <embed src="repository\Ne.Volnujsa.U.Menya.Vse.Normalno.2006.XviD.DVDRip.avi" width="100%" height="100">
+            <noembed><img src="images\cover.jpg" alt="Alternative Media"></noembed>
+        </embed>
+
 <a name="bottom"></a>
 <a href="index2.html#top">Go to the top</a>
 
