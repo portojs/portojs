@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Frames Example</title>
 </head>
-<frameset cols="3*,2*,1*">
-    <frame name="left" src="index.html" />
-    <frame name="center" src="index2.html" />
-    <frame name="right" src="index.html" />
+<frameset cols="25%,*,25%" border="10" framespacing="10">
+    <frame name="left" src="index.html" frameborder="1" marginwidth="30"
+            marginheight="50"/>
+    <frame name="center" src="index2.html" scrolling="no" />
+    <frame name="right" src="index.html" noresize="noresize" longdesc="index2.html"/>
     <noframes>
         <body style="color: black; background: lightcyan">
             You browser does not support frames
