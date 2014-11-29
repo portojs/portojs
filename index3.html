@@ -16,11 +16,36 @@
             padding: 1em;
         }
         label {
-            float: left; width: 6em;
+            float: left; width: 6em; clear: left;
         }
     </style>
 </head>
 <body>
+    <form action="someplace.php">
+        <fieldset>
+            <legend>
+                Films you like
+            </legend>
+            <div>
+                <label for="drama">
+                    Drama
+                </label>
+                <input id="drama" type="checkbox" value="drama" name="drama">
+            </div>
+            <div>
+                <label for="action">
+                    Action
+                </label>
+                <input id="action" type="checkbox" value="action" name="action">
+            </div>
+            <div>
+                <label for="comedy">
+                    Comedy
+                </label>
+                <input id="comedy" type="checkbox" value="comedy" name="comedy">
+            </div>
+        </fieldset>
+    </form>
 
 </body>
 </html>
