@@ -13,15 +13,15 @@ h1 {
 h2 {
     font-size: 1.5em;
     background-color: #ccc;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border: 0;
+    margin: 30px 5px 30px 5px;
+    padding: 5px 10 px 5px 10px;
+}
+h3 {
+    border-style: dotted;
+    border-width: 3px;
+    border-left-width: 10px;
+    border-right-width: 10px;
+    border-color: red;
 }
 a {
     text-decoration: underline;
@@ -37,10 +37,36 @@ p {
     letter-spacing: 0.1em;
     word-spacing: 0.3em;
     line-height: 1.5em;
-    text-align: center;
-    text-indent: 10px;
+    text-align: left;
+    text-indent: 0px;
     text-decoration: blink;
+    margin: 2px;
+    padding: 5px;
 }
 p:hover {
     text-transform: capitalize;
+}
+code {
+    font: 1em/1.5 Courier;
+}
+#border1 {
+    border: 1px solid;
+}
+#border2 {
+    border: 1px dotted;
+}
+#border3 {
+    border: 2px dashed #ccc;
+}
+#border4 {
+    border: solid;
+    border-width: 1px 5px 10px 15px;
+}
+#border5 {
+    border: 5px;
+    border-style: solid dotted dashed solid;
+}
+#border6 {
+    border: 5px solid;
+    border-color: black #444 #888 #ccc;
 }
