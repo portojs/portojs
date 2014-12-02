@@ -71,3 +71,9 @@ table {
     color: blue;
     font-style: italic;
 }
+input[type=number]:valid {
+    background: green;
+}
+input[type=number]:invalid {
+    background: red;
+}
