@@ -77,3 +77,16 @@ input[type=number]:valid {
 input[type=number]:invalid {
     background: red;
 }
+#buba {
+    background-color: #ccc;
+    font-weight: bold;
+    padding: 20px;
+    color: red;
+}
+.intro {
+    background: #ccc;
+    padding: 20px;
+}
+p.intro {
+    color: red;
+}

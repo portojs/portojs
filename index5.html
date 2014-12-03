@@ -156,9 +156,10 @@
     <form action="somescript.php">
         <fieldset>
             <legend>Name</legend>
-            <p>First Name <input name="first_name"></p>
-            <p>Last Name <input name="last_name"></p>
+            <p>First Name <input name="first_name" placeholder="John" autofocus></p>
+            <p>Last Name <input name="last_name" placeholder="Doe"></p>
             <p>Age <input value="20" type="number" name="quantity" step="2" min="20" max="30"></p>
+            <p>Email <input type="email" placeholder="you@somewhere.com" name="email_address" id="email_address"></p>
         </fieldset>
         <fieldset>
             <legend>Temperature</legend>
@@ -170,8 +171,8 @@
         </fieldset>
         <fieldset>
             <legend>Address</legend>
-            <p>Street <input name="address_street"></p>
-            <p>City <input name="address_city"></p>
+            <p>Street <input name="address_street" placeholder="My Street"></p>
+            <p>City <input name="address_city" placeholder="My City"></p>
             <p>
                 Country
                 <select name="country">
@@ -192,8 +193,49 @@
                     </optgroup>
                 </select>
             </p>
+            <p>
+                Country
+                <input name="country" list="country_name">
+                    <datalist id="country_name">
+                        <option value="Arnor"></option>
+                        <option value="Gondor"></option>
+                        <option value="Rohan"></option>
+                        <option value="Umbar"></option>
+                        <option value="Anduin"></option>
+                        <option value="Avalamar"></option>
+                    </datalist>
+            </p>
         </fieldset>
     </form>
+    <hr>
+        <video src="G.avi" controls autoplay loop muted height="150" width="200">
+            <img src="funnycats.jpg" alt="Hilarious cats"></video>
+        <video src="Gaslight.avi" autoplay controls poster="images\PANO.jpg"
+            height="200" width="350"></video>
+        <video controls>
+            <source src="bublik.mp4" type="video/mp4; codecs='avc1, mp4a'">
+            <source src="bublik.avi" type="video/avi; codecs='vp8.0, vorbis'">
+            <p>My browser does not like HTML5</p>
+        </video>
+    <hr>
+        <audio src="repository\Ackky - Untitle Acid.mp3" autoplay controls muted loop></audio>
+    <hr>
+        <canvas id="flying_castles" width="600" height="200">
+            <p>Flying castles and princess and dragons and such</p>
+        </canvas>
+    <hr>
+        <p id="buba">Too bad folks, but I'm going in!</p>
+    <hr>
+        <div id="buba">
+            <h1>The very same Buba!</h1>
+            <p class="intro">This is a Buba from my neighbourhood.</p>
+            <p>You will certainly like him!</p>
+        </div>
+    <hr>
+        <h4 class="intro">Go For It!</h4>
+        <p class="intro">This</p>
+        <p class="intro">That</p>
+        <p class="intro">Those</p>
 </body>
 
 </html>
