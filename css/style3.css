@@ -6,6 +6,7 @@ body {
     background-color: #ffc;
     margin: 20px;
     padding: 0;
+    background-image: url("d:\- middle-country\=progging\porto\images\PANO.jpg") no-repeat fixed;
 }
 
 /* This is a comment, by the way */
@@ -49,10 +50,6 @@ img {
     border-color: #ccc;
 }
 
-a {
-    text-decoration: none;
-}
-
 strong {
     font-style: italic;
     text-transform: uppercase;
@@ -89,4 +86,87 @@ input[type=number]:invalid {
 }
 p.intro {
     color: red;
+}
+
+.bodya, .bodya2, .bodya3 {
+    color: green;
+}
+
+.bodya {
+    background-color: #ccc;
+}
+
+.bodya2 {
+    background-color: yellow;
+}
+
+.bodya3 {
+    background-color: white;
+}
+
+#top {
+    background-color: #ccc;
+    padding: 1em;
+}
+
+#top h1 {
+    color: #ff0;
+}
+
+#top p {
+    color: red;
+    font-weight: bold;
+}
+
+a:active {
+    color: red;
+}
+
+a:hover {
+    color: purple;
+    text-decoration: underline dotted;
+}
+
+input:focus {
+    background-color: lightgrey;
+}
+
+.child:first-child {
+    text-decoration: none;
+}
+
+.child {
+    text-decoration: underline;
+}
+
+/*
+p:first-child {
+    font-weight: bold;
+    font-size: 40px;
+    font-style: italic;
+}
+
+p:last-child {
+    font-weight: bold;
+    font-size: 40px;
+}
+*/
+
+p.border {
+    border: 1px red solid;
+}
+
+p.sum {
+    font: 14px/1.5 "Times New Roman", times, serif;
+    padding: 30px 10px;
+    border: solid;
+    border-width: 1px 5px 5px 1px;
+    border-color: red green blue yellow;
+    margin: 10px 50px;
+}
+
+table.image {
+    padding: 5em;
+    margin: 10em;
+    background: white url(images\PANO.jpg) no-repeat fixed;
 }
