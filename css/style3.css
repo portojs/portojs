@@ -170,3 +170,51 @@ table.image {
     margin: 10em;
     background: white url(images\PANO.jpg) no-repeat fixed;
 }
+
+body #content .alternative li {
+    background-color: green;
+}
+
+ol.inline li {
+    display: inline;
+}
+
+#navigation a {
+    display: inline-block;
+    padding: 20px 10px;
+}
+
+p.none {
+    display: none;
+}
+
+p.hidden {
+    visibility: hidden;
+}
+
+div.table {
+    display: table;
+    padding: 10px 20px;
+    margin: 5px 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+div.table div:last-child {
+    display: table-footer-group;
+}
+
+div.table div {
+    display: table-row-group;
+}
+div.table div:first-child {
+    display: table-header-group;
+}
+
+div.table div div {
+    display: table-row;
+}
+
+div.table div div p {
+    display: table-cell;
+}
