@@ -218,3 +218,109 @@ div.table div div {
 div.table div div p {
     display: table-cell;
 }
+
+p.first-letter {
+    font-size: 12px;
+}
+
+p.first-letter:first-letter {
+    font-size: 24px;
+    float: left;
+}
+
+p.first-letter:first-line {
+    font-weight: bold;
+}
+
+p.first-letter:before {
+    content: open-quote;
+}
+
+p.first-letter:after {
+    content: close-quote;
+}
+
+ul#before_content:after {
+    content: url(images\PANO.jpg);
+}
+
+ul#before_content li:hover:before {
+    content: "POW! ";
+    background-color: red;
+    color: #fc0;
+}
+
+/*
+#navigation2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+}
+
+#navigation3 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+}
+*/
+
+#navigation2 {
+    float: left;
+    width: 200px;
+}
+
+#navigation2 a:hover {
+    background: #39c;
+    border-color: white;
+}
+
+#navigation2 ul a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    background-color: #17a;
+    border-left: 3px solid #28b;
+    padding: 0 0.5em;
+}
+
+#navigation3 {
+    float: right;
+    width: 200px;
+}
+
+#navigation3 a:hover {
+    background: #39c;
+    border-color: white;
+}
+
+#list1 {
+    list-style: none;
+}
+
+#content2 {
+    margin: 0 200px;
+}
+
+#footer {
+    clear: both;
+    text-align: center;
+}
+
+#header1 {
+    margin-top: 2em;
+}
+
+#body1 {
+    margin-top: 0;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 800px;
+    clear: both;
+    text-align: center;
+}
