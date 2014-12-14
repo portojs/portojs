@@ -11,9 +11,11 @@ body {
 
 /* This is a comment, by the way */
 
+/*
 p {
     line-height: 21px;
 }
+*/
 
 h1 {
     color: #ffc;
@@ -428,4 +430,60 @@ h5 ~ p {
 #transparency {
     background-color: rgba(0,0,0,0.6);
     color: white;
+}
+
+#hsla1 {
+    background-color: hsla(0, 75%, 75%, 0.2);
+}
+
+#hsla2 {
+    background-color: hsla(0, 75%, 75%, 0.4);
+}
+
+#hsla3 {
+    background-color: hsla(0, 75%, 75%, 0.6);
+}
+
+#hsla4 {
+    background-color: hsla(0, 75%, 75%, 0.8);
+}
+
+#hsla5 {
+    background-color: hsla(0, 75%, 75%, 1.0);
+}
+
+p.what {
+    text-decoration: line-through;
+}
+
+p.what + p {
+    color: violet;
+}
+
+p.what + ol {
+    color: violet;
+}
+
+div.what li {
+    color: royalblue;
+}
+
+div.what ~ ol {
+    font-weight: bold;
+}
+
+div.what:first-child {
+    background-color: greenyellow;
+}
+
+div.what p:first-letter {
+    font: 22px;
+}
+.what:last-child {
+    background-color: sandybrown;
+}
+
+#ani_test1 p {
+    height: 360px;
+    padding: 40px;
 }
