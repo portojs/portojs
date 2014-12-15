@@ -1,0 +1,120 @@
+h1 + #that {
+    color: red;
+}
+
+#that > p {
+    background-color: yellow;
+}
+
+#par1:first-letter {
+    font-size: 24px;
+}
+
+#that > p:before {
+    content: "Main thought";
+    font-size: 10px;
+    padding-right: 5px;
+    float: left;
+}
+
+#par1:first-child {
+    text-decoration: line-through;
+}
+
+#par1:last-child {
+    text-decoration: line-through;
+}
+
+div.table {
+    display: table;
+    padding: 10px 20px;
+    margin: 5px 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+div.table div:last-child {
+    display: table-footer-group;
+}
+
+div.table div:first-child {
+    display: table-header-group;
+}
+
+div.table div {
+    display: table-row-group;
+}
+
+div.table div p {
+    display: table-cell;
+}
+
+#ani  {
+    font: 36px arial, helvetica, sans-serif;
+    color: #000;
+    background: #06c;
+}
+
+#ani p {
+    height: 360px;
+    padding: 40px;
+}
+
+a {
+    display: block;
+    margin: 0 auto;
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: 2.5s;
+    transition: 2.5s;
+}
+
+a:hover {
+    background: rgba(255,255,255,.5);
+    color: white;
+    border-color: white;
+}
+
+#daddy {
+    background: rgba(0,0,0,.3);
+}
+
+#daddy a {
+    width: 120px;
+    height: 120px;
+    padding: 60px;
+    border-radius: 80px;
+    border: 60px solid rgba(255,255,255,.5);
+}
+
+#daddy a:hover {
+    border-radius: 180px;
+}
+
+p[title] {
+    border-bottom: 1px dotted #ccc;
+}
+
+[href] {
+    background-color: green;
+}
+
+p[title=true] {
+    background-color: #2288bb;
+    color: white;
+}
+
+p[title=testing] {
+    transition: border 2.5s linear 0;
+    color: hsl(36,50%,50%);
+    font-size: 30px;
+    border-radius: 60px;
+    border: 10px solid yellowgreen;
+}
+
+p[title=testing]:hover {
+    color: hsl(36,100%,50%);
+    border-radius: 200px;
+    border: 20px solid blue;
+}
