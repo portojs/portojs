@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+    <title>
+
+        CSS transitions: Timing functions
+
+    </title>
+    <style>
+
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font: 15px arial, helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #06c;
+        }
+
+        li {
+            list-style: none;
+            margin: 20px 0;
+            background: #def;
+        }
+        li a {
+            display: block;
+            width: 300px;
+            padding: 20px 0;
+            background: #06c;
+            color: white;
+        }
+
+        #timing1 {
+            -webkit-transition: 1s;
+            transition: 1s;
+        }
+        #timing2 {
+            -webkit-transition: 1s linear;
+            transition: 1s linear;
+        }
+        #timing3 {
+            -webkit-transition: 1s ease-in;
+            transition: 1s ease-in;
+        }
+        #timing4 {
+            -webkit-transition: 1s ease-out;
+            transition: 1s ease-out;
+        }
+        #timing5 {
+            -webkit-transition: 1s cubic-bezier(.5,.25,0,1);
+            transition: 1s cubic-bezier(.5,.25,0,1);
+        }
+        #timing6 {
+            -webkit-transition: 1s cubic-bezier(.5,1.5,.5,-0.5);
+            transition: 1s cubic-bezier(.5,1.5,.5,-0.5);
+        }
+
+        li a:hover {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>CSS transition timing functions</h1>
+<ul>
+    <li><a href="" id="timing1"><code>ease</code> (default)</a></li>
+    <li><a href="" id="timing2"><code>linear</code></a></li>
+    <li><a href="" id="timing3"><code>ease-in</code></a></li>
+    <li><a href="" id="timing4"><code>ease-out</code></a></li>
+    <li><a href="" id="timing5"><code>cubic-bezier(.5,.25,0,1)</code></a></li>
+    <li><a href="" id="timing6"><code>cubic-bezier(.5,1.5,.5,-0.5)</code></a></li>
+</ul>
+<!--
+
+ Link back to HTML Dog:
+
+-->
+<p><a href="http://www.htmldog.com/examples/"><img src="http://www.htmldog.com/badge1.gif" alt="HTML Dog"></a></p>
+</body>
+
+</html>

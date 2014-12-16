@@ -106,6 +106,7 @@ p[title=true] {
 }
 
 p[title=testing] {
+    -webkit-transition: border 2.5s linear 0;
     transition: border 2.5s linear 0;
     color: hsl(36,50%,50%);
     font-size: 30px;
@@ -117,4 +118,16 @@ p[title=testing]:hover {
     color: hsl(36,100%,50%);
     border-radius: 200px;
     border: 20px solid blue;
+}
+
+p[title=testing2] {
+    -webkit-transition: 2s ease-in;
+    transition: 2s ease-in;
+    transition-property: background-color;
+    background-color: red;
+    color: white;
+}
+
+p[title=testing2]:hover {
+    background-color: green;
 }
