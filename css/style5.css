@@ -1,3 +1,5 @@
+@import url(morestyles.css);
+
 h1 + #that {
     color: red;
 }
@@ -130,4 +132,126 @@ p[title=testing2] {
 
 p[title=testing2]:hover {
     background-color: green;
+}
+
+.note {
+    display: block;
+    margin-left: 250px;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    font-size: 50px;
+    color: white;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+}
+
+#grad1 {
+    background: linear-gradient(to right,orange,red);
+}
+
+#grad1:hover {
+    transform: rotate(-10deg) scale(1.5);
+    -webkit-transform: rotate(-10deg) scale(1.5);
+    -ms-transform: rotate(-10deg) scale(1.5);
+    transform-origin: 0 0;
+}
+
+#grad2 {
+    background: linear-gradient(to bottom right, hsl(46,100%,60%), blue);
+}
+
+#grad2:hover {
+    transform: skew(20deg,10deg) scale(1,2) translate(50px,100px);
+    -webkit-transform: skew(20deg,10deg) scale(1,2) translate(50px,100px);
+    -ms-transform: skew(20deg,10deg) scale(1,2) translate(50px,100px);
+    transform-origin: 0 0;
+}
+
+#grad3 {
+    background: linear-gradient(20deg,hsl(26,90%,70%),darkorange);
+}
+
+#grad3:hover {
+    transform: rotateX(20deg) rotateY(20deg) translateX(50px);
+}
+
+#grad4 {
+    background: radial-gradient(circle closest-side at 120px 130px, indianred, firebrick);
+}
+
+#grad4:hover {
+    background: radial-gradient(circle closest-side at 150px 160px, indianred, firebrick);
+}
+
+#grad5 {
+    background: linear-gradient(135deg, hsl(36,100%,50%) 10%,
+    hsl(72,100%,50%) 60%, white 90%);
+}
+
+#grad6 {
+    background: repeating-linear-gradient(white, black 30px, white 10px);
+}
+
+#grad7 {
+    background: repeating-radial-gradient(#8b2, #8b2 10px, #e90 10px, #e90 20px);
+ }
+
+@media screen and (max-width: 1000px) {
+    #content {width: 100%}
+}
+
+@media screen and (max-width: 800px) {
+    #nav {float: none}
+}
+
+@media screen and (max-width: 600px) {
+    #content aside {
+        float: none;
+        display: block;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #nav {float: left}
+}
+
+@media screen and (orientation: portrait) {
+    #nav {float: none}
+}
+
+@media screen and (min-device-height: 768px) and (max-device-width: 1024px) {
+    body {background: none}
+}
+
+@media (device-pixel-ratio: 2) and (-webkit-device-pixel-ratio: 2) {
+    body {background: url(twiceasbig.png)}
+}
+
+@media screen and (resolution: 326dpi) {
+}
+
+@media screen and (min-resolution: 76dpi) {
+}
+
+@media screen and (device-aspect-ratio: 3/4) {
+}
+
+@media print {
+    body {
+        font-size: 36px;
+        font-family: times, serif;
+    }
+    #navigation {
+        display: none;
+    }
+}
+
+@font-face {
+    font-family: "font of all knowledge";
+    src: url(fontofallknowledge.woff);
+}
+
+p {
+    font-family: "font of all knowledge", arial, sans-serif;
 }
