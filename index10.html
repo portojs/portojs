@@ -1,49 +1,62 @@
-<!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Practice CSS border-collapse Property</title>
-    <style type="text/css">
-        table.one {border-collapse:collapse;}
-        table.two {border-collapse:separate;}
-        td.a {
-            border-style:dotted;
-            border-width:3px;
-            border-color:#000000;
-            padding: 10px;
-        }
-        td.b {
-            border-style:solid;
-            border-width:3px;
-            border-color:red;
-            padding:10px;
-        }
-    </style>
+<head>
+    <title>Practice CSS empty-cell Property</title>
 </head>
 <body>
-<table class="one">
-    <caption>Collapse Border Example</caption>
-    <tr>
-        <td class="a"> Cell A Collapse Example</td>
-        <td class="b"> Cell B Collapse Example</td>
+
+<style type="text/css">
+    table.empty{
+        width:350px;
+        border:solid 3px;
+        border-collapse:separate;
+        empty-cells:hide;
+    }
+    table.test{
+        width:350px;
+        border:solid 3px;
+        border-collapse:collapse;
+        empty-cells:hide;
+        text-align: center;
+    }
+    td.test{
+        border-style: solid;
+        border-width: 2px;
+    }
+    td.empty{
+        padding:5px;
+        border-style:solid;
+        border-width:1px;
+        border-color:#999999;
+    }
+</style>
+<table class="test">
+    <tr class="test">
+        <td class="test">1</td>
+        <td class="test">2</td>
+        <td class="test">3</td>
     </tr>
-    <tr>
-        <td class="b"> Cell B Collapse Example</td>
-        <td class="a"> Cell A Collapse Example</td>
+    <tr class="test">
+        <td class="test">1</td>
+        <td class="test">2</td>
+        <td class="test">3</td>
     </tr>
 </table>
-
-<br />
-
-<table class="two">
-    <caption>Separate Border Example</caption>
+<hr>
+<table class="empty">
     <tr>
-        <td class="a"> Cell A Collapse Example</td>
-        <td class="b"> Cell B Collapse Example</td>
+        <th></th>
+        <th>Title one</th>
+        <th>Title two</th>
     </tr>
     <tr>
-        <td class="b"> Cell B Collapse Example</td>
-        <td class="a"> Cell A Collapse Example</td>
+        <th>Row Title</th>
+        <td class="empty">value</td>
+        <td class="empty">value</td>
+    </tr>
+    <tr>
+        <th>Row Title</th>
+        <td class="empty">value</td>
+        <td class="empty"></td>
     </tr>
 </table>
 
