@@ -1,64 +1,62 @@
 <html>
 <head>
-    <title>Practice CSS empty-cell Property</title>
+    <title>Practice CSS z-index Property</title>
+    <link href="css/style6.css" class="text/css" rel="stylesheet">
 </head>
 <body>
 
-<style type="text/css">
-    table.empty{
-        width:350px;
-        border:solid 3px;
-        border-collapse:separate;
-        empty-cells:hide;
-    }
-    table.test{
-        width:350px;
-        border:solid 3px;
-        border-collapse:collapse;
-        empty-cells:hide;
-        text-align: center;
-    }
-    td.test{
-        border-style: solid;
-        border-width: 2px;
-    }
-    td.empty{
-        padding:5px;
-        border-style:solid;
-        border-width:1px;
-        border-color:#999999;
-    }
-</style>
-<table class="test">
-    <tr class="test">
-        <td class="test">1</td>
-        <td class="test">2</td>
-        <td class="test">3</td>
-    </tr>
-    <tr class="test">
-        <td class="test">1</td>
-        <td class="test">2</td>
-        <td class="test">3</td>
-    </tr>
-</table>
-<hr>
-<table class="empty">
-    <tr>
-        <th></th>
-        <th>Title one</th>
-        <th>Title two</th>
-    </tr>
-    <tr>
-        <th>Row Title</th>
-        <td class="empty">value</td>
-        <td class="empty">value</td>
-    </tr>
-    <tr>
-        <th>Row Title</th>
-        <td class="empty">value</td>
-        <td class="empty"></td>
-    </tr>
-</table>
+<div id="red"></div>
+<div id="yellow"></div>
+<div id="green"></div>
+
+<script src="js/script.js"></script>
+
+<a href="somewhere.html" onclick="alert('Nooooo!');">Click me</a>
+<a href="somewhere.html" onclick=name;">Click me</a>
+
+<canvas></canvas>
+<script>
+    var canvas = document.querySelector('canvas'),
+            ctx = canvas.getContext('2d');
+
+    var resize = function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resize);
+
+    window.addEventListener('load', function () {
+
+        resize();
+
+        var pos, vel;
+        pos = {
+            x: 10,
+            y: 10
+        };
+        vel = {
+            x: 1,
+            y: 1
+        };
+
+        var loop = function () {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pos.x += vel.x;
+            pos.y += vel.y;
+            if (pos.x < 5 || pos.x > canvas.width - 5) {
+                vel.x *= -1;
+            }
+            if (pos.y < 5 || pos.y > canvas.height - 5) {
+                vel.y *= -1;
+            }
+            ctx.fillRect(pos.x - 5, pos.y - 5, 10, 10);
+        };
+
+        setInterval(loop, 1000 / 60);
+    });
+
+</script>
 
 </body>
 </html>

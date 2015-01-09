@@ -1,0 +1,48 @@
+
+div {
+    width:300px;
+    height:100px;
+    position:relative;
+    border: solid;
+}
+
+#red {
+    background:red;
+    top:10px;
+    left:80px;
+    z-index:2
+}
+
+#green {
+    background:green;
+    top:-220px;
+    left:120px;
+    z-index:3;"
+}
+
+#yellow {
+    background:yellow;
+    top:-60px;
+    left:35px;
+    z-index:1;
+}
+
+div:hover {
+    background:blue;
+    border: dotted;
+}
+
+#red:hover {
+    background:blue;
+    z-index:3;
+}
+
+#green:hover {
+    background:blue;
+    z-index:3;
+}
+
+#yellow:hover {
+    background:blue;
+    z-index:3;
+}
