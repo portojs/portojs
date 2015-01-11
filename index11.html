@@ -10,7 +10,130 @@
              * a
              * comment
              */
-            document.write("Hello World!");
+            document.write("Hello World!<br/>");
+            function sayHello() {alert("Hello World!");}
+            var G1 = "global";//declaring a global variable
+            function checkScope() {
+                var G1 = "local";//declaring a local variable
+                var P1 = document.getElementById("parOne");
+                P1.write(G1);
+            }
+            boba = "Gupa";
+            document.write(boba+"<br/>");
+
+            var age = 10;
+            if (age > 18) {
+                document.write("<b>Qualifies for driving</b><br/>")
+            }else{
+                document.write("<b>Does not qualify for driving</b><br/>")
+            }
+
+            var book;
+            book = "math";
+            if (book == "math"){
+                document.write("<b>Math book</b><br/>")
+            }else if (book == "history"){
+                document.write("<b>History book</b><br/>")
+            }else if (book == "ecomonics"){
+                document.write("<b>Economics book</b><br/>")
+            }else{
+                document.write("<b>Unknown book</b><br/>")
+            }
+
+            var grade = "A";
+            document.write("Entering switch block<br/>");
+            switch (grade){
+                case "A": document.write("Good job<br/>");
+                    break;
+                case "B": document.write("Pretty good<br/>");
+                    break;
+                case "C": document.write("Passed<br/>");
+                    break;
+                case "D": document.write("Not so good<br/>");
+                    break;
+                case "F": document.write("Failed<br/>");
+                    break;
+                default: document.write("Unknown grade<br/>");
+            }
+            document.write("Exiting switch block<br/>");
+
+            var count = 0;
+            document.write("Starting loop:" + "<br/>");
+            while (count < 10){
+                document.write("Counting: " + count + "<br/>");
+                count++;
+            }
+            document.write("Loop ended!" + "<br/>");
+
+            var count2 = 0;
+            document.write("Starting loop-2:" + "<br/>");
+            do {
+                document.write("Counting: " + count2 + "<br/>")
+            } while (count2 < 0);
+            document.write("Loop ended!" + "<br/>");
+
+            var count3;
+            document.write("Starting loop-3:" + "<br/>");
+            for (count3 = 0; count3 < 10; count3++){
+                document.write("Counting: " + count);
+                document.write("<br/>");
+            }
+            document.write("Loop ended!"+"<br/>");
+
+            var aProperty;
+            document.write("Navigator object properties:" + "<br/>");
+            for (aProperty in navigator){
+                document.write(aProperty);
+                document.write("<br/>");
+            }
+            document.write("Navigator object properties listed!" + "<br/>");
+
+            var x = 1;
+            document.write("Entering the loop-4:" + "<br/>");
+            while (x < 20){
+                if (x == 5){
+                    break;
+                }
+                x++;
+                document.write(x + "<br/>");
+            }
+            document.write("Exiting the loop-4!" + "<br/>");
+
+            var x2 = 0;
+            document.write("Entering the loop-5" + "<br/>");
+            while (x < 20){
+                x = x + 1;
+                if (x == 10){
+                    continue;
+                }
+                document.write(x + "<br/>");
+            }
+            document.write("Exiting the loop-5!" + "<br/>");
+
+            document.write("Entering the loop-6!" + "<br/>");
+            outerloop:
+            for (var i = 0; i < 5; i++){
+                document.write("Outerloop: " + i + "<br/>");
+                innerloop:
+                for (var j = 0; j < 5; j++){
+                    if (j > 3) break;
+                    if (i == 2) break innerloop;
+                    if (i == 4) break outerloop;
+                    document.write("Innerloop: " + j + "<br/>");
+                }
+            }
+            document.write("Exiting the loop-6!" + "<br/>");
+
+            document.write("Entering the loop-7!" + "<br/>");
+            outerloop:
+            for (var i2 = 0; i2 < 3; i2++){
+                document.write("Outerloop: " + i2 + "<br/>");
+                for (var j2 = 0; j2 < 5; j2++){
+                    if (j2 == 3) {continue outerloop}
+                    document.write("Innerloop " + j2 + "<br/>");
+                }
+            }
+            document.write("Exiting the loop-7!" + "<br/>");
         //-->
     </script>
     <title></title>
@@ -20,6 +143,8 @@
 </head>
 <body>
     <div id="first">Done</div>
-    <p></p>
+    <p id="parOne"></p>
+    <input type="button" onclick="sayHello()" value="Say Hello">
+    <input type="button" onclick="checkScope()" value="Check Scope">
 </body>
 </html>
