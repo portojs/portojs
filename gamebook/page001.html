@@ -4,20 +4,79 @@
     <meta charset="UTF-8">
     <title>Deep woods and ancient castles</title>
     <style>
-        #maingrad {
+        #mainGrad {
             min-height: 1200px;
             background: -webkit-linear-gradient(lightskyblue, white);
             background: -o-linear-gradient(lightskyblue, white);
             background: -moz-linear-gradient(lightskyblue, white);
             background: linear-gradient(lightskyblue, white);
         }
+        #textField {
+            margin: 20pt;
+            padding: 10pt;
+        }
+/*        ul {
+            list-style-type: square;
+        }
+/*        li:hover {
+            background: dodgerblue;
+            color: white;
+        }
     </style>
+    <script type="text/javascript">
+        var location1 = "It is a dark night, the road is surrounded by black trees. " +
+                "The wood on both sides is very dense. The road goes south and north.";
+        document.getElementById("locationField").onload = function(){loadLocation1()};
+        function loadLocation1(){
+            document.getElementById("LocationField").innerHTML = location1;
+        }
+        var hero = {
+            strength: 15,
+            speed: 15,
+            charisma: 15,
+            power: 15
+        };
+        var bandit1 = {
+            strength: 20,
+            speed: 10,
+            charisma: 10,
+            power: 18
+        };
+        function talkBandit1(){
+            var result1 = "The bandit laughed into your face and brandished his saber.";
+            var result2 = "The bandit got nervous and retreated into the woods.";
+            if (hero.charisma < bandit1.power) {
+                document.getElementById("resultField").innerHTML = result1;
+            }
+            else {document.getElementById("resultField").innerHTML = result2;}
+        }
+        function attackBandit1(){
+            var result1 = "The bandit easily deflected all the attacks and disarmed you " +
+                    "with a deft maneuver.";
+            var result2 = "The bandit proved no match for you, in less than a minute " +
+                    "you've disarmed him.";
+            if (hero.strength < bandit1.strength) {
+                document.getElementById("resultField").innerHTML = result1;
+            }
+            else {document.getElementById("resultField").innerHTML = result2;}
+        }
+    </script>
 </head>
 
-<body id="maingrad">
-    <p style="">
-        It is a dark night, you are surrounded by black trees.
-        The road goes south and north.
-    </p>
+<body id="mainGrad">
+    <div id="textField">
+        <p id="locationField"></p>
+        <p>
+            In the middle of the road stands a stinky bandit with a rusty saber in his hand.
+        </p>
+        <ul>
+            <li onclick="talkBandit1()">Try to talk it out with the bandit</li>
+            <li onclick="attackBandit1()">Try to attack the bandit</li>
+            <li>Try to run away from the bandit</li>
+            <li>Go south</li>
+            <li>Go north</li>
+        </ul>
+        <p id="resultField"></p>
+    </div>
 </body>
 </html>
