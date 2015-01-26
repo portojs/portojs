@@ -32,6 +32,7 @@
     <script type="text/javascript">
         var location1 = "The sky is dark, the road is surrounded by black trees. " +
                 "The wood on both sides is very dense. The road goes south and north.";
+        var location1BanditEscaped = "<li onclick='goSouthLocation1()'>Go south</li><li onclick='goNorthLocation1()'>Go north</li>";
         var location2 = "The forest edge is near - there are not so many trees as before and " +
                 "most of them are young sapling. There is a path, going westwards " +
                 "between the trees.";
@@ -49,7 +50,8 @@
             speed: 10,
             charisma: 10,
             power: 18,
-            alive: true
+            alive: true,
+            present: true
         };
         function intimidateBandit1(){
             var result1 = "The bandit laughed into your face and spit under your feet.";
@@ -60,6 +62,8 @@
             else {
                 document.getElementById("resultField").innerHTML = result2;
                 document.getElementById("eventField").innerHTML = " ";
+                document.getElementById("actionList").innerHTML = location1BanditEscaped;
+                bandit1.present = false;
             }
         }
         function attackBandit1(){
@@ -86,7 +90,7 @@
             var result1 = "As you try to go south, the bandit blocks your way and says " +
                     "menacingly: 'Where do you think you're going?!";
             var result2 = "You walk south, soon the trees on both sides become scarce.";
-            if (bandit1.alive = true){
+            if ((bandit1.alive == true) && (bandit1.present == true)) {
                 document.getElementById("resultField").innerHTML = result1;
             }
             else {
@@ -99,7 +103,7 @@
                     "menacingly: 'Where do you think you're going?!";
             var result2 = "You walk north, if anything the sky seems to grow even darker" +
                     "and the air heavier. It seems you are going deeper into the forest.";
-            if (bandit1.alive = true){
+            if (bandit1.alive == true){
                 document.getElementById("resultField").innerHTML = result1;
             }
             else {
@@ -116,7 +120,7 @@
         <p id="eventField">
             In the middle of the road stands a stinky bandit with a rusty saber in his hand.
         </p>
-        <ul>
+        <ul id="actionList">
             <li onclick="intimidateBandit1()">Try to intimidate the bandit</li>
             <li onclick="attackBandit1()">Try to attack the bandit</li>
             <li onclick="escapeBandit1()">Try to run away from the bandit</li>
