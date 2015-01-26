@@ -15,10 +15,10 @@
             margin: 20pt;
             padding: 10pt;
         }
-/*        ul {
+        ul {
             list-style-type: square;
         }
-/*        li:hover {
+        li:hover {
             background: dodgerblue;
             color: white;
         }
@@ -26,7 +26,6 @@
     <script type="text/javascript">
         var location1 = "It is a dark night, the road is surrounded by black trees. " +
                 "The wood on both sides is very dense. The road goes south and north.";
-        document.getElementById("locationField").onload = function(){loadLocation1()};
         function loadLocation1(){
             document.getElementById("LocationField").innerHTML = location1;
         }
@@ -63,7 +62,7 @@
     </script>
 </head>
 
-<body id="mainGrad">
+<body id="mainGrad" onload="document.getElementById("locationField").innerHTML=location1">
     <div id="textField">
         <p id="locationField"></p>
         <p>
