@@ -1,0 +1,28 @@
+#mainGradient {
+    min-height: 1200px;
+    background: -webkit-linear-gradient(lightskyblue, white);
+    background: -o-linear-gradient(lightskyblue, white);
+    background: -moz-linear-gradient(lightskyblue, white);
+    background: linear-gradient(lightskyblue, white);
+}
+#mainWindow {
+    margin: 20pt;
+    padding: 10pt;
+}
+#eventField {
+    height: 20px;
+}
+#actionList {
+    height: 150px;
+}
+#resultField {
+    margin-top: 30pt;
+    font-style: italic;
+}
+ul {
+    list-style-type: square;
+}
+li:hover {
+    background: dodgerblue;
+    color: white;
+}
