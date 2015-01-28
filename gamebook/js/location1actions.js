@@ -10,7 +10,10 @@ function intimidateBandit1() {
     else {
         document.getElementById("resultField").innerHTML = result2;
         document.getElementById("eventField").innerHTML = " ";
-        document.getElementById("actionList").innerHTML = location1BanditEscaped;
+        document.getElementById("action1").innerHTML = location1Action5;
+        document.getElementById("action2").innerHTML = location1Action6;
+        document.getElementById("action3").innerHTML = "<p></p>";
+        document.getElementById("action4").innerHTML = "<p></p>";
         bandit1.present = false;
     }
 }
