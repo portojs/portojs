@@ -1,21 +1,21 @@
-#mainGradient {
+#main_gradient {
     min-height: 1200px;
     background: -webkit-linear-gradient(lightskyblue, white);
     background: -o-linear-gradient(lightskyblue, white);
     background: -moz-linear-gradient(lightskyblue, white);
     background: linear-gradient(lightskyblue, white);
 }
-#mainWindow {
+#main_window {
     margin: 20pt;
     padding: 10pt;
 }
-#eventField {
+#event_field {
     height: 20px;
 }
-#actionList {
+#action_list {
     height: 150px;
 }
-#resultField {
+#result_field {
     margin-top: 30pt;
     font-style: italic;
 }

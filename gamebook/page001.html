@@ -6,51 +6,16 @@
     <script src="js/locations.js" defer="defer"></script>
     <script src="js/location1actions.js" defer="defer"></script>
     <script src="js/characters.js" defer="defer"></script>
-    <script async="async">
-        function firstLoad() {
-            var listItem1 = document.createElement("LI");
-            var listItem1Text = document.createTextNode("Examine the bandit");
-            listItem1.appendChild(listItem1Text);
-            var listItem2 = document.createElement("LI");
-            var listItem2Text = document.createTextNode("Intimidate the bandit");
-            listItem2.appendChild(listItem2Text);
-            var listItem3 = document.createElement("LI");
-            var listItem3Text = document.createTextNode("Attack the bandit");
-            listItem3.appendChild(listItem3Text);
-            var listItem4 = document.createElement("LI");
-            var listItem4Text = document.createTextNode("Escape the bandit");
-            listItem4.appendChild(listItem4Text);
-            document.getElementById('locationField').innerHTML = location1;
-            document.getElementById('eventField').innerHTML = location1Event1;
-            document.getElementById('actionList').appendChild(listItem1);
-            document.getElementById('actionList').appendChild(listItem2);
-            document.getElementById('actionList').appendChild(listItem3);
-            document.getElementById('actionList').appendChild(listItem4);
-            document.getElementsByTagName("LI")[0].setAttribute("onclick", "examineBandit1()");
-            document.getElementsByTagName("LI")[1].setAttribute("onclick", "intimidateBandit1()");
-            document.getElementsByTagName("LI")[1].setAttribute("onclick", "attackBandit1()");
-            document.getElementsByTagName("LI")[2].setAttribute("onclick", "escapeBandit1()");
-//            document.getElementById('action1').innerHTML = location1Action1;
-//            document.getElementById('action2').innerHTML = location1Action2;
-//            document.getElementById('action3').innerHTML = location1Action3;
-//            document.getElementById('action4').innerHTML = location1Action4;
-        }
-    </script>
+    <script src="js/firstload.js" async="async"></script>
     <link rel="stylesheet" type="text/css" href="css/mainpage.css">
 </head>
 
-<body id="mainGradient" onload="firstLoad()">
-    <div id="mainWindow">
-        <p id="locationField"></p>
-        <p id="eventField"></p>
-        <ul id="actionList">
-<!--            <li id="action1"></li>
-            <li id="action2"></li>
-            <li id="action3"></li>
-            <li id="action4"></li>
-            -->
-        </ul>
-        <p id="resultField"></p>
+<body id="main_gradient" onload="firstLoad()">
+    <div id="main_window">
+        <p id="location_field"></p>
+        <p id="event_field"></p>
+        <ul id="action_list"></ul>
+        <p id="result_field"></p>
     </div>
 </body>
 </html>

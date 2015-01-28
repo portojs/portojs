@@ -5,15 +5,19 @@ function intimidateBandit1() {
     var result1 = "The bandit laughed into your face and spit under your feet.";
     var result2 = "The bandit got nervous and retreated into the woods.";
     if (hero.power < bandit1.power) {
-        document.getElementById("resultField").innerHTML = result1;
+        document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        document.getElementById("resultField").innerHTML = result2;
-        document.getElementById("eventField").innerHTML = " ";
-        document.getElementById("action1").innerHTML = location1Action5;
-        document.getElementById("action2").innerHTML = location1Action6;
-        document.getElementById("action3").innerHTML = "<p></p>";
-        document.getElementById("action4").innerHTML = "<p></p>";
+        var listItem1Text = document.createTextNode("Go north");
+        var actionItem = document.getElementById("action_list").childNodes[0];
+        actionItem.replaceChild(listItem1Text, actionItem.childNodes[0]);
+        actionItem.setAttribute("onclick", "goNorthLocation1()");
+        var listItem2Text = document.createTextNode("Go south");
+        actionItem = document.getElementById("action_list").childNodes[1];
+        actionItem.replaceChild(listItem2Text, actionItem.childNodes[0]);
+        actionItem.setAttribute("onclick", "goSouthLocation1()");
+        document.getElementById("result_field").innerHTML = result2;
+        document.getElementById("event_field").innerHTML = " ";
         bandit1.present = false;
     }
 }
@@ -23,10 +27,10 @@ function attackBandit1() {
     var result2 = "The bandit proved no match for you, in less than a minute " +
         "you've disarmed him.";
     if (hero.strength < bandit1.strength) {
-        document.getElementById("resultField").innerHTML = result1;
+        document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        document.getElementById("resultField").innerHTML = result2;
+        document.getElementById("result_field").innerHTML = result2;
     }
 }
 function escapeBandit1() {
@@ -35,10 +39,10 @@ function escapeBandit1() {
     var result2 = "Your legs are strong and fast, very soon the bandit " +
         "stops far behind you and curses under his breath, unable to catch you."
     if (hero.speed < bandit1.speed) {
-        document.getElementById("resultField").innerHTML = result1;
+        document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        document.getElementById("resultField").innerHTML = result2;
+        document.getElementById("result_field").innerHTML = result2;
     }
 }
 function goSouthLocation1() {
@@ -46,11 +50,11 @@ function goSouthLocation1() {
         "menacingly: 'Where do you think you're going?!";
     var result2 = "You walk south, soon the trees on both sides become scarce.";
     if ((bandit1.alive == true) && (bandit1.present == true)) {
-        document.getElementById("resultField").innerHTML = result1;
+        document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        document.getElementById("resultField").innerHTML = result2;
-        document.getElementById("locationField").innerHTML = location2;
+        document.getElementById("result_field").innerHTML = result2;
+        document.getElementById("location_field").innerHTML = location2;
     }
 }
 function goNorthLocation1() {
@@ -59,10 +63,10 @@ function goNorthLocation1() {
     var result2 = "You walk north, if anything the sky seems to grow even darker" +
         "and the air heavier. It seems you are going deeper into the forest.";
     if (bandit1.alive == true){
-        document.getElementById("resultField").innerHTML = result1;
+        document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        document.getElementById("resultField").innerHTML = result2;
-        document.getElementById("locationField").innerHTML = location3;
+        document.getElementById("result_field").innerHTML = result2;
+        document.getElementById("location_field").innerHTML = location3;
     }
 }
