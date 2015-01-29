@@ -7,50 +7,52 @@ function changeActionList (option1, action1,
                            option4, action4,
                            option5, action5,
                            option6, action6) {
-    var is;
+    var is = true;
     var actionList = document.getElementById("action_list");
-    while (is = true) {
+    while (is == true) {
         actionList.removeChild(actionList.childNodes[0]);
         is = actionList.hasChildNodes();
     }
-
-    if (option1 == true) {
-        document.getElementById("event_field").innerHTML = "Done";
-//        var listItem1 = document.createElement("LI");
-//        listItem1.appendChild(option1);
-//        actionList.appendChild(listItem1);
-//        document.getElementsByTagName("LI")[0].setAttribute("onclick", action1);
+    if (option1 !== undefined) {
+        var listItem1 = document.createElement("LI");
+        var listItem1Text = document.createTextNode(option1);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
+        document.getElementsByTagName("LI")[0].setAttribute("onclick", action1);
     }
-    /*
-    if (action2 = true) {
+    if (action2 !== undefined) {
         listItem1 = document.createElement("LI");
-        listItem1.appendChild(option2);
-        actionList.appendChild(listItem1);
+        listItem1Text = document.createTextNode(option2);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action2);
     }
-    if (action3 = true) {
+    if (action3 !== undefined) {
         listItem1 = document.createElement("LI");
-        listItem1.appendChild(option3);
-        actionList.appendChild(listItem1);
+        listItem1Text = document.createTextNode(option3);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action3);
     }
-    if (action4 = true) {
+    if (action4 !== undefined) {
         listItem1 = document.createElement("LI");
-        listItem1.appendChild(option4);
-        actionList.appendChild(listItem1);
+        listItem1Text = document.createTextNode(option4);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action4);
     }
-    if (action5 = true) {
+    if (action5 !== undefined) {
         listItem1 = document.createElement("LI");
-        listItem1.appendChild(option5);
-        actionList.appendChild(listItem1);
+        listItem1Text = document.createTextNode(option5);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action5);
     }
-    if (action6 = true) {
+    if (action6 !== undefined) {
         listItem1 = document.createElement("LI");
-        listItem1.appendChild(option6);
-        actionList.appendChild(listItem1);
+        listItem1Text = document.createTextNode(option6);
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action6);
     }
-    */
 }

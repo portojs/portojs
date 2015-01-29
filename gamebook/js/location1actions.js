@@ -8,24 +8,13 @@ function intimidateBandit1() {
         document.getElementById("result_field").innerHTML = result1;
     }
     else {
-//        actionList.removeChild(actionList.childNodes[0]);
-//        var actionItem = actionList.childNodes[0];
-//        var listItem1Text = document.createTextNode("Go north");
-//        var listItem2Text = document.createTextNode("Go south");
-//        actionItem.replaceChild(listItem1Text, actionItem.childNodes[0]);
-//        actionItem.setAttribute("onclick", "goNorthLocation1()");
-//        actionItem = actionList.childNodes[1];
-//        actionItem.replaceChild(listItem2Text, actionItem.childNodes[0]);
-//        actionItem.setAttribute("onclick", "goSouthLocation1()");
         document.getElementById("result_field").innerHTML = result2;
-//        document.getElementById("event_field").innerHTML = " ";
+        document.getElementById("event_field").innerHTML = " ";
         bandit1.present = false;
         changeActionList("Go north", "goNorthLocation1()", "Go south", "goSouthLocation1()");
-//        while (actionList.childNodes[2] = true) {
-//            actionList.removeChild(actionList.childNodes[2]);
-//        }
     }
 }
+
 function attackBandit1() {
     var result1 = "The bandit easily deflected all the attacks and disarmed you " +
         "with a deft maneuver.";
