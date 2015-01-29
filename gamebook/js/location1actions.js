@@ -8,26 +8,27 @@ function intimidateBandit1() {
         document.getElementById("result_field").innerHTML = result1;
     }
     else {
+        var i;
         var actionList = document.getElementById("action_list");
-        var actionListAction1 = actionList.childNodes[0];
-        var actionListAction2 = actionList.childNodes[1];
-        var actionListAction3 = actionList.childNodes[2];
-        var actionListAction4 = actionList.childNodes[3];
-        var actionItem = actionList.childNodes[0];
-        var listItem1Text = document.createTextNode("Go north");
-        var listItem2Text = document.createTextNode("Go south");
-        actionItem.replaceChild(listItem1Text, actionItem.childNodes[0]);
-        actionItem.setAttribute("onclick", "goNorthLocation1()");
-        actionItem = actionList.childNodes[1];
-        actionItem.replaceChild(listItem2Text, actionItem.childNodes[0]);
-        actionItem.setAttribute("onclick", "goSouthLocation1()");
+        actionList.removeChild(actionList.childNodes[0]);
+        for (i=5; actionList.childNodes[i] >= 0; i--) {
+            actionList.removeChild(actionList.childNodes[0]);
+        }
+//        var actionItem = actionList.childNodes[0];
+//        var listItem1Text = document.createTextNode("Go north");
+//        var listItem2Text = document.createTextNode("Go south");
+//        actionItem.replaceChild(listItem1Text, actionItem.childNodes[0]);
+//        actionItem.setAttribute("onclick", "goNorthLocation1()");
+//        actionItem = actionList.childNodes[1];
+//        actionItem.replaceChild(listItem2Text, actionItem.childNodes[0]);
+//        actionItem.setAttribute("onclick", "goSouthLocation1()");
         document.getElementById("result_field").innerHTML = result2;
         document.getElementById("event_field").innerHTML = " ";
         bandit1.present = false;
-        clearActionList();
-        while (actionList.childNodes[2] = true) {
-            actionList.removeChild(actionList.childNodes[2]);
-        }
+//        changeActionList("Go north", "Go south");
+//        while (actionList.childNodes[2] = true) {
+//            actionList.removeChild(actionList.childNodes[2]);
+//        }
     }
 }
 function attackBandit1() {
