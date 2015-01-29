@@ -8,12 +8,7 @@ function intimidateBandit1() {
         document.getElementById("result_field").innerHTML = result1;
     }
     else {
-        var i;
-        var actionList = document.getElementById("action_list");
-        actionList.removeChild(actionList.childNodes[0]);
-        for (i=5; actionList.childNodes[i] >= 0; i--) {
-            actionList.removeChild(actionList.childNodes[0]);
-        }
+//        actionList.removeChild(actionList.childNodes[0]);
 //        var actionItem = actionList.childNodes[0];
 //        var listItem1Text = document.createTextNode("Go north");
 //        var listItem2Text = document.createTextNode("Go south");
@@ -23,9 +18,9 @@ function intimidateBandit1() {
 //        actionItem.replaceChild(listItem2Text, actionItem.childNodes[0]);
 //        actionItem.setAttribute("onclick", "goSouthLocation1()");
         document.getElementById("result_field").innerHTML = result2;
-        document.getElementById("event_field").innerHTML = " ";
+//        document.getElementById("event_field").innerHTML = " ";
         bandit1.present = false;
-//        changeActionList("Go north", "Go south");
+        changeActionList("Go north", "goNorthLocation1()", "Go south", "goSouthLocation1()");
 //        while (actionList.childNodes[2] = true) {
 //            actionList.removeChild(actionList.childNodes[2]);
 //        }
