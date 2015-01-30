@@ -2,6 +2,7 @@
  * Created by Peter on 28.01.2015.
  */
 function firstLoad() {
+//    changeActionList("Examine the bandit","examineBandit1()","Intimidate the bandit","intimidateBandit1()","Attack the bandit","attackBandit1()","Escape the bandit","escapeBandit1()");
     var listItem1 = document.createElement("LI");
     var listItem1Text = document.createTextNode("Examine the bandit");
     listItem1.appendChild(listItem1Text);

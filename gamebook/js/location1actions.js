@@ -37,11 +37,12 @@ function escapeBandit1() {
     }
     else {
         document.getElementById("result_field").innerHTML = result2;
+        document.getElementById("event_field").innerHTML = " ";
         function escapeRoute() {
             document.getElementById("location_field").innerHTML = location4;
         }
         escapeRoute();
-        changeActionList();
+        changeActionList("Go uphill","go1Location4","Go downhill","go2location4");
     }
 }
 function goSouthLocation1() {
