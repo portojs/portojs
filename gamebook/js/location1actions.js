@@ -1,6 +1,40 @@
 /**
  * Created by Peter on 27.01.2015.
  */
+function examineBandit1() {
+    var result1 = "You aren't sure. The bandit looks very formidable " +
+        "and scary Somehow it seems you don't stand much of a chance against him.";
+    var result2_1 = "weaker, ";
+    var result2_2 = "stronger, ";
+    var result3_1 = "slower, ";
+    var result3_2 = "faster, ";
+    var result4_1 = "less experienced.";
+    var result4_2 = "more experienced.";
+    if (hero.intelligence < 15) {
+        document.getElementById("result_field").innerHTML = result1;
+    }
+    else {
+        document.getElementById("result_field").innerHTML = "The bandit is: ";
+        if (hero.strength > bandit1.strength) {
+            document.getElementById("result_field").innerHTML += result2_1;
+        }
+        else {
+            document.getElementById("result_field").innerHTML += result2_2;
+        }
+        if (hero.speed > bandit1.speed) {
+            document.getElementById("result_field").innerHTML += result3_1;
+        }
+        else {
+            document.getElementById("result_field").innerHTML += result3_2;
+        }
+        if (hero.power > bandit1.power) {
+            document.getElementById("result_field").innerHTML += result4_1;
+        }
+        else {
+            document.getElementById("result_field").innerHTML += result4_2;
+        }
+    }
+}
 function intimidateBandit1() {
     var result1 = "The bandit laughed into your face and spit under your feet.";
     var result2 = "The bandit got nervous and retreated into the woods.";

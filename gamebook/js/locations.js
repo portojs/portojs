@@ -17,6 +17,6 @@ var location3 =
 var location4 =
     "You are deep in the woods, heavy branches hung low almost touching your head, " +
     "dense underbrush hinders your movement. You hear faint sounds of animals moving somewhere " +
-    "behind the trees. There are two possible way out of this spot - one leading up " +
+    "behind the trees. There are two possible ways out of this spot - one leading up " +
     "the nearest hill, and the other - to go downhill, where the sounds of running " +
     "water can be heard.";
