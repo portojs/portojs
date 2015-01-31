@@ -57,6 +57,7 @@ function changeActionList (option1, action1,
     }
 }
 
-function attack (tohit1, tohit2) {
-    
+function attack (attack1, damage1, attack2, damage2) {
+    var at1 = rolls.d20() + hero.tohit;
+    document.getElementById('event_field').innerHTML = at1;
 }

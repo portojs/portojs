@@ -54,16 +54,19 @@ var loc1 = {
         }
     },
     attackBandit1: function() {
-        var result1 = "The bandit easily deflected all the attacks and disarmed you " +
-            "with a deft maneuver.";
-        var result2 = "The bandit proved no match for you, in less than a minute " +
-            "you've disarmed him.";
-        if (hero.strength < bandit1.strength) {
-            document.getElementById("result_field").innerHTML = result1;
-        }
-        else {
-            document.getElementById("result_field").innerHTML = result2;
-        }
+//        var heroAttack = hero.tohit;
+//        var heroWeapon = weapons.(hero.weapon);
+        document.getElementById("event_field").innerHTML = hero.weapon;
+//        var result1 = "The bandit easily deflected all the attacks and disarmed you " +
+//            "with a deft maneuver.";
+//        var result2 = "The bandit proved no match for you, in less than a minute " +
+//            "you've disarmed him.";
+//        if (hero.strength < bandit1.strength) {
+//            document.getElementById("result_field").innerHTML = result1;
+//        }
+//        else {
+//            document.getElementById("result_field").innerHTML = result2;
+//        }
     },
     escapeBandit1: function() {
         var result1 = "You tried to run away, but the bandit is very quick " +
