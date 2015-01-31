@@ -55,8 +55,9 @@ var loc1 = {
     },
     attackBandit1: function() {
 //        var heroAttack = hero.tohit;
-//        var heroWeapon = weapons.(hero.weapon);
-        document.getElementById("event_field").innerHTML = hero.weapon;
+//        var heroWeapon = hero.weapon;
+//        var d4 = Math.floor((Math.random() * 4) + 1);
+        document.getElementById("event_field").innerHTML = rolls.d20();
 //        var result1 = "The bandit easily deflected all the attacks and disarmed you " +
 //            "with a deft maneuver.";
 //        var result2 = "The bandit proved no match for you, in less than a minute " +

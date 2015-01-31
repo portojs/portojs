@@ -3,13 +3,13 @@
  */
 var rolls = {
     d4: function() {
-        Math.floor((Math.random() * 4) + 1)
+        return Math.floor((Math.random() * 4) + 1);
     },
     d6: function() {
-        Math.floor((Math.random() * 6) + 1)
+        return Math.floor((Math.random() * 6) + 1);
     },
     d20: function() {
-        Math.floor((Math.random() * 20) + 1)
+        return Math.floor((Math.random() * 20) + 1);
     }
 };
 var weapons = {
