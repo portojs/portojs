@@ -15,14 +15,14 @@ function firstLoad() {
     var listItem4 = document.createElement("LI");
     var listItem4Text = document.createTextNode("Escape the bandit");
     listItem4.appendChild(listItem4Text);
-    document.getElementById('location_field').innerHTML = location1;
-    document.getElementById('event_field').innerHTML = location1Event1;
+    document.getElementById('location_field').innerHTML = loc1.description;
+    document.getElementById('event_field').innerHTML = loc1.event;
     document.getElementById('action_list').appendChild(listItem1);
     document.getElementById('action_list').appendChild(listItem2);
     document.getElementById('action_list').appendChild(listItem3);
     document.getElementById('action_list').appendChild(listItem4);
-    document.getElementsByTagName("LI")[0].setAttribute("onclick", "examineBandit1()");
-    document.getElementsByTagName("LI")[1].setAttribute("onclick", "intimidateBandit1()");
-    document.getElementsByTagName("LI")[2].setAttribute("onclick", "attackBandit1()");
-    document.getElementsByTagName("LI")[3].setAttribute("onclick", "escapeBandit1()");
+    document.getElementsByTagName("LI")[0].setAttribute("onclick", "loc1.examineBandit1()");
+    document.getElementsByTagName("LI")[1].setAttribute("onclick", "loc1.intimidateBandit1()");
+    document.getElementsByTagName("LI")[2].setAttribute("onclick", "loc1.attackBandit1()");
+    document.getElementsByTagName("LI")[3].setAttribute("onclick", "loc1.escapeBandit1()");
 }

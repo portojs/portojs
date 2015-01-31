@@ -56,3 +56,7 @@ function changeActionList (option1, action1,
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action6);
     }
 }
+
+function attack (tohit1, tohit2) {
+    
+}

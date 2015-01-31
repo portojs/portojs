@@ -2,18 +2,26 @@
  * Created by Peter on 27.01.2015.
  */
 var hero = {
-    strength: 15,
-    speed: 15,
+    class:"Fighter",
+    level: 2,
+    hp: 24,
+    strength: 16,
+    constitution: 15,
     charisma: 15,
     intelligence: 16,
-    power: 25
+    tohit: 5,
+    weapon: "Longsword"
 };
 var bandit1 = {
-    strength: 20,
-    speed: 10,
+    class: "Thief",
+    level: 1,
+    hp: 6,
+    strength: 12,
+    constitution: 10,
     charisma: 10,
     intelligence: 8,
-    power: 18,
+    tohit: 2,
+    weapon: "Saber",
     alive: true,
     present: true
 };
