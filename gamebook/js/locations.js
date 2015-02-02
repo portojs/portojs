@@ -54,12 +54,26 @@ var loc1 = {
             changeActionList("Go north", "loc1.goNorth()", "Go south", "loc1.goSouth()");
         }
     },
+    /*
     attackBandit1: function() {
         var heroAttackRoll = rolls.d20();
+        var heroDamage = hero.weapon.damage() + 3;
         var heroAttack = rolls.d20() + hero.tohit;
+        var heroCrit = weaponsArray[1].crit.split(",");
+        var i;
+        for (i = 0, i < heroCrit.length, i++) {
+            if (heroAttackRoll == heroCrit[i]) {
+                heroDamage += heroDamage*2;
+                break
+            }
+            else {
+                break
+            }
+        };
+
 //        var heroWeapon = hero.weapon;
 //        var d4 = Math.floor((Math.random() * 4) + 1);
-        document.getElementById("event_field").innerHTML = heroAttack;
+        document.getElementById("event_field").innerHTML = heroCrit.length;
 //        var result1 = "The bandit easily deflected all the attacks and disarmed you " +
 //            "with a deft maneuver.";
 //        var result2 = "The bandit proved no match for you, in less than a minute " +
@@ -71,6 +85,7 @@ var loc1 = {
 //            document.getElementById("result_field").innerHTML = result2;
 //        }
     },
+    */
     escapeBandit1: function() {
         var result1 = "You tried to run away, but the bandit is very quick " +
             "and catches up with you easily.";

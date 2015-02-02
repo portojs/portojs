@@ -15,13 +15,36 @@ var rolls = {
         return Math.floor((Math.random() * 20) + 1);
     }
 };
+
 var weapons = {
     sswordName: "Shortsword",
-    sswordDamage: rolls.d6(),
+    sswordDamage: function() {
+        return rolls.d6();
+    },
     sswordCrit: 20,
     saberName: "Saber",
-    saberDamage: rolls.d6()
+    saberDamage: function() {
+        return rolls.d6();
+    }
 };
+
+var weaponsArray = [
+    ssword = {
+        name: "Shortsword",
+        damage: function() {
+            return rolls.d6();
+        },
+        crit: "20"
+    },
+    saber = {
+        name: "Saber",
+        damage: function() {
+            return rolls.d6();
+        },
+        crit: "18,19,20"
+    }
+];
+
 var hero = {
     class:"Fighter",
     level: 2,
@@ -31,8 +54,9 @@ var hero = {
     charisma: 15,
     intelligence: 16,
     tohit: 5,
-    weapon: weapons.sswordName
+    weapon: weaponsArray[0]
 };
+
 var bandit1 = {
     class: "Thief",
     level: 1,
@@ -42,7 +66,7 @@ var bandit1 = {
     charisma: 10,
     intelligence: 8,
     tohit: 2,
-    weapon: weapons.saberName,
+    weapon: weaponsArray[1],
     alive: true,
     present: true
 };

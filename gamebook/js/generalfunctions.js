@@ -56,7 +56,18 @@ function changeActionList (option1, action1,
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action6);
     }
 }
-
-function attack (attack1, damage1, attack2, damage2) {
+/*
+function attack() {
     var heroAttack = rolls.d20() + hero.tohit;
+
 }
+
+function crit() {
+    if (rolls.d20() = hero.) {
+
+    }
+    else {
+
+    }
+}
+*/
