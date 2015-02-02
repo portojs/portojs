@@ -15,7 +15,7 @@ var rolls = {
         return Math.floor((Math.random() * 20) + 1);
     }
 };
-
+/*
 var weapons = {
     sswordName: "Shortsword",
     sswordDamage: function() {
@@ -27,7 +27,7 @@ var weapons = {
         return rolls.d6();
     }
 };
-
+*/
 var weaponsArray = [
     ssword = {
         name: "Shortsword",
@@ -54,6 +54,7 @@ var hero = {
     charisma: 15,
     intelligence: 16,
     tohit: 5,
+    ac: 20,
     weapon: weaponsArray[0]
 };
 
@@ -66,6 +67,7 @@ var bandit1 = {
     charisma: 10,
     intelligence: 8,
     tohit: 2,
+    ac: 16,
     weapon: weaponsArray[1],
     alive: true,
     present: true

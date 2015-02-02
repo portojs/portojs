@@ -1,42 +1,33 @@
 /**
  * Created by Peter on 02.02.2015.
  */
-function attackBandit1() {
-    /*
+function attack() {
     var heroAttackRoll = rolls.d20();
-    var heroDamage = hero.weapon.damage() + 3;
-    var heroAttack = rolls.d20() + hero.tohit;
-    var heroCrit = weaponsArray[1].crit.split(",");
-    var heroCrit1 = heroCrit[0];
-    var i;
-    */
-    var i;
-    var crit;
+    var heroTotalAtRoll = heroAttackRoll + hero.tohit;
+    var heroDamage;
     var finalDamage;
-    var heroAttackRoll = rolls.d20();
-    var heroDamage = hero.weapon.damage() + 3;
-    var heroCrit = weaponsArray[1].crit.split(",");
-//    document.getElementById("event_field").innerHTML = heroAttackRoll;
-    for (i = 0; i < heroCrit.length; i++) {
-        crit = heroCrit[i];
-        if (heroAttackRoll == crit) {
+    var eventLog = document.getElementById("result_field");
+    eventLog.innerHTML += "Attack: " + heroTotalAtRoll + "<br>";
+    if (heroTotalAtRoll >= bandit1.ac) {
+        heroDamage = hero.weapon.damage() + 3;
+        eventLog.innerHTML += "Damage: " + heroDamage + "<br>";
+        if (critical(heroAttackRoll) == true) {
             finalDamage = heroDamage * 2;
+            eventLog.innerHTML += "Critical hit!" + "<br>";
+            eventLog.innerHTML += "Total damage: " + finalDamage + "<br>";
         }
-        else {
-            finalDamage = heroDamage;
-        }
-        document.getElementById("event_field").innerHTML = heroAttackRoll + " ";
-        document.getElementById("event_field").innerHTML += heroDamage + " ";
-        document.getElementById("event_field").innerHTML += finalDamage + " ";
     }
+    else {
+        eventLog.innerHTML += "Miss!" + "<br>";
+    }
+}
 
-    /*
-        if (heroAttackRoll == heroCrit[i]) {
-            heroDamage += heroDamage * 2;
-            break
+function critical (roll) {
+    var i;
+    var heroCrit = weaponsArray[1].crit.split(",");
+    for (i = 0; i < heroCrit.length; i++) {
+        if (roll == heroCrit[i]) {
+            return true;
         }
-        else {
-            break
-        }
-        */
+    }
 }
