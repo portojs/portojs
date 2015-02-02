@@ -15,28 +15,29 @@ var loc1 = {
         var result3_2 = "faster, ";
         var result4_1 = "less experienced.";
         var result4_2 = "more experienced.";
+        var resultField = document.getElementById("result_field");
         if (hero.intelligence < 15) {
-            document.getElementById("result_field").innerHTML = result1;
+            resultField.innerHTML = result1;
         }
         else {
-            document.getElementById("result_field").innerHTML = "The bandit is: ";
+            resultField.innerHTML = "The bandit is: ";
             if (hero.strength > bandit1.strength) {
-                document.getElementById("result_field").innerHTML += result2_1;
+                resultField.innerHTML += result2_1;
             }
             else {
-                document.getElementById("result_field").innerHTML += result2_2;
+                resultField.innerHTML += result2_2;
             }
             if (hero.speed > bandit1.speed) {
-                document.getElementById("result_field").innerHTML += result3_1;
+                resultField.innerHTML += result3_1;
             }
             else {
-                document.getElementById("result_field").innerHTML += result3_2;
+                resultField.innerHTML += result3_2;
             }
-            if (hero.power > bandit1.power) {
-                document.getElementById("result_field").innerHTML += result4_1;
+            if (hero.level > bandit1.level) {
+                resultField.innerHTML += result4_1;
             }
             else {
-                document.getElementById("result_field").innerHTML += result4_2;
+                resultField.innerHTML += result4_2;
             }
         }
     },
@@ -54,10 +55,11 @@ var loc1 = {
         }
     },
     attackBandit1: function() {
-//        var heroAttack = hero.tohit;
+        var heroAttackRoll = rolls.d20();
+        var heroAttack = rolls.d20() + hero.tohit;
 //        var heroWeapon = hero.weapon;
 //        var d4 = Math.floor((Math.random() * 4) + 1);
-        document.getElementById("event_field").innerHTML = rolls.d20();
+        document.getElementById("event_field").innerHTML = heroAttack;
 //        var result1 = "The bandit easily deflected all the attacks and disarmed you " +
 //            "with a deft maneuver.";
 //        var result2 = "The bandit proved no match for you, in less than a minute " +

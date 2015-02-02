@@ -22,7 +22,7 @@ function firstLoad() {
     document.getElementById('action_list').appendChild(listItem3);
     document.getElementById('action_list').appendChild(listItem4);
     document.getElementsByTagName("LI")[0].setAttribute("onclick", "loc1.examineBandit1()");
-    document.getElementsByTagName("LI")[1].setAttribute("onclick", "loc1.intimidateBandit1()");
+    document.getElementsByTagName("LI")[1].onclick = function() {loc1.intimidateBandit1()};
     document.getElementsByTagName("LI")[2].setAttribute("onclick", "loc1.attackBandit1()");
     document.getElementsByTagName("LI")[3].setAttribute("onclick", "loc1.escapeBandit1()");
 }

@@ -8,13 +8,17 @@ var rolls = {
     d6: function() {
         return Math.floor((Math.random() * 6) + 1);
     },
+    d8: function() {
+        return Math.floor((Math.random() * 8) + 1);
+    },
     d20: function() {
         return Math.floor((Math.random() * 20) + 1);
     }
 };
 var weapons = {
-    shortswordName: "Shortsword",
-    shortswordDamage: rolls.d6(),
+    sswordName: "Shortsword",
+    sswordDamage: rolls.d6(),
+    sswordCrit: 20,
     saberName: "Saber",
     saberDamage: rolls.d6()
 };
@@ -27,7 +31,7 @@ var hero = {
     charisma: 15,
     intelligence: 16,
     tohit: 5,
-    weapon: weapons.shortswordName
+    weapon: weapons.sswordName
 };
 var bandit1 = {
     class: "Thief",
