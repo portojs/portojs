@@ -3,16 +3,16 @@
  */
 var rolls = {
     d4: function() {
-        return Math.floor((Math.random() * 4) + 1);
+        return Math.floor(Math.random() * 5);
     },
     d6: function() {
-        return Math.floor((Math.random() * 6) + 1);
+        return Math.floor(Math.random() * 7);
     },
     d8: function() {
-        return Math.floor((Math.random() * 8) + 1);
+        return Math.floor(Math.random() * 9);
     },
     d20: function() {
-        return Math.floor((Math.random() * 20) + 1);
+        return Math.floor(Math.random() * 21);
     }
 };
 /*
@@ -31,21 +31,18 @@ var weapons = {
 var weaponsArray = [
     ssword = {
         name: "Shortsword",
-        damage: function() {
-            return rolls.d6();
-        },
+        damage: rolls.d6,
         crit: "20"
     },
     saber = {
         name: "Saber",
-        damage: function() {
-            return rolls.d6();
-        },
+        damage: rolls.d6,
         crit: "18,19,20"
     }
 ];
 
 var hero = {
+    name: "Valin",
     class:"Fighter",
     level: 2,
     hp: 24,
@@ -59,9 +56,10 @@ var hero = {
 };
 
 var bandit1 = {
+    name: "Seasoned bandit",
     class: "Thief",
     level: 1,
-    hp: 6,
+    hp: 36,
     strength: 12,
     constitution: 10,
     charisma: 10,
