@@ -8,8 +8,7 @@ function heroAttack(heroA, enemy, actions) {
     var finalDamage;
     var defenderHP = enemy.hp;
     var eventLog = document.getElementById("text_area");
-    changeActionList(actions);
-    eventLog.innerHTML = actions;
+    var newActions = sendActions(actions);
     eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
     document.getElementById("enemy_hp").style.visibility = "visible";
     document.getElementById("hero_hp").style.visibility = "visible";
@@ -30,6 +29,8 @@ function heroAttack(heroA, enemy, actions) {
             if (enemy.hp <= 0) {
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
+                eventLog.innerHTML += enemy.name + " is defeated";
+                changeActionList(newActions);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -41,9 +42,10 @@ function heroAttack(heroA, enemy, actions) {
             eventLog.innerHTML += enemy.name + " HP left: " + defenderHP + "&#13;";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
-      //          changeActionList(actions);
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
+                eventLog.innerHTML += enemy.name + " is defeated";
+                changeActionList(newActions);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -114,4 +116,18 @@ function critical (attacker, roll) {
             return true;
         }
     }
+}
+
+function sendActions (actions) {
+    var i;
+    var actionList = "";
+    for (i = 0; i < actions.length; i++) {
+        if (i == (actions.length - 1)) {
+            actionList += "&#34;" + actions[i] + "&#34;";
+        }
+        else {
+            actionList += "&#34;" + actions[i] + "&#34;,";
+        }
+    }
+    return actionList;
 }
