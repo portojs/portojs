@@ -56,8 +56,10 @@ var loc1 = {
     },
 
     attackBandit1: function() {
-        heroAttack(hero, bandit1);
-        changeActionList("Attack the bandit","attackBandit1()");
+        var action1 = "Go north";
+        var actions = "'Go north', 'loc1.goNorth()', 'Go south', 'loc1.goSouth()'";
+        heroAttack(hero, bandit1, actions);
+        changeActionList("Attack the bandit","loc1.attackBandit1()");
     },
 
     escapeBandit1: function() {

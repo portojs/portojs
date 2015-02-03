@@ -1,14 +1,18 @@
 /**
  * Created by Peter on 02.02.2015.
  */
-function heroAttack(heroA, enemy) {
+function heroAttack(heroA, enemy, actions) {
     var attackerAttackRoll = rolls.d20();
     var attackerTotalAtRoll = attackerAttackRoll + heroA.tohit;
     var attackerDamage;
     var finalDamage;
     var defenderHP = enemy.hp;
     var eventLog = document.getElementById("text_area");
+    changeActionList(actions);
+    eventLog.innerHTML = actions;
     eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
+    document.getElementById("enemy_hp").style.visibility = "visible";
+    document.getElementById("hero_hp").style.visibility = "visible";
     if (attackerAttackRoll == 0) {
         eventLog.innerHTML += "Critical miss" + "&#13;";
         enemyAttack(enemy, heroA);
@@ -37,6 +41,7 @@ function heroAttack(heroA, enemy) {
             eventLog.innerHTML += enemy.name + " HP left: " + defenderHP + "&#13;";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
+      //          changeActionList(actions);
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
             }
@@ -49,6 +54,8 @@ function heroAttack(heroA, enemy) {
         eventLog.innerHTML += "Miss!" + "&#13;";
         enemyAttack(enemy, heroA);
     }
+    document.getElementById("hero_hp").innerHTML = heroA.hp;
+    document.getElementById("enemy_hp").innerHTML = enemy.hp;
 }
 
 function enemyAttack(enemy, heroA) {
@@ -95,6 +102,8 @@ function enemyAttack(enemy, heroA) {
     else {
         eventLog.innerHTML += "Miss!" + "&#13;";
     }
+    document.getElementById("hero_hp").innerHTML = heroA.hp;
+    document.getElementById("enemy_hp").innerHTML = enemy.hp;
 }
 
 function critical (attacker, roll) {

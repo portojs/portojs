@@ -23,6 +23,12 @@
     height: 150px;
     width: 100%;
 }
+#hero_hp {
+    visibility: hidden;
+}
+#enemy_hp {
+    visibility: hidden;
+}
 ul {
     list-style-type: none;
 }
