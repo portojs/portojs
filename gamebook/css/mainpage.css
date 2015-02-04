@@ -1,3 +1,11 @@
+h3 {
+}
+
+#loot {
+    visibility: visible;
+    margin-left: 150px;
+    display: inline;
+}
 #main_gradient {
     min-height: 1200px;
     background: -webkit-linear-gradient(lightskyblue, white);
@@ -11,9 +19,17 @@
 }
 #event_field {
     height: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px #3399cc solid;
 }
 #action_list {
+    float: left;
     height: 150px;
+}
+#loot_list {
+    float: left;
+    height: 150px;
+    border-bottom: 2px #3399cc solid;
 }
 #result_field {
     margin-top: 30pt;
@@ -25,9 +41,11 @@
 }
 #hero_hp {
     visibility: hidden;
+    width: 50px;
 }
 #enemy_hp {
     visibility: hidden;
+    width: 50px;
 }
 ul {
     list-style-type: none;

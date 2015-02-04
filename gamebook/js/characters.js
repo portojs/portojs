@@ -15,6 +15,13 @@ var rolls = {
         return Math.floor(Math.random() * 21);
     }
 };
+
+var items = [
+  gold = {
+      name: "Gold"
+  }
+];
+
 /*
 var weapons = {
     sswordName: "Shortsword",
@@ -59,7 +66,7 @@ var bandit1 = {
     name: "Seasoned bandit",
     class: "Thief",
     level: 1,
-    hp: 36,
+    hp: 16,
     strength: 12,
     constitution: 10,
     charisma: 10,
@@ -67,6 +74,7 @@ var bandit1 = {
     tohit: 2,
     ac: 16,
     weapon: weaponsArray[1],
+    inventory: [weaponsArray[1], 25 + items[0]],
     alive: true,
     present: true
 };

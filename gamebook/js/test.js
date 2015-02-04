@@ -8,7 +8,7 @@ function heroAttack(heroA, enemy, actions) {
     var finalDamage;
     var defenderHP = enemy.hp;
     var eventLog = document.getElementById("text_area");
-    var newActions = sendActions(actions);
+//    var newActions = sendActions(actions);
     eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
     document.getElementById("enemy_hp").style.visibility = "visible";
     document.getElementById("hero_hp").style.visibility = "visible";
@@ -30,7 +30,7 @@ function heroAttack(heroA, enemy, actions) {
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList(newActions);
+                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -45,7 +45,7 @@ function heroAttack(heroA, enemy, actions) {
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList(newActions);
+                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -108,7 +108,7 @@ function enemyAttack(enemy, heroA) {
     document.getElementById("enemy_hp").innerHTML = enemy.hp;
 }
 
-function critical (attacker, roll) {
+function critical(attacker, roll) {
     var i;
     var attackerCrit = attacker.weapon.crit.split(",");
     for (i = 0; i < attackerCrit.length; i++) {
@@ -118,9 +118,18 @@ function critical (attacker, roll) {
     }
 }
 
-function sendActions (actions) {
+function lootEnemy() {
+
+}
+
+function exitLoot() {
+
+}
+/*
+function sendActions(actions) {
     var i;
     var actionList = "";
+    var actionListMain;
     for (i = 0; i < actions.length; i++) {
         if (i == (actions.length - 1)) {
             actionList += "&#34;" + actions[i] + "&#34;";
@@ -129,5 +138,11 @@ function sendActions (actions) {
             actionList += "&#34;" + actions[i] + "&#34;,";
         }
     }
-    return actionList;
+    actionListMain = "changeActionList(" + actionList + ")";
+    return actionListMain;
 }
+
+function changeActionListSub(stringFunction) {
+    stringFunction;
+}
+    */
