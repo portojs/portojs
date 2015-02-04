@@ -125,6 +125,23 @@ function lootEnemy() {
 function exitLoot() {
 
 }
+
+function test(option1, action1,
+              option2, action2,
+              option3, action3,
+              option4, action4,
+              option5, action5,
+              option6, action6) {
+    var i;
+    var actionList = document.getElementById("action_list");
+    for (i = 0; i < actionList.childNodes.length; i++) {
+        actionList.childNodes[i].style.visibility = "hidden";
+    }
+    for (i = 0; i < arguments.length; i++) {
+        actionList.childNodes[i].style.visibility = "visible";
+        actionList.childNodes[i].innerHTML = arguments[i];
+    }
+}
 /*
 function sendActions(actions) {
     var i;
