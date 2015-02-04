@@ -1,6 +1,31 @@
 /**
  * Created by Peter on 29.01.2015.
  */
+
+function changeActionList(option1, action1,
+              option2, action2,
+              option3, action3,
+              option4, action4,
+              option5, action5,
+              option6, action6) {
+    var i;
+    var res;
+    var actionList = document.getElementById("action_list");
+    for (i = 0; i < actionList.childNodes.length; i++) {
+        actionList.childNodes[i].style.visibility = "hidden";
+    }
+    for (i = 0; i < arguments.length; i++) {
+        res = arguments[i].split(",");
+        actionList.childNodes[i].style.visibility = "visible";
+        actionList.childNodes[i].innerHTML = res[0];
+        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
+    }
+}
+
+////
+//// old function, now I have a shorter one
+////
+/*
 function changeActionList (option1, action1,
                            option2, action2,
                            option3, action3,
@@ -54,20 +79,6 @@ function changeActionList (option1, action1,
         listItem1.appendChild(listItem1Text);
         document.getElementById('action_list').appendChild(listItem1);
         document.getElementsByTagName("LI")[1].setAttribute("onclick", action6);
-    }
-}
-/*
-function attack() {
-    var heroAttack = rolls.d20() + hero.tohit;
-
-}
-
-function crit() {
-    if (rolls.d20() = hero.) {
-
-    }
-    else {
-
     }
 }
 */
