@@ -118,12 +118,24 @@ function critical(attacker, roll) {
     }
 }
 
-function lootEnemy() {
+function lootEnemy(enemyName) {
+    var i;
+    for (i = 0; i < enemyName.inventory.length; i++) {
+        var listItem1 = document.createElement("LI");
+        var listItem1Text = document.createTextNode(enemyName.inventory[i]);
+        var invItem = enemyName.inventory[i];
+        listItem1.appendChild(listItem1Text);
+        document.getElementById('loot_list').appendChild(listItem1);
+        document.getElementsByTagName("LI")[i].onclick = function() {takeItem(invItem)};
+    }
+}
 
+function test(item) {
+    var currentItem = weaponsArray.indexOf("item");
+    
 }
 
 function exitLoot() {
-
 }
 
 

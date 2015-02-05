@@ -56,7 +56,7 @@ var loc1 = {
     },
 
     attackBandit1: function() {
-        var actions = ["Loot,lootEnemy()", "Exit,exitLoot()"];
+        var actions = ["Loot,lootEnemy(bandit1)", "Exit,exitLoot()"];
         changeActionList("Attack the bandit,loc1.attackBandit1()");
         heroAttack(hero, bandit1, actions);
     },

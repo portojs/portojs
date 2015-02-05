@@ -62,6 +62,14 @@ var hero = {
     weapon: weaponsArray[0]
 };
 
+var heroInventory = [
+    ssword = {
+        name: "Shortsword",
+        damage: rolls.d6,
+        crit: "20"
+    }
+];
+
 var bandit1 = {
     name: "Seasoned bandit",
     class: "Thief",
@@ -74,7 +82,7 @@ var bandit1 = {
     tohit: 2,
     ac: 16,
     weapon: weaponsArray[1],
-    inventory: [weaponsArray[1], 25 + items[0]],
+    inventory: [weaponsArray[1].name, "25 " + items[0].name],
     alive: true,
     present: true
 };
