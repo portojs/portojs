@@ -12,13 +12,14 @@ function lootEnemy(enemyName) {
         tempVars.push(enemyName.inventory[i]);
         listItem1.appendChild(listItem1Text);
         document.getElementById('loot_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[i].setAttribute("onclick", "test(tempVars[1], tempVars[0])")
+        document.getElementsByTagName("LI")[i].setAttribute("onclick", "test(tempVars[0])")
         }
 }
 
-function test(item, container) {
+function test(container) {
     var i;
     var itemNumber;
+    var item = docu
     for (i = 0; i < itemArray.length; i++) {
         if (itemArray[i].name == item) {
             itemNumber = container.inventory.indexOf(item);

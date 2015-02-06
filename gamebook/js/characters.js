@@ -28,7 +28,8 @@ var itemArray = [
         crit: "18,19,20"
     },
     gold = {
-        name: "Gold"
+        name: "Gold",
+        quantity: 0
     }
 ];
 
@@ -50,7 +51,11 @@ var heroInventory = [
     shortsword = {
         name: "Shortsword",
         damage: rolls.d6,
-        crit: "20"
+        crit: "20",
+        quantity: 1
+    },
+    gold = {
+        quantity: 100
     }
 ];
 
@@ -66,7 +71,7 @@ var bandit1 = {
     tohit: 2,
     ac: 16,
     weapon: itemArray[1],
-    inventory: [itemArray[1].name, "25 " + itemArray[2].name],
+    inventory: [itemArray[1].name, 50 + " " + itemArray[2].name],
     alive: true,
     present: true
 };
