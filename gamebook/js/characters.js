@@ -16,27 +16,8 @@ var rolls = {
     }
 };
 
-var items = [
-  gold = {
-      name: "Gold"
-  }
-];
-
-/*
-var weapons = {
-    sswordName: "Shortsword",
-    sswordDamage: function() {
-        return rolls.d6();
-    },
-    sswordCrit: 20,
-    saberName: "Saber",
-    saberDamage: function() {
-        return rolls.d6();
-    }
-};
-*/
-var weaponsArray = [
-    ssword = {
+var itemArray = [
+    shortsword = {
         name: "Shortsword",
         damage: rolls.d6,
         crit: "20"
@@ -45,6 +26,9 @@ var weaponsArray = [
         name: "Saber",
         damage: rolls.d6,
         crit: "18,19,20"
+    },
+    gold = {
+        name: "Gold"
     }
 ];
 
@@ -59,11 +43,11 @@ var hero = {
     intelligence: 16,
     tohit: 5,
     ac: 20,
-    weapon: weaponsArray[0]
+    weapon: itemArray[0]
 };
 
 var heroInventory = [
-    ssword = {
+    shortsword = {
         name: "Shortsword",
         damage: rolls.d6,
         crit: "20"
@@ -81,8 +65,10 @@ var bandit1 = {
     intelligence: 8,
     tohit: 2,
     ac: 16,
-    weapon: weaponsArray[1],
-    inventory: [weaponsArray[1].name, "25 " + items[0].name],
+    weapon: itemArray[1],
+    inventory: [itemArray[1].name, "25 " + itemArray[2].name],
     alive: true,
     present: true
 };
+
+var tempVars = [];
