@@ -55,6 +55,7 @@ var heroInventory = [
         quantity: 1
     },
     gold = {
+        name: "Gold",
         quantity: 100
     }
 ];
@@ -71,6 +72,18 @@ var bandit1 = {
     tohit: 2,
     ac: 14,
     weapon: itemArray[1],
+    inventory2: [
+        saber = {
+            name: "Saber",
+            damage: rolls.d6,
+            crit: "18,19,20",
+            quantity: 1
+        },
+        gold = {
+            name: "Gold",
+            quantity: 100
+        }
+    ],
     inventory: [itemArray[1].name, 50 + " " + itemArray[2].name],
     alive: true,
     present: true
