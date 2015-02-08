@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Deep woods and ancient castles</title>
     <script src="js/locations.js" defer="defer"></script>
     <script src="js/generalfunctions.js" defer="defer"></script>
@@ -27,7 +28,7 @@
         </div>
         <p id="result_field"></p>
         <form>
-            <input type="button" value="Test" onclick="test(tempVars[0].inventory[0], tempVars[0])">
+            <input type="button" value="Test" onclick="test(this.value)">
             <textarea id="text_area"></textarea>
             <textarea id="hero_hp"></textarea>
             <textarea id="enemy_hp"></textarea>

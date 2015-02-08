@@ -5,40 +5,29 @@
 function lootEnemy(enemyName) {
     var i;
     tempVars.push(enemyName);
-//    document.getElementById('event_field').innerHTML = tempVars[0].name;
     for (i = 0; i < enemyName.inventory.length; i++) {
         var listItem1 = document.createElement("LI");
         var listItem1Text = document.createTextNode(enemyName.inventory[i]);
         tempVars.push(enemyName.inventory[i]);
         listItem1.appendChild(listItem1Text);
         document.getElementById('loot_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[i].setAttribute("onclick", "test(tempVars[0])")
+        document.getElementsByTagName("LI")[i].onclick = "test(this.innerHTML)";
         }
 }
 
-function test(container) {
+function test(itemName) {
+    document.getElementById('event_field').innerHTML = itemName;
     var i;
     var itemNumber;
-    var item = docu
     for (i = 0; i < itemArray.length; i++) {
-        if (itemArray[i].name == item) {
-            itemNumber = container.inventory.indexOf(item);
-            container.inventory.splice(itemNumber, 1);
+        if (itemArray[i].name == itemName) {
+            itemNumber = tempVars[0].inventory.indexOf(itemName);
+            tempVars[0].inventory.splice(itemNumber, 1);
             heroInventory.push(itemArray[i]);
             document.getElementById('event_field').innerHTML = heroInventory[1].name;
         }
-//    tempVars.splice(0,1)
     }
-    /*
-    function findItem (element) {
-        return element.name == item;
-    }
-    */
 }
-
-function exitLoot() {
-}
-
 
 ////
 //// deprecated function, proved to be unnecessary

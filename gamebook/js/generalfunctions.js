@@ -2,12 +2,7 @@
  * Created by Peter on 29.01.2015.
  */
 
-function changeActionList(option1, action1,
-              option2, action2,
-              option3, action3,
-              option4, action4,
-              option5, action5,
-              option6, action6) {
+function changeActionList(action1, action2, action3, action4, action5, action6) {
     var i;
     var res;
     var actionList = document.getElementById("action_list");
@@ -29,7 +24,6 @@ function heroAttack(heroA, enemy, actions) {
     var finalDamage;
     var defenderHP = enemy.hp;
     var eventLog = document.getElementById("text_area");
-//    var newActions = sendActions(actions);
     eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
     document.getElementById("enemy_hp").style.visibility = "visible";
     document.getElementById("hero_hp").style.visibility = "visible";
