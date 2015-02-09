@@ -12,42 +12,35 @@ function lootEnemy(enemyName) {
         var listItem1 = document.createElement("LI");
         var listItem1Text = document.createTextNode(enemyName.inventory2[i].quantity + " " + enemyName.inventory2[i].name);
 //        tempVars.push(enemyName.inventory[i]);
-        listItem1.onclick = function() {test(this.innerHTML)};
+        listItem1.onclick = function() {take(this.innerHTML)};
         listItem1.appendChild(listItem1Text);
         document.getElementById('loot_list').appendChild(listItem1);
         }
 }
 
-function test(itemName) {
+function take(itemName) {
     var i;
     var j;
-    var itemNumber;
-//    var n = itemName.indexOf(" ");
     var item = itemName.substr(itemName.indexOf(" "));
-//    tempVars[0].inventory2.splice(0, 1);
-//    document.getElementById('event_field').innerHTML = tempVars[0].inventory2[0].name;
-//    document.getElementById('event_field').innerHTML = item;
-//    document.getElementById('event_field').innerHTML = "true";
+    var itemTrue = item.substr(1);
     for (i = 0; i < itemArray.length; i++) {
-//        document.getElementById('event_field').innerHTML = "true";
-        if (itemArray[i].name == item) {
-            document.getElementById('event_field').innerHTML = "true";
-//            itemNumber = tempVars[0].inventory2.indexOf(itemName);
-//            tempVars[0].inventory2.splice(itemNumber, 1);
-/*            heroInventory.push(itemArray[i]);
+        if (itemArray[i].name == itemTrue) {
+            updateInventory(itemTrue);
+            heroInventory.push(itemArray[i]);
             for (j = 0; j < tempVars[0].inventory2.length; j++) {
-                document.getElementById('event_field').innerHTML = "true";
-                if (item == tempVars[0].inventory2[j].name) {
-                    document.getElementById('event_field').innerHTML = "true";
+                if (itemTrue == tempVars[0].inventory2[j].name) {
+                    document.getElementById('result_field').innerHTML = itemName + " added to inventory.";
                     tempVars[0].inventory2.splice(j, 1);
                 }
-            }*/
-//            document.getElementById('event_field').innerHTML = heroInventory[2].name;
+            }
         }
     }
     lootEnemy(tempVars[0]);
 }
 
+function updateInventory(itemName) {
+    if (itemName )
+}
 ////
 //// deprecated function, proved to be unnecessary
 ////

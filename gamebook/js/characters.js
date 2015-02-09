@@ -84,7 +84,6 @@ var bandit1 = {
             quantity: 100
         }
     ],
-    inventory: [itemArray[1].name, 50 + " " + itemArray[2].name],
     alive: true,
     present: true
 };
