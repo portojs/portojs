@@ -22,14 +22,18 @@ function take(itemName) {
     var i;
     var j;
     var item = itemName.substr(itemName.indexOf(" "));
+    var itemQuantity = parseInt(itemName.substr(0, itemName.indexOf(" ")));
     var itemTrue = item.substr(1);
     for (i = 0; i < itemArray.length; i++) {
         if (itemArray[i].name == itemTrue) {
-            updateInventory(itemTrue);
-            heroInventory.push(itemArray[i]);
+//            document.getElementById('result_field').innerHTML += heroInventory.length + "<br>";
+            updateInventory(itemTrue, itemQuantity, itemArray[i]);
+//            document.getElementById('result_field').innerHTML += heroInventory.length + "<br>";
+//            heroInventory.push(itemArray[i]);
             for (j = 0; j < tempVars[0].inventory2.length; j++) {
                 if (itemTrue == tempVars[0].inventory2[j].name) {
-                    document.getElementById('result_field').innerHTML = itemName + " added to inventory.";
+                    document.getElementById('result_field').innerHTML += itemName + " added to inventory." + "<br>";
+//                    document.getElementById('result_field').innerHTML += itemQuantity + heroInventory[0].quantity;
                     tempVars[0].inventory2.splice(j, 1);
                 }
             }
@@ -38,9 +42,29 @@ function take(itemName) {
     lootEnemy(tempVars[0]);
 }
 
-function updateInventory(itemName) {
-    if (itemName )
+function updateInventory(itemTrue, itemQuantity, itemId) {
+    var i;
+    var j;
+    var check = true;
+//    document.getElementById('result_field').innerHTML += itemTrue + "<br>";
+//    document.getElementById('result_field').innerHTML += itemQuantity + "<br>";
+//    document.getElementById('result_field').innerHTML += itemId + "<br>";
+    for (i = 0; i < heroInventory.length; i++) {
+        if (itemTrue == heroInventory[i].name) {
+            heroInventory[i].quantity += itemQuantity;
+            check = true;
+//            document.getElementById('result_field').innerHTML += heroInventory[i].name + " " + heroInventory[i].quantity + "<br>";
+            break;
+        }
+        else if (itemTrue != heroInventory[i].name) {
+            check = false;
+        }
+    }
+    if (check == false) {
+        heroInventory.push(itemId);
+    }
 }
+
 ////
 //// deprecated function, proved to be unnecessary
 ////
