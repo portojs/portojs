@@ -14,11 +14,12 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
 //    }
     for (i = 0; i < arguments.length; i++) {
         res = arguments[i].split(",");
-        document.getElementById("result_field").innerHTML += res[1].length;
+//        document.getElementById("result_field").innerHTML += res[1].length;
         var listItem = document.createElement("LI");
         var listItemText = document.createTextNode(res[0]);
         listItem.appendChild(listItemText);
-        listItem.addEventListener("click", res[1]);
+//        listItem.addEventListener("click", res[1]);
+        listItem.addEventListener("click", loc1.goNorth);
         actionList.appendChild(listItem);
 //        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
     }
