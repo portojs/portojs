@@ -6,14 +6,20 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
     var i;
     var res;
     var actionList = document.getElementById("action_list");
-    for (i = 0; i < actionList.childNodes.length; i++) {
-        actionList.childNodes[i].style.visibility = "hidden";
+    while (actionList.hasChildNodes()) {
+        actionList.removeChild(actionList.childNodes[0]);
     }
+//    for (i = 0; i < actionList.childNodes.length; i++) {
+//        actionList.childNodes[i].style.visibility = "hidden";
+//    }
     for (i = 0; i < arguments.length; i++) {
         res = arguments[i].split(",");
-        actionList.childNodes[i].style.visibility = "visible";
-        actionList.childNodes[i].innerHTML = res[0];
-        actionList.childNodes[i].addEventListener("click", res[1]);
+        document.getElementById("result_field").innerHTML += res[1].length;
+        var listItem = document.createElement("LI");
+        var listItemText = document.createTextNode(res[0]);
+        listItem.appendChild(listItemText);
+        listItem.addEventListener("click", res[1]);
+        actionList.appendChild(listItem);
 //        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
     }
 }
