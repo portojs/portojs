@@ -16,6 +16,7 @@ function lootEnemy(enemyName) {
         listItem1.appendChild(listItem1Text);
         document.getElementById('loot_list').appendChild(listItem1);
         }
+    changeActionList("Exit,exitLoot()");
 }
 
 function take(itemName) {

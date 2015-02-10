@@ -5,6 +5,9 @@
     background: -moz-linear-gradient(lightskyblue, white);
     background: linear-gradient(lightskyblue, white);
 }
+#upper_menu li {
+    display: inline;
+}
 #main_window {
     margin: 20pt;
     padding: 10pt;

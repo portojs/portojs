@@ -3,6 +3,7 @@
  */
 function firstLoad() {
 //    changeActionList("Examine the bandit","examineBandit1()","Intimidate the bandit","intimidateBandit1()","Attack the bandit","attackBandit1()","Escape the bandit","escapeBandit1()");
+    var actionList = document.getElementById("action_list");
     var listItem1 = document.createElement("LI");
     var listItem1Text = document.createTextNode("Examine the bandit");
     listItem1.appendChild(listItem1Text);
@@ -17,12 +18,12 @@ function firstLoad() {
     listItem4.appendChild(listItem4Text);
     document.getElementById('location_field').innerHTML = loc1.description;
     document.getElementById('event_field').innerHTML = loc1.event;
-    document.getElementById('action_list').appendChild(listItem1);
-    document.getElementById('action_list').appendChild(listItem2);
-    document.getElementById('action_list').appendChild(listItem3);
-    document.getElementById('action_list').appendChild(listItem4);
-    document.getElementsByTagName("LI")[0].setAttribute("onclick", "loc1.examineBandit1()");
-    document.getElementsByTagName("LI")[1].onclick = function() {loc1.intimidateBandit1()};
-    document.getElementsByTagName("LI")[2].setAttribute("onclick", "loc1.attackBandit1()");
-    document.getElementsByTagName("LI")[3].setAttribute("onclick", "loc1.escapeBandit1()");
+    actionList.appendChild(listItem1);
+    actionList.appendChild(listItem2);
+    actionList.appendChild(listItem3);
+    actionList.appendChild(listItem4);
+    actionList.childNodes[0].addEventListener("click", loc1.examineBandit1());
+    actionList.childNodes[1].addEventListener("click", loc1.intimidateBandit1());
+    actionList.childNodes[2].addEventListener("click", loc1.attackBandit1());
+    actionList.childNodes[3].addEventListener("click", loc1.escapeBandit1());
 }

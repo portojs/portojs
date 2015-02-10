@@ -13,7 +13,8 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
         res = arguments[i].split(",");
         actionList.childNodes[i].style.visibility = "visible";
         actionList.childNodes[i].innerHTML = res[0];
-        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
+        actionList.childNodes[i].addEventListener("click", res[1]);
+//        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
     }
 }
 
