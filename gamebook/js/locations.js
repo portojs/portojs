@@ -7,33 +7,16 @@ var loc1 = {
     event: "In the middle of the road stands a stinky bandit with a rusty saber " +
     "in his hand.",
     eventCheck: true,
-    bandit1: {
-        name: "Seasoned bandit",
-        class: "Thief",
-        level: 1,
-        hp: 12,
-        strength: 12,
-        constitution: 10,
-        charisma: 10,
-        intelligence: 8,
-        tohit: 2,
-        ac: 14,
-        weapon: itemArray[1],
-        inventory2: [
-            saber = {
-                name: "Saber",
-                damage: rolls.d6,
-                crit: "18,19,20",
-                quantity: 1
-            },
-            gold = {
-                name: "Gold",
-                quantity: 100
-            }
-        ],
-        alive: true,
-        present: true
-    },
+    changeActions: function() {
+        if (loc1.eventCheck == true) {
+            document.getElementById("event_field").innerHTML = loc1.event;
+            changeActionList("Examine the bandit,loc1.examineBandit1()",
+                "Intimidate the bandit,loc1.intimidateBandit1()",
+                "Attack the bandit,loc1.attackBandit1()",
+                "Escape the bandit,loc1.escapeBandit1()");
+        } else {
+            changeActionList("Go north,loc1.goNorth()", "Go south,loc1.goSouth()");
+        }},
     examineBandit1: function() {
         var result1 = "You aren't sure. The bandit looks very formidable " +
             "and scary Somehow it seems you don't stand much of a chance against him.";
@@ -49,19 +32,19 @@ var loc1 = {
         }
         else {
             resultField.innerHTML = "The bandit is: ";
-            if (hero.strength > loc1.bandit1.strength) {
+            if (hero.strength > bandit1.strength) {
                 resultField.innerHTML += result2_1;
             }
             else {
                 resultField.innerHTML += result2_2;
             }
-            if (hero.speed > loc1.bandit1.speed) {
+            if (hero.speed > bandit1.speed) {
                 resultField.innerHTML += result3_1;
             }
             else {
                 resultField.innerHTML += result3_2;
             }
-            if (hero.level > loc1.bandit1.level) {
+            if (hero.level > bandit1.level) {
                 resultField.innerHTML += result4_1;
             }
             else {
@@ -72,21 +55,21 @@ var loc1 = {
     intimidateBandit1: function() {
         var result1 = "The bandit laughed into your face and spit under your feet.";
         var result2 = "The bandit got nervous and retreated into the woods.";
-        if (hero.level < loc1.bandit1.level) {
+        if (hero.level < bandit1.level) {
             document.getElementById("result_field").innerHTML = result1;
         }
         else {
             document.getElementById("result_field").innerHTML = result2;
             document.getElementById("event_field").innerHTML = " ";
-            loc1.bandit1.present = false;
+            bandit1.present = false;
             changeActionList("Go north,loc1.goNorth()", "Go south,loc1.goSouth()");
         }
     },
 
     attackBandit1: function() {
-        var actions = ["Loot,lootEnemy(loc.bandit1)", "Exit,exitLoot()"];
+//        var actions = ["Loot,lootEnemy(bandit1)", "Exit,exitLoot()"];
         changeActionList("Attack the bandit,loc1.attackBandit1()");
-        heroAttack(hero, loc1.bandit1, actions);
+        heroAttack(hero, bandit1, loc1);
     },
 
     escapeBandit1: function() {
@@ -94,7 +77,7 @@ var loc1 = {
             "and catches up with you easily.";
         var result2 = "Your legs are strong and fast, very soon the bandit " +
             "stops far behind you and curses under his breath, unable to catch you.";
-        if (hero.constitution < loc1.bandit1.constitution) {
+        if (hero.constitution < bandit1.constitution) {
             document.getElementById("result_field").innerHTML = result1;
         }
         else {
@@ -111,7 +94,7 @@ var loc1 = {
         var result1 = "As you try to go south, the bandit blocks your way and says " +
             "menacingly: 'Where do you think you're going?!";
         var result2 = "You walk south, soon the trees on both sides become scarce.";
-        if ((loc1.bandit1.alive == true) && (loc1.bandit1.present == true)) {
+        if ((bandit1.alive == true) && (bandit1.present == true)) {
             document.getElementById("result_field").innerHTML = result1;
         }
         else {
@@ -124,7 +107,7 @@ var loc1 = {
             "menacingly: 'Where do you think you're going?!";
         var result2 = "You walk north, if anything the sky seems to grow even darker" +
             "and the air heavier. It seems you are going deeper into the forest.";
-        if ((loc1.bandit1.alive == true) && (loc1.bandit1.present == true)) {
+        if ((bandit1.alive == true) && (bandit1.present == true)) {
             document.getElementById("result_field").innerHTML = result1;
         }
         else {

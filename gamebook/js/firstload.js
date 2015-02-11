@@ -2,8 +2,9 @@
  * Created by Peter on 28.01.2015.
  */
 function firstLoad() {
+    changeLocation(loc1);
 //    changeActionList("Examine the bandit","examineBandit1()","Intimidate the bandit","intimidateBandit1()","Attack the bandit","attackBandit1()","Escape the bandit","escapeBandit1()");
-    var actionList = document.getElementById("action_list");
+/*    var actionList = document.getElementById("action_list");
     var listItem1 = document.createElement("LI");
     var listItem1Text = document.createTextNode("Examine the bandit");
     listItem1.addEventListener("click", loc1.examineBandit1);
@@ -25,5 +26,5 @@ function firstLoad() {
     actionList.appendChild(listItem1);
     actionList.appendChild(listItem2);
     actionList.appendChild(listItem3);
-    actionList.appendChild(listItem4);
+    actionList.appendChild(listItem4);*/
 }

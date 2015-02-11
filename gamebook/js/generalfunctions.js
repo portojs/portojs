@@ -26,12 +26,14 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
     }
 }
 
-function heroAttack(heroA, enemy, actions) {
+function heroAttack(heroA, enemy, locationName) {
     var attackerAttackRoll = rolls.d20();
     var attackerTotalAtRoll = attackerAttackRoll + heroA.tohit;
     var attackerDamage;
     var finalDamage;
     var defenderHP = enemy.hp;
+    currentContainer = enemy;
+    currentLocation = locationName;
     var eventLog = document.getElementById("text_area");
     eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
     document.getElementById("enemy_hp").style.visibility = "visible";
@@ -52,9 +54,10 @@ function heroAttack(heroA, enemy, actions) {
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
+                locationName.eventCheck = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList("Loot,lootEnemy(" + enemy + ")", "Exit,exitLoot()");
+                changeActionList("Loot,lootEnemy()", "Exit,exitLoot()");
 //                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
@@ -68,9 +71,10 @@ function heroAttack(heroA, enemy, actions) {
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
+                locationName.eventCheck = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList("Loot,lootEnemy(" + enemy + ")", "Exit,exitLoot()");
+                changeActionList("Loot,lootEnemy()", "Exit,exitLoot()");
 //                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {

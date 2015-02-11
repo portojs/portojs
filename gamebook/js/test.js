@@ -2,16 +2,16 @@
  * Created by Peter on 02.02.2015.
  */
 
-function lootEnemy(enemyName) {
+function lootEnemy() {
     var i;
     document.getElementById("loot").style.visibility = 'visible';
-    tempVars.push(enemyName);
+//    tempVars.push(enemyName);
     while (document.getElementById('loot_list').hasChildNodes()) {
         document.getElementById('loot_list').removeChild(document.getElementById('loot_list').firstChild);
     }
-    for (i = 0; i < enemyName.inventory2.length; i++) {
+    for (i = 0; i < currentContainer.inventory2.length; i++) {
         var listItem = document.createElement("LI");
-        var listItemText = document.createTextNode(enemyName.inventory2[i].quantity + " " + enemyName.inventory2[i].name);
+        var listItemText = document.createTextNode(currentContainer.inventory2[i].quantity + " " + currentContainer.inventory2[i].name);
         listItem.onclick = function() {take(this.innerHTML)};
         listItem.appendChild(listItemText);
         document.getElementById('loot_list').appendChild(listItem);
@@ -28,15 +28,15 @@ function take(itemName) {
     for (i = 0; i < itemArray.length; i++) {
         if (itemArray[i].name == itemTrue) {
             updateInventory(itemTrue, itemQuantity, itemArray[i]);
-            for (j = 0; j < tempVars[0].inventory2.length; j++) {
-                if (itemTrue == tempVars[0].inventory2[j].name) {
+            for (j = 0; j < currentContainer.inventory2.length; j++) {
+                if (itemTrue == currentContainer.inventory2[j].name) {
                     document.getElementById('result_field').innerHTML += itemName + " added to inventory." + "<br>";
-                    tempVars[0].inventory2.splice(j, 1);
+                    currentContainer.inventory2.splice(j, 1);
                 }
             }
         }
     }
-    lootEnemy(tempVars[0]);
+    lootEnemy();
 }
 
 function updateInventory(itemTrue, itemQuantity, itemId) {
@@ -58,12 +58,13 @@ function updateInventory(itemTrue, itemQuantity, itemId) {
     }
 }
 
+function exitLoot(){
+    changeLocation(currentLocation);
+}
+
 function changeLocation(locationName) {
     document.getElementById("location_field").innerHTML = locationName.description;
-    if (locationName.eventCheck = true) {
-        document.getElementById("event_field").innerHTML = locationName.event;
-    }
-    locationName.changeLocation();
+    locationName.changeActions();
 }
 
 ////
