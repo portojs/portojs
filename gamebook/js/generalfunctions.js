@@ -54,7 +54,8 @@ function heroAttack(heroA, enemy, actions) {
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
+                changeActionList("Loot,lootEnemy(" + enemy + ")", "Exit,exitLoot()");
+//                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -69,7 +70,8 @@ function heroAttack(heroA, enemy, actions) {
                 enemy.alive = false;
                 eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
                 eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
+                changeActionList("Loot,lootEnemy(" + enemy + ")", "Exit,exitLoot()");
+//                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);

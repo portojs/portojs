@@ -33,7 +33,7 @@
     margin: 1em;
 }
 #loot {
-    visibility: visible;
+    visibility: hidden;
 }
 
 #result_field {

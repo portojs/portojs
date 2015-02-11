@@ -60,32 +60,4 @@ var heroInventory = [
     }
 ];
 
-var bandit1 = {
-    name: "Seasoned bandit",
-    class: "Thief",
-    level: 1,
-    hp: 12,
-    strength: 12,
-    constitution: 10,
-    charisma: 10,
-    intelligence: 8,
-    tohit: 2,
-    ac: 14,
-    weapon: itemArray[1],
-    inventory2: [
-        saber = {
-            name: "Saber",
-            damage: rolls.d6,
-            crit: "18,19,20",
-            quantity: 1
-        },
-        gold = {
-            name: "Gold",
-            quantity: 100
-        }
-    ],
-    alive: true,
-    present: true
-};
-
 var tempVars = [];

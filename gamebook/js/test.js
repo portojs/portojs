@@ -4,7 +4,7 @@
 
 function lootEnemy(enemyName) {
     var i;
-    document.getElementById("loot").setAttribute("visibility","hidden");
+    document.getElementById("loot").style.visibility = 'visible';
     tempVars.push(enemyName);
     while (document.getElementById('loot_list').hasChildNodes()) {
         document.getElementById('loot_list').removeChild(document.getElementById('loot_list').firstChild);
@@ -59,7 +59,11 @@ function updateInventory(itemTrue, itemQuantity, itemId) {
 }
 
 function changeLocation(locationName) {
-
+    document.getElementById("location_field").innerHTML = locationName.description;
+    if (locationName.eventCheck = true) {
+        document.getElementById("event_field").innerHTML = locationName.event;
+    }
+    locationName.changeLocation();
 }
 
 ////
