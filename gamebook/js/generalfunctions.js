@@ -6,7 +6,7 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
     var i;
     var res;
     var actionList = document.getElementById("action_list");
-    var test1 = document.getElementById("result_field").innerHTML += "Go";
+//    var test1 = document.getElementById("result_field").innerHTML += "Go";
     while (actionList.hasChildNodes()) {
         actionList.removeChild(actionList.childNodes[0]);
     }
@@ -17,10 +17,10 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
         res = arguments[i].split(",");
 //        document.getElementById("result_field").innerHTML += res[1].length;
         var listItem = document.createElement("LI");
+        listItem.setAttribute("onclick", res[1]);
         var listItemText = document.createTextNode(res[0]);
         listItem.appendChild(listItemText);
-//        listItem.addEventListener("click", res[1]);
-        listItem.addEventListener("click", test1);
+//        listItem.addEventListener("click", test1);
         actionList.appendChild(listItem);
 //        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
     }

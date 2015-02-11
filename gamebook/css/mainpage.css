@@ -22,13 +22,18 @@
 #main_list {
     float: left;
     width: 50%;
+    height: 200px;
     padding: 10px;
     margin: 1em;
 }
 #sub_list {
     float: left;
+    height: 200px;
     padding: 10px;
     margin: 1em;
+}
+#loot {
+    visibility: visible;
 }
 
 #result_field {

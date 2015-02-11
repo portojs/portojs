@@ -51,13 +51,13 @@ var loc1 = {
             document.getElementById("result_field").innerHTML = result2;
             document.getElementById("event_field").innerHTML = " ";
             bandit1.present = false;
-            changeActionList("Go north,loc1.goNorth", "Go south,loc1.goSouth");
+            changeActionList("Go north,loc1.goNorth()", "Go south,loc1.goSouth()");
         }
     },
 
     attackBandit1: function() {
-        var actions = ["Loot,lootEnemy(bandit1)", "Exit,exitLoot"];
-        changeActionList("Attack the bandit,loc1.attackBandit1");
+        var actions = ["Loot,lootEnemy(bandit1)", "Exit,exitLoot()"];
+        changeActionList("Attack the bandit,loc1.attackBandit1()");
         heroAttack(hero, bandit1, actions);
     },
 
@@ -76,7 +76,7 @@ var loc1 = {
                 document.getElementById("location_field").innerHTML = loc4.description;
             }
             escapeRoute();
-            changeActionList("Go uphill,go1Location4", "Go downhill,go2location4");
+            changeActionList("Go uphill,go1Location4()", "Go downhill,go2location4()");
         }
     },
     goSouth: function() {

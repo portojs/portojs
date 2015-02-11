@@ -4,6 +4,7 @@
 
 function lootEnemy(enemyName) {
     var i;
+    document.getElementById("loot").setAttribute("visibility","hidden");
     tempVars.push(enemyName);
     while (document.getElementById('loot_list').hasChildNodes()) {
         document.getElementById('loot_list').removeChild(document.getElementById('loot_list').firstChild);
@@ -15,7 +16,7 @@ function lootEnemy(enemyName) {
         listItem.appendChild(listItemText);
         document.getElementById('loot_list').appendChild(listItem);
         }
-    changeActionList("Exit,exitLoot");
+    changeActionList("Exit,exitLoot()");
 }
 
 function take(itemName) {
@@ -55,6 +56,10 @@ function updateInventory(itemTrue, itemQuantity, itemId) {
     if (check == false) {
         heroInventory.push(itemId);
     }
+}
+
+function changeLocation(locationName) {
+
 }
 
 ////
