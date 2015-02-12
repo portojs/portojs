@@ -167,7 +167,7 @@ var loc6 = {
         if (loc4.eventCheck1 == true) {
         } else  {
             document.getElementById("event_field").innerHTML = " ";
-            changeActionList("Іти на північ до замку,loc4.goNorth()", "Іти на схід до дороги,loc6.goEast()", "Іти на південь до каньону,loc6.goSouth()");
+            changeActionList("Іти на північ до замку,loc6.goNorth()", "Іти на схід до дороги,loc6.goEast()", "Іти на південь до каньону,loc6.goSouth()");
         }
     },
     goNorth: function() {
