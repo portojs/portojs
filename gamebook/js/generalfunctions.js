@@ -2,6 +2,12 @@
  * Created by Peter on 29.01.2015.
  */
 
+function changeLocation(locationName) {
+    document.getElementById("location_field").innerHTML = locationName.description;
+    document.getElementById("result_field").value = "";
+    locationName.setActions();
+}
+
 function changeActionList(action1, action2, action3, action4, action5, action6) {
     var i;
     var res;
@@ -35,29 +41,29 @@ function heroAttack(heroA, enemy, locationName) {
     currentContainer = enemy;
     currentLocation = locationName;
     var eventLog = document.getElementById("text_area");
-    eventLog.innerHTML = heroA.name + " attacks: " + attackerTotalAtRoll + "&#13;";
+    eventLog.innerHTML = heroA.name + " атакує: " + attackerTotalAtRoll + "&#13;";
     document.getElementById("enemy_hp").style.visibility = "visible";
     document.getElementById("hero_hp").style.visibility = "visible";
     if (attackerAttackRoll == 0) {
-        eventLog.innerHTML += "Critical miss" + "&#13;";
+        eventLog.innerHTML += "Значний промах" + "&#13;";
         enemyAttack(enemy, heroA);
     }
     else if (attackerTotalAtRoll >= enemy.ac) {
         attackerDamage = heroA.weapon.damage() + 3;
-        eventLog.innerHTML += "Damage: " + attackerDamage + "&#13;";
+        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "&#13;";
         if (critical(heroA, attackerAttackRoll) == true) {
             finalDamage = attackerDamage * 2;
-            eventLog.innerHTML += "Critical hit!" + "&#13;";
-            eventLog.innerHTML += "Total damage: " + finalDamage + "&#13;";
+            eventLog.innerHTML += "Вдалий удар!" + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "&#13;";
             defenderHP -= finalDamage;
-            eventLog.innerHTML += enemy.name + " HP left: " + defenderHP + "&#13;";
+            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "&#13;";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
-                locationName.eventCheck = false;
-                eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
-                eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList("Loot,lootEnemy()", "Exit,exitLoot()");
+                locationName.eventCheck1 = false;
+                eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += enemy.name + " переможений";
+                changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
 //                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
@@ -65,16 +71,16 @@ function heroAttack(heroA, enemy, locationName) {
             }
         }
         else {
-            eventLog.innerHTML += "Total damage: " + attackerDamage + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "&#13;";
             defenderHP -= attackerDamage;
-            eventLog.innerHTML += enemy.name + " HP left: " + defenderHP + "&#13;";
+            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "&#13;";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
-                locationName.eventCheck = false;
-                eventLog.innerHTML += enemy.name + " is killed" + "&#13;";
-                eventLog.innerHTML += enemy.name + " is defeated";
-                changeActionList("Loot,lootEnemy()", "Exit,exitLoot()");
+                locationName.eventCheck1 = false;
+                eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += enemy.name + " переможений";
+                changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
 //                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
@@ -83,7 +89,7 @@ function heroAttack(heroA, enemy, locationName) {
         }
     }
     else {
-        eventLog.innerHTML += "Miss!" + "&#13;";
+        eventLog.innerHTML += "Промах!" + "&#13;";
         enemyAttack(enemy, heroA);
     }
     document.getElementById("hero_hp").innerHTML = heroA.hp;
@@ -97,42 +103,42 @@ function enemyAttack(enemy, heroA) {
     var finalDamage;
     var defenderHP = heroA.hp;
     var eventLog = document.getElementById("text_area");
-    eventLog.innerHTML += enemy.name + " attacks: " + attackerTotalAtRoll + "&#13;";
+    eventLog.innerHTML += enemy.name + " атакує: " + attackerTotalAtRoll + "&#13;";
     if (attackerAttackRoll == 0) {
-        eventLog.innerHTML += "Critical miss" + "&#13;";
+        eventLog.innerHTML += "Значний промах" + "&#13;";
     }
     else if (attackerTotalAtRoll >= heroA.ac) {
         attackerDamage = enemy.weapon.damage() + 3;
-        eventLog.innerHTML += "Damage: " + attackerDamage + "&#13;";
+        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "&#13;";
         if (critical(enemy, attackerAttackRoll) == true) {
             finalDamage = attackerDamage * 2;
-            eventLog.innerHTML += "Critical hit!" + "&#13;";
-            eventLog.innerHTML += "Total damage: " + finalDamage + "&#13;";
+            eventLog.innerHTML += "Вдалий удар!" + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "&#13;";
             defenderHP -= finalDamage;
-            eventLog.innerHTML += heroA.name + " HP left: " + defenderHP + "&#13;";
+            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "&#13;";
             heroA.hp = defenderHP;
             if (heroA.hp <= 0) {
                 heroA.alive = false;
-                eventLog.innerHTML += heroA.name + " is killed" + "&#13;";
+                eventLog.innerHTML += heroA.name + " вбитий" + "&#13;";
             }
             else {
             }
         }
         else {
-            eventLog.innerHTML += "Total damage: " + attackerDamage + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "&#13;";
             defenderHP -= attackerDamage;
-            eventLog.innerHTML += heroA.name + " HP left: " + defenderHP + "&#13;";
+            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "&#13;";
             heroA.hp = defenderHP;
             if (heroA.hp <= 0) {
                 heroA.alive = false;
-                eventLog.innerHTML += heroA.name + " is killed" + "&#13;";
+                eventLog.innerHTML += heroA.name + " вбитий" + "&#13;";
             }
             else {
             }
         }
     }
     else {
-        eventLog.innerHTML += "Miss!" + "&#13;";
+        eventLog.innerHTML += "Промах!" + "&#13;";
     }
     document.getElementById("hero_hp").innerHTML = heroA.hp;
     document.getElementById("enemy_hp").innerHTML = enemy.hp;
@@ -146,6 +152,66 @@ function critical(attacker, roll) {
             return true;
         }
     }
+}
+
+function lootEnemy() {
+    var i;
+    document.getElementById("loot").style.visibility = 'visible';
+//    tempVars.push(enemyName);
+    while (document.getElementById('loot_list').hasChildNodes()) {
+        document.getElementById('loot_list').removeChild(document.getElementById('loot_list').firstChild);
+    }
+    for (i = 0; i < currentContainer.inventory2.length; i++) {
+        var listItem = document.createElement("LI");
+        var listItemText = document.createTextNode(currentContainer.inventory2[i].quantity + " " + currentContainer.inventory2[i].name);
+        listItem.onclick = function() {take(this.innerHTML)};
+        listItem.appendChild(listItemText);
+        document.getElementById('loot_list').appendChild(listItem);
+    }
+    changeActionList("Вихід,exitLoot()");
+}
+
+function take(itemName) {
+    var i;
+    var j;
+    var item = itemName.substr(itemName.indexOf(" "));
+    var itemQuantity = parseInt(itemName.substr(0, itemName.indexOf(" ")));
+    var itemTrue = item.substr(1);
+    for (i = 0; i < itemArray.length; i++) {
+        if (itemArray[i].name == itemTrue) {
+            updateInventory(itemTrue, itemQuantity, itemArray[i]);
+            for (j = 0; j < currentContainer.inventory2.length; j++) {
+                if (itemTrue == currentContainer.inventory2[j].name) {
+                    document.getElementById('result_field').innerHTML += itemName + " додано в інвентар." + "<br>";
+                    currentContainer.inventory2.splice(j, 1);
+                }
+            }
+        }
+    }
+    lootEnemy();
+}
+
+function updateInventory(itemTrue, itemQuantity, itemId) {
+    var i;
+    var j;
+    var check = true;
+    for (i = 0; i < heroInventory.length; i++) {
+        if (itemTrue == heroInventory[i].name) {
+            heroInventory[i].quantity += itemQuantity;
+            check = true;
+            break;
+        }
+        else if (itemTrue != heroInventory[i].name) {
+            check = false;
+        }
+    }
+    if (check == false) {
+        heroInventory.push(itemId);
+    }
+}
+
+function exitLoot(){
+    changeLocation(currentLocation);
 }
 
 ////

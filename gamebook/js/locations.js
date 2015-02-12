@@ -2,36 +2,34 @@
  * Created by Peter on 27.01.2015.
  */
 var loc1 = {
-    description: "The sky is dark, the road is surrounded by black trees. " +
-    "The wood on both sides is very dense. The road goes south and north.",
-    event: "In the middle of the road stands a stinky bandit with a rusty saber " +
-    "in his hand.",
-    eventCheck: true,
-    changeActions: function() {
-        if (loc1.eventCheck == true) {
+    description: "Густий ліс, дорога прямує із півдня на північ.",
+    event: "Посеред дороги стоїть розбійник з іржавою шабелю у руці.",
+    eventCheck1: true,
+    setActions: function() {
+        if (loc1.eventCheck1 == true) {
             document.getElementById("event_field").innerHTML = loc1.event;
-            changeActionList("Examine the bandit,loc1.examineBandit1()",
-                "Intimidate the bandit,loc1.intimidateBandit1()",
-                "Attack the bandit,loc1.attackBandit1()",
-                "Escape the bandit,loc1.escapeBandit1()");
+            changeActionList("Оглянути розбійника,loc1.examineBandit1()",
+                "Залякати розбійника,loc1.intimidateBandit1()",
+                "Атакувати розбійника,loc1.attackBandit1()",
+                "Втекти від розбійника,loc1.escapeBandit1()");
         } else {
-            changeActionList("Go north,loc1.goNorth()", "Go south,loc1.goSouth()");
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Іти на північ,loc1.goNorth()", "Іти на південь,loc1.goSouth()");
         }},
     examineBandit1: function() {
-        var result1 = "You aren't sure. The bandit looks very formidable " +
-            "and scary Somehow it seems you don't stand much of a chance against him.";
-        var result2_1 = "weaker, ";
-        var result2_2 = "stronger, ";
-        var result3_1 = "slower, ";
-        var result3_2 = "faster, ";
-        var result4_1 = "less experienced.";
-        var result4_2 = "more experienced.";
+        var result1 = "Важко оцінити розбійника, проте він здається небезпечним.";
+        var result2_1 = "слабший, ";
+        var result2_2 = "сильніший, ";
+        var result3_1 = "повільніший, ";
+        var result3_2 = "швидший, ";
+        var result4_1 = "менш досвідчений.";
+        var result4_2 = "більш досвідчений.";
         var resultField = document.getElementById("result_field");
         if (hero.intelligence < 15) {
             resultField.innerHTML = result1;
         }
         else {
-            resultField.innerHTML = "The bandit is: ";
+            resultField.innerHTML = "Розбійник ";
             if (hero.strength > bandit1.strength) {
                 resultField.innerHTML += result2_1;
             }
@@ -53,8 +51,8 @@ var loc1 = {
         }
     },
     intimidateBandit1: function() {
-        var result1 = "The bandit laughed into your face and spit under your feet.";
-        var result2 = "The bandit got nervous and retreated into the woods.";
+        var result1 = "Розбійник розсміявся та сплюнув на дорогу.";
+        var result2 = "Розбійник зблід та швидко зник у лісі.";
         if (hero.level < bandit1.level) {
             document.getElementById("result_field").innerHTML = result1;
         }
@@ -62,76 +60,123 @@ var loc1 = {
             document.getElementById("result_field").innerHTML = result2;
             document.getElementById("event_field").innerHTML = " ";
             bandit1.present = false;
-            changeActionList("Go north,loc1.goNorth()", "Go south,loc1.goSouth()");
+            loc1.eventCheck1 = false;
+            changeLocation(loc1);
         }
     },
 
     attackBandit1: function() {
-//        var actions = ["Loot,lootEnemy(bandit1)", "Exit,exitLoot()"];
-        changeActionList("Attack the bandit,loc1.attackBandit1()");
+        changeActionList("Атакувати розбійника,loc1.attackBandit1()");
         heroAttack(hero, bandit1, loc1);
     },
 
     escapeBandit1: function() {
-        var result1 = "You tried to run away, but the bandit is very quick " +
-            "and catches up with you easily.";
-        var result2 = "Your legs are strong and fast, very soon the bandit " +
-            "stops far behind you and curses under his breath, unable to catch you.";
+        var result1 = "Ви спробували втекти, проте розбіник швидко наздогнав вас.";
+        var result2 = "Ви дуже швидкі, і дуже скоро робійник залишився далеко позаду десь посеред лісу.";
         if (hero.constitution < bandit1.constitution) {
             document.getElementById("result_field").innerHTML = result1;
         }
         else {
             document.getElementById("result_field").innerHTML = result2;
-            document.getElementById("event_field").innerHTML = " ";
-            function escapeRoute() {
-                document.getElementById("location_field").innerHTML = loc4.description;
-            }
-            escapeRoute();
-            changeActionList("Go uphill,go1Location4()", "Go downhill,go2location4()");
+            changeLocation(loc4);
         }
     },
     goSouth: function() {
-        var result1 = "As you try to go south, the bandit blocks your way and says " +
-            "menacingly: 'Where do you think you're going?!";
-        var result2 = "You walk south, soon the trees on both sides become scarce.";
-        if ((bandit1.alive == true) && (bandit1.present == true)) {
-            document.getElementById("result_field").innerHTML = result1;
-        }
-        else {
-            document.getElementById("result_field").innerHTML = result2;
-            document.getElementById("location_field").innerHTML = loc2.description;
-        }
+            changeLocation(loc2);
     },
     goNorth: function() {
-        var result1 = "As you try to go north, the bandit blocks your way and says " +
-            "menacingly: 'Where do you think you're going?!";
-        var result2 = "You walk north, if anything the sky seems to grow even darker" +
-            "and the air heavier. It seems you are going deeper into the forest.";
-        if ((bandit1.alive == true) && (bandit1.present == true)) {
-            document.getElementById("result_field").innerHTML = result1;
-        }
-        else {
-            document.getElementById("result_field").innerHTML = result2;
-            document.getElementById("location_field").innerHTML = loc3.description;
-        }
+            changeLocation(loc3);
     }
 };
 var loc2 = {
-    description: "The forest edge is near - there are not so many trees as before and " +
-    "most of them are young sapling. There is a path, going westwards " +
-    "between the trees."
+    description: "Дерева тут маленькі та криві, здається ліс не дуже хоче рости у цій місцевості. На півдні дорога добігає до краю великого каньону та обривається. Багато років потому тут був міст, проте зараз про той міст нагадують лише кам'яні уламки даелко внизу." +
+    "На північ дорога поринає глибоко в ліс, та ще є маленька стежка поміж деревами, що прямує на захід.",
+    eventCheck1: false,
+    setActions: function() {
+        if (loc4.eventCheck1 == true) {
+        } else  {
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Іти західною стежкою,loc2.goWest()", "Іти на північ,loc2.goNorth()");
+        }
+    },
+    goWest: function() {
+        changeLocation(loc4);
+    },
+    goNorth: function() {
+        changeLocation(loc1);
+    }
 };
 var loc3 = {
-    description: "The trees on both sides are huge, their powerful roots burrow across " +
-    "the road, making the passage difficult. You can see a strange light among the " +
-    "trees to the east."
+    description: "З обох боків дороги ростуть могутні дерева. На півночі понад найвишими деревами видно велику башту. На захід від дороги віддідяється стара дорога, що заросла густою травою.",
+    eventCheck1: false,
+    setActions: function() {
+        if (loc4.eventCheck1 == true) {
+        } else  {
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Іти на північ,loc3.goNorth()", "Іти на південь,loc3.goSouth()", "Іти на захід,loc3.goWest()");
+        }
+    },
+    goNorth: function() {
+        changeLocation(loc5);
+    },
+    goSouth: function() {
+        changeLocation(loc1);
+    },
+    goWest: function() {
+        changeLocation(loc6);
+    }
 };
 var loc4 = {
-    description: "You are deep in the woods, heavy branches hung low almost touching your head, " +
-    "dense underbrush hinders your movement. You hear faint sounds of animals moving somewhere " +
-    "behind the trees. There are two possible ways out of this spot - one leading up " +
-    "the nearest hill, and the other - to go downhill, where the sounds of running " +
-    "water can be heard.",
-    goUphill: function(){},
-    goDownhill: function(){}
+    description: "Схил пагорба, що порос густи лісом. Дерева дуже високі, неба майже не видно. Поміж деревами в'ється стежка. У східному напрямку вона спускається з пагорба, а на північ піднімається на його вершину.",
+    eventCheck1: false,
+    setActions: function() {
+        if (loc4.eventCheck1 == true) {
+        } else  {
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Піднятися схилом,loc4.goUphill()", "Спуститися схилом,loc4.goDownhill()");
+        }
+    },
+    goUphill: function() {
+        changeLocation(loc6);
+    },
+    goDownhill: function() {
+        changeLocation(loc2);
+    }
+};
+var loc5 = {
+    description: "Посеред лісу стоїть старий замок. Десь на заході та південніше посеред лісу встає великий пагорб. Ворота замка закриті, дорога від цих воріт уходить на південь. Серед дерев, що впритул підступили до стін замку, видно стежку, що мабуть веде до вершини далекого пагорбу",
+    eventCheck1: false,
+    setActions: function() {
+        if (loc4.eventCheck1 == true) {
+        } else  {
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Іти на південь по дорозі,loc5.goSouth()", "Іти стежкою убік пагорбу,loc5.goSW()");
+        }
+    },
+    goSouth: function() {
+        changeLocation(loc3);
+    },
+    goSW: function() {
+        changeLocation(loc6);
+    }
+};
+var loc6 = {
+    description: "Вершина пагорба, видно дуже далеко. Десь на сході посеред лісу простежується дорога. На півночі поміж великих дерев височіть замок. На півдні ліс сходить схилами пагорба і рпатово обривається, здається десь там проходить великий каньон.",
+    eventCheck1: false,
+    setActions: function() {
+        if (loc4.eventCheck1 == true) {
+        } else  {
+            document.getElementById("event_field").innerHTML = " ";
+            changeActionList("Іти на північ до замку,loc4.goNorth()", "Іти на схід до дороги,loc6.goEast()", "Іти на південь до каньону,loc6.goSouth()");
+        }
+    },
+    goNorth: function() {
+        changeLocation(loc5);
+    },
+    goEast: function() {
+        changeLocation(loc3);
+    },
+    goSouth: function() {
+        changeLocation(loc4);
+    }
 };

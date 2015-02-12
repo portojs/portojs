@@ -18,23 +18,23 @@ var rolls = {
 
 var itemArray = [
     shortsword = {
-        name: "Shortsword",
+        name: "Короткий меч",
         damage: rolls.d6,
         crit: "20"
     },
     saber = {
-        name: "Saber",
+        name: "Шабля",
         damage: rolls.d6,
         crit: "18,19,20"
     },
     gold = {
-        name: "Gold",
+        name: "Золото",
         quantity: 0
     }
 ];
 
 var hero = {
-    name: "Valin",
+    name: "Валін",
     class:"Fighter",
     level: 2,
     hp: 24,
@@ -49,19 +49,19 @@ var hero = {
 
 var heroInventory = [
     shortsword = {
-        name: "Shortsword",
+        name: "Короткий меч",
         damage: rolls.d6,
         crit: "20",
         quantity: 1
     },
     gold = {
-        name: "Gold",
+        name: "Золото",
         quantity: 100
     }
 ];
 
 var bandit1 = {
-    name: "Seasoned bandit",
+    name: "Розбійник",
     class: "Thief",
     level: 1,
     hp: 12,
@@ -74,13 +74,13 @@ var bandit1 = {
     weapon: itemArray[1],
     inventory2: [
         saber = {
-            name: "Saber",
+            name: "Шабля",
             damage: rolls.d6,
             crit: "18,19,20",
             quantity: 1
         },
         gold = {
-            name: "Gold",
+            name: "Золото",
             quantity: 100
         }
     ],
