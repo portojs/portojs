@@ -12,23 +12,16 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
     var i;
     var res;
     var actionList = document.getElementById("action_list");
-//    var test1 = document.getElementById("result_field").innerHTML += "Go";
     while (actionList.hasChildNodes()) {
         actionList.removeChild(actionList.childNodes[0]);
     }
-//    for (i = 0; i < actionList.childNodes.length; i++) {
-//        actionList.childNodes[i].style.visibility = "hidden";
-//    }
     for (i = 0; i < arguments.length; i++) {
         res = arguments[i].split(",");
-//        document.getElementById("result_field").innerHTML += res[1].length;
         var listItem = document.createElement("LI");
         listItem.setAttribute("onclick", res[1]);
         var listItemText = document.createTextNode(res[0]);
         listItem.appendChild(listItemText);
-//        listItem.addEventListener("click", test1);
         actionList.appendChild(listItem);
-//        document.getElementsByTagName("LI")[i].setAttribute("onclick", res[1]);
     }
 }
 
@@ -64,7 +57,6 @@ function heroAttack(heroA, enemy, locationName) {
                 eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
                 eventLog.innerHTML += enemy.name + " переможений";
                 changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
-//                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -81,7 +73,6 @@ function heroAttack(heroA, enemy, locationName) {
                 eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
                 eventLog.innerHTML += enemy.name + " переможений";
                 changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
-//                changeActionList(actions[0],actions[1],actions[2],actions[3],actions[4],actions[5],actions[6],actions[7]);
             }
             else {
                 enemyAttack(enemy, heroA);
@@ -207,11 +198,38 @@ function updateInventory(itemTrue, itemQuantity, itemId) {
     }
     if (check == false) {
         heroInventory.push(itemId);
+        heroInventory[heroInventory.length - 1].quantity = 1;
     }
 }
 
 function exitLoot(){
     changeLocation(currentLocation);
+}
+
+/* show/hide inventory functions */
+
+$(document).ready(function(){
+    hideInventory();
+});
+
+function showInventory() {
+    var i;
+    $("#popup1").show();
+    var inventoryList = document.getElementById("inventory_list");
+    while (inventoryList.hasChildNodes()) {
+        inventoryList.removeChild(inventoryList.childNodes[0]);
+    }
+    for (i = 0; i < heroInventory.length; i++) {
+        var listItem = document.createElement("LI");
+//        listItem.setAttribute("onclick", itemDescription());
+        var listItemText = document.createTextNode(heroInventory[i].name + " (" + heroInventory[i].quantity + ")");
+        listItem.appendChild(listItemText);
+        inventoryList.appendChild(listItem);
+    }
+}
+
+function hideInventory() {
+    $("#popup1").hide();
 }
 
 ////

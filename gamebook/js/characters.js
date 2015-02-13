@@ -20,12 +20,14 @@ var itemArray = [
     shortsword = {
         name: "Короткий меч",
         damage: rolls.d6,
-        crit: "20"
+        crit: "20",
+        quantity: 0
     },
     saber = {
         name: "Шабля",
         damage: rolls.d6,
-        crit: "18,19,20"
+        crit: "18,19,20",
+        quantity: 0
     },
     gold = {
         name: "Золото",

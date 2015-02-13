@@ -1,3 +1,7 @@
+/*
+
+// temporarily disabled, looking for ways to improve design
+
 #main_gradient {
     min-height: 1200px;
     background: -webkit-linear-gradient(lightskyblue, white);
@@ -5,6 +9,8 @@
     background: -moz-linear-gradient(lightskyblue, white);
     background: linear-gradient(lightskyblue, white);
 }
+*/
+
 #upper_menu li {
     display: inline;
 }
@@ -62,7 +68,10 @@ li:hover {
     background: dodgerblue;
     color: white;
 }
+
+/**/
 /* popup Inventory window */
+/**/
 
 .b-popup {
     width: 100%;
@@ -74,10 +83,22 @@ li:hover {
 }
 .b-popup .b-popup-content {
     margin: 100px auto 0 auto;
-    width: 800px;
-    height: 400px;
-    padding: 40px;
+    width: auto;
+    height: auto;
+    padding: 20px;
     background-color: #c5c5c5;
     border-radius: 5px;
     box-shadow: 0 0 10px #000;
+    display: table;
+}
+.b-popup .b-popup-content h3 {
+    text-align: center;
+    display: table-row;
+}
+.b-popup .b-popup-content #inventory_list {
+    display: table-row;
+}
+.b-popup .b-popup-content #inv_menu_close {
+    text-align: right;
+    display: table-row;
 }
