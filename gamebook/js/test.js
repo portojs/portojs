@@ -1,8 +1,17 @@
 /**
  * Created by Peter on 02.02.2015.
  */
+$(document).ready(function(){
+    hideInventory();
+});
 
+function showInventory() {
+    $("#popup1").show();
+}
 
+function hideInventory() {
+    $("#popup1").hide();
+}
 
 ////
 //// deprecated function, proved to be unnecessary

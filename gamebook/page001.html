@@ -11,37 +11,52 @@
     <script src="js/firstload.js" async="async"></script>
     <link rel="stylesheet" type="text/css" href="css/mainpage.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../js/jquery-1.11.2.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </head>
 
 <body id="main_gradient" onload="firstLoad()">
+
     <div id="upper_menu">
         <ul>
-            <li>Інвентар</li>
+            <li onclick="showInventory()">Інвентар</li>
             <li>Герой</li>
         </ul>
     </div>
+
     <div id="main_window">
+
         <p id="location_field"></p>
         <p id="event_field"></p>
+
         <div>
             <div id="main_list">
                 <h3>ДІЇ</h3>
                 <ul id="action_list"></ul>
             </div>
             <div id="sub_list">
-                <h3 id="loot">ОБШУК</h3>
+                <h3 id="loot">ПРЕДМЕТИ</h3>
                 <ul id="loot_list"></ul>
             </div>
         </div>
+
         <p id="result_field"></p>
+
         <form>
             <input type="button" value="Test" onclick="changeLocation(loc1)">
             <textarea id="text_area"></textarea>
             <textarea id="hero_hp"></textarea>
             <textarea id="enemy_hp"></textarea>
         </form>
+
     </div>
+
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
+            Text in Popup
+            <a href="javascript:hideInventory()">Hide popup</a>
+        </div>
+    </div>
+
 </body>
 </html>
