@@ -119,3 +119,41 @@ li:hover {
     text-align: right;
     display: table-row;
 }
+.b-popup .b-popup-content3 {
+    margin: 200px auto 0 auto;
+    width: auto;
+    height: 400px;
+    padding: 20px;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    display: table;
+}
+.b-popup .b-popup-content3 #battle_commands {
+    padding: 20px;
+    height: 400px;
+    text-align: left;
+    vertical-align: top;
+}
+.b-popup .b-popup-content3 #battle_log {
+    height: 200px;
+    padding: 20px;
+}
+.b-popup .b-popup-content3 #battle_graphics {
+    height: 200px;
+    padding: 20px;
+}
+#battle_graphics {
+    width: 400px;
+    height: 400px;
+}
+.b-popup .b-popup-content4 {
+    margin: 200px auto 0 auto;
+    width: auto;
+    height: 400px;
+    padding: 20px;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    display: table;
+}

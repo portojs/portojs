@@ -2,6 +2,13 @@
  * Created by Peter on 29.01.2015.
  */
 
+$(document).ready(function(){
+    hideInventory();
+    closeItemDescription();
+    closeBattle();
+    closeLootWindow();
+});
+
 function changeLocation(locationName) {
     document.getElementById("location_field").innerHTML = locationName.description;
     document.getElementById("result_field").value = "";
@@ -33,28 +40,28 @@ function heroAttack(heroA, enemy, locationName) {
     var defenderHP = enemy.hp;
     currentContainer = enemy;
     currentLocation = locationName;
-    var eventLog = document.getElementById("text_area");
-    eventLog.innerHTML = heroA.name + " атакує: " + attackerTotalAtRoll + "&#13;";
+    var eventLog = document.getElementById("battle_log");
+    eventLog.innerHTML = heroA.name + " атакує: " + attackerTotalAtRoll + "<br>";
     document.getElementById("enemy_hp").style.visibility = "visible";
     document.getElementById("hero_hp").style.visibility = "visible";
     if (attackerAttackRoll == 0) {
-        eventLog.innerHTML += "Значний промах" + "&#13;";
+        eventLog.innerHTML += "Значний промах" + "<br>";
         enemyAttack(enemy, heroA);
     }
     else if (attackerTotalAtRoll >= enemy.ac) {
         attackerDamage = heroA.weapon.damage() + 3;
-        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "&#13;";
+        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "<br>";
         if (critical(heroA, attackerAttackRoll) == true) {
             finalDamage = attackerDamage * 2;
-            eventLog.innerHTML += "Вдалий удар!" + "&#13;";
-            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "&#13;";
+            eventLog.innerHTML += "Вдалий удар!" + "<br>";
+            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "<br>";
             defenderHP -= finalDamage;
-            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "&#13;";
+            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "<br>;";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
                 locationName.eventCheck1 = false;
-                eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += enemy.name + " вбитий" + "<br>";
                 eventLog.innerHTML += enemy.name + " переможений";
                 changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
             }
@@ -63,14 +70,14 @@ function heroAttack(heroA, enemy, locationName) {
             }
         }
         else {
-            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "<br>";
             defenderHP -= attackerDamage;
-            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "&#13;";
+            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "<br>";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
                 locationName.eventCheck1 = false;
-                eventLog.innerHTML += enemy.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += enemy.name + " вбитий" + "<br>";
                 eventLog.innerHTML += enemy.name + " переможений";
                 changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
             }
@@ -80,7 +87,7 @@ function heroAttack(heroA, enemy, locationName) {
         }
     }
     else {
-        eventLog.innerHTML += "Промах!" + "&#13;";
+        eventLog.innerHTML += "Промах!" + "<br>";
         enemyAttack(enemy, heroA);
     }
     document.getElementById("hero_hp").innerHTML = heroA.hp;
@@ -93,43 +100,43 @@ function enemyAttack(enemy, heroA) {
     var attackerDamage;
     var finalDamage;
     var defenderHP = heroA.hp;
-    var eventLog = document.getElementById("text_area");
-    eventLog.innerHTML += enemy.name + " атакує: " + attackerTotalAtRoll + "&#13;";
+    var eventLog = document.getElementById("battle_log");
+    eventLog.innerHTML += enemy.name + " атакує: " + attackerTotalAtRoll + "<br>";
     if (attackerAttackRoll == 0) {
-        eventLog.innerHTML += "Значний промах" + "&#13;";
+        eventLog.innerHTML += "Значний промах" + "<br>";
     }
     else if (attackerTotalAtRoll >= heroA.ac) {
         attackerDamage = enemy.weapon.damage() + 3;
-        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "&#13;";
+        eventLog.innerHTML += "Пошкодження: " + attackerDamage + "<br>";
         if (critical(enemy, attackerAttackRoll) == true) {
             finalDamage = attackerDamage * 2;
-            eventLog.innerHTML += "Вдалий удар!" + "&#13;";
-            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "&#13;";
+            eventLog.innerHTML += "Вдалий удар!" + "<br>";
+            eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "<br>";
             defenderHP -= finalDamage;
-            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "&#13;";
+            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "<br>";
             heroA.hp = defenderHP;
             if (heroA.hp <= 0) {
                 heroA.alive = false;
-                eventLog.innerHTML += heroA.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += heroA.name + " вбитий" + "<br>";
             }
             else {
             }
         }
         else {
-            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "&#13;";
+            eventLog.innerHTML += "Загальні пошкодження: " + attackerDamage + "<br>";
             defenderHP -= attackerDamage;
-            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "&#13;";
+            eventLog.innerHTML += heroA.name + " здоров'я залишилось: " + defenderHP + "<br>";
             heroA.hp = defenderHP;
             if (heroA.hp <= 0) {
                 heroA.alive = false;
-                eventLog.innerHTML += heroA.name + " вбитий" + "&#13;";
+                eventLog.innerHTML += heroA.name + " вбитий" + "<br>";
             }
             else {
             }
         }
     }
     else {
-        eventLog.innerHTML += "Промах!" + "&#13;";
+        eventLog.innerHTML += "Промах!" + "<br>";
     }
     document.getElementById("hero_hp").innerHTML = heroA.hp;
     document.getElementById("enemy_hp").innerHTML = enemy.hp;
@@ -206,12 +213,7 @@ function exitLoot(){
     changeLocation(currentLocation);
 }
 
-/* show/hide inventory functions */
-
-$(document).ready(function(){
-    hideInventory();
-    closeItemDescription();
-});
+/* show/hide inventory functions *////////////////////////////////////////////////////
 
 function showInventory() {
     var i;
@@ -234,7 +236,7 @@ function hideInventory() {
     $("#popup1").hide();
 }
 
-/* show item description */
+/* show item description *//////////////////////////////////////////////////////
 
 function openItemDescription(text) {
     var i;
@@ -246,68 +248,26 @@ function openItemDescription(text) {
         }
     }
 }
-
 function closeItemDescription() {
     $("#popup2").hide();
 }
 
-////
-//// old function, now I have a shorter one
-////
-/*
-function changeActionList (option1, action1,
-                           option2, action2,
-                           option3, action3,
-                           option4, action4,
-                           option5, action5,
-                           option6, action6) {
-    var is = true;
-    var actionList = document.getElementById("action_list");
-    while (is == true) {
-        actionList.removeChild(actionList.childNodes[0]);
-        is = actionList.hasChildNodes();
-    }
-    if (option1 !== undefined) {
-        var listItem1 = document.createElement("LI");
-        var listItem1Text = document.createTextNode(option1);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[0].setAttribute("onclick", action1);
-    }
-    if (action2 !== undefined) {
-        listItem1 = document.createElement("LI");
-        listItem1Text = document.createTextNode(option2);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[1].setAttribute("onclick", action2);
-    }
-    if (action3 !== undefined) {
-        listItem1 = document.createElement("LI");
-        listItem1Text = document.createTextNode(option3);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[1].setAttribute("onclick", action3);
-    }
-    if (action4 !== undefined) {
-        listItem1 = document.createElement("LI");
-        listItem1Text = document.createTextNode(option4);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[1].setAttribute("onclick", action4);
-    }
-    if (action5 !== undefined) {
-        listItem1 = document.createElement("LI");
-        listItem1Text = document.createTextNode(option5);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[1].setAttribute("onclick", action5);
-    }
-    if (action6 !== undefined) {
-        listItem1 = document.createElement("LI");
-        listItem1Text = document.createTextNode(option6);
-        listItem1.appendChild(listItem1Text);
-        document.getElementById('action_list').appendChild(listItem1);
-        document.getElementsByTagName("LI")[1].setAttribute("onclick", action6);
-    }
+/* open/close battle window *////////////////////////////////////////////////////
+
+function openBattle() {
+    $("#popup3").show();
 }
-*/
+
+function closeBattle() {
+    $("#popup3").hide();
+}
+
+/* open/close loot window *//////////////////////////////////////////////////////
+
+function openLootWindow() {
+    $("#popup4").show();
+}
+
+function closeLootWindow() {
+    $("#popup4").hide();
+}
