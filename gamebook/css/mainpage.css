@@ -102,3 +102,10 @@ li:hover {
     text-align: right;
     display: table-row;
 }
+.b-popup .b-popup-content #inventory_item_description {
+    display: table-row;
+}
+.b-popup .b-popup-content #item_description_close {
+    text-align: right;
+    display: table-row;
+}

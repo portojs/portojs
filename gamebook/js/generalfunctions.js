@@ -210,6 +210,7 @@ function exitLoot(){
 
 $(document).ready(function(){
     hideInventory();
+    closeItemDescription();
 });
 
 function showInventory() {
@@ -221,7 +222,8 @@ function showInventory() {
     }
     for (i = 0; i < heroInventory.length; i++) {
         var listItem = document.createElement("LI");
-//        listItem.setAttribute("onclick", itemDescription());
+//        currentItem = heroInventory[i];
+        listItem.setAttribute("onclick", "test()");
         var listItemText = document.createTextNode(heroInventory[i].name + " (" + heroInventory[i].quantity + ")");
         listItem.appendChild(listItemText);
         inventoryList.appendChild(listItem);
@@ -230,6 +232,12 @@ function showInventory() {
 
 function hideInventory() {
     $("#popup1").hide();
+}
+
+/* show item description */
+
+function closeItemDescription() {
+    $("#popup2").hide();
 }
 
 ////

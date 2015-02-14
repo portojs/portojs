@@ -43,7 +43,7 @@
         <p id="result_field"></p>
 
         <form>
-            <input type="button" value="Test" onclick="changeLocation(loc1)">
+            <input type="button" value="Test" onclick="test()">
             <textarea id="text_area"></textarea>
             <textarea id="hero_hp"></textarea>
             <textarea id="enemy_hp"></textarea>
@@ -54,10 +54,18 @@
     <div class="b-popup" id="popup1">
         <div class="b-popup-content">
             <h3>ІНВЕНТАР</h3>
-<!--            <p id="inventory_list"></p> -->
             <ul id="inventory_list"></ul>
             <div id="inv_menu_close">
                 <a href="javascript:hideInventory()">Закрити</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="b-popup" id="popup2">
+        <div class="b-popup-content">
+            <p id="inventory_item_description"></p>
+            <div id="item_description_close">
+                <a href="javascript:closeItemDescription()">Закрити</a>
             </div>
         </div>
     </div>

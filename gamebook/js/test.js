@@ -2,6 +2,9 @@
  * Created by Peter on 02.02.2015.
  */
 
+function test() {
+    document.getElementById("result_field").innerHTML = this.innerHTML;
+}
 ////
 //// deprecated function, proved to be unnecessary
 ////

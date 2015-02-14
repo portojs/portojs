@@ -21,12 +21,24 @@ var itemArray = [
         name: "Короткий меч",
         damage: rolls.d6,
         crit: "20",
-        quantity: 0
+        critMult: 2,
+        weight: 0.4,
+        quantity: 0,
+        description:
+            "Цей меч бачив багато битв і, мабуть, в нього було чимало власників. " +
+            "На лезі безліч подряпин, одна із яких не дозволяє прочитати " +
+            "імя майстра-коваля. Обмотане шкірою руків'я сильно потерлось." +
+            "<br><br>Тип: ріжуче" +
+            "<br>Урон: 1d6" +
+            "<br>Критичний удар: 20" +
+            "<br>Вага: 0,4 кг"
     },
     saber = {
         name: "Шабля",
         damage: rolls.d6,
         crit: "18,19,20",
+        critMult: 2,
+        weight: 0.3,
         quantity: 0
     },
     gold = {
@@ -54,6 +66,8 @@ var heroInventory = [
         name: "Короткий меч",
         damage: rolls.d6,
         crit: "20",
+        critMult: 2,
+        weight: 0.4,
         quantity: 1
     },
     gold = {
@@ -79,6 +93,8 @@ var bandit1 = {
             name: "Шабля",
             damage: rolls.d6,
             crit: "18,19,20",
+            critMult: 2,
+            weight: 0.3,
             quantity: 1
         },
         gold = {
@@ -92,3 +108,4 @@ var bandit1 = {
 
 var currentContainer;
 var currentLocation;
+var currentItem;
