@@ -2,9 +2,16 @@
  * Created by Peter on 02.02.2015.
  */
 
-function test() {
-    document.getElementById("result_field").innerHTML = this.innerHTML;
+function test(text) {
+    var i;
+    var trueName = text.substr(0, (text.indexOf("(") - 1));
+    for (i = 0; i < heroInventory.length; i++) {
+        if (heroInventory[i].name == trueName) {
+            document.getElementById("result_field").innerHTML = heroInventory[i].description;
+        }
+    }
 }
+
 ////
 //// deprecated function, proved to be unnecessary
 ////

@@ -98,14 +98,24 @@ li:hover {
 .b-popup .b-popup-content #inventory_list {
     display: table-row;
 }
-.b-popup .b-popup-content #inv_menu_close {
+.b-popup .b-popup-content2 {
+    margin: 200px 300px 0 300px;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+    display: table;
+}
+.b-popup .b-popup-content2 #inv_menu_close {
     text-align: right;
     display: table-row;
 }
-.b-popup .b-popup-content #inventory_item_description {
+.b-popup .b-popup-content2 #inventory_item_description {
     display: table-row;
 }
-.b-popup .b-popup-content #item_description_close {
+.b-popup .b-popup-content2 #item_description_close {
     text-align: right;
     display: table-row;
 }

@@ -223,7 +223,7 @@ function showInventory() {
     for (i = 0; i < heroInventory.length; i++) {
         var listItem = document.createElement("LI");
 //        currentItem = heroInventory[i];
-        listItem.setAttribute("onclick", "test()");
+        listItem.setAttribute("onclick", "openItemDescription(this.innerHTML)");
         var listItemText = document.createTextNode(heroInventory[i].name + " (" + heroInventory[i].quantity + ")");
         listItem.appendChild(listItemText);
         inventoryList.appendChild(listItem);
@@ -235,6 +235,17 @@ function hideInventory() {
 }
 
 /* show item description */
+
+function openItemDescription(text) {
+    var i;
+    $("#popup2").show();
+    var trueName = text.substr(0, (text.indexOf("(") - 1));
+    for (i = 0; i < heroInventory.length; i++) {
+        if (heroInventory[i].name == trueName) {
+            document.getElementById("inventory_item_description").innerHTML = heroInventory[i].description;
+        }
+    }
+}
 
 function closeItemDescription() {
     $("#popup2").hide();
