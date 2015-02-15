@@ -66,8 +66,7 @@ var loc1 = {
     },
 
     attackBandit1: function() {
-        changeActionList("Атакувати розбійника,loc1.attackBandit1()");
-        heroAttack(hero, bandit1, loc1);
+        heroAttack(bandit1, loc1);
     },
 
     escapeBandit1: function() {

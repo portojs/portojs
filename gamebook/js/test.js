@@ -2,7 +2,7 @@
  * Created by Peter on 02.02.2015.
  */
 
-function test(enemy, locationName) {
+function heroAttack(enemy, locationName) {
     $("#popup3").show();
     var battleCommands = document.getElementById("battle_commands");
     while (battleCommands.hasChildNodes()) {
@@ -15,7 +15,24 @@ function test(enemy, locationName) {
     battleCommands.appendChild(listItem);
 }
 
+function lootEnemy() {
+    var i;
+    while (document.getElementById('loot_items_list').hasChildNodes()) {
+        document.getElementById('loot_items_list').removeChild(document.getElementById('loot_items_list').firstChild);
+    }
+    for (i = 0; i < currentContainer.inventory2.length; i++) {
+        var listItem = document.createElement("LI");
+        var listItemText = document.createTextNode(currentContainer.inventory2[i].quantity + " " + currentContainer.inventory2[i].name);
+        listItem.onclick = function() {take(this.innerHTML)};
+        listItem.appendChild(listItemText);
+        document.getElementById('loot_items_list').appendChild(listItem);
+    }
+}
+
 function heroAttackTest(heroA, enemy, locationName) {
+    var lootCommands;
+    var listItem;
+    var listItemText;
     var attackerAttackRoll = rolls.d20();
     var attackerTotalAtRoll = attackerAttackRoll + heroA.tohit;
     var attackerDamage;
@@ -46,7 +63,14 @@ function heroAttackTest(heroA, enemy, locationName) {
                 locationName.eventCheck1 = false;
                 eventLog.innerHTML += enemy.name + " вбитий" + "<br>";
                 eventLog.innerHTML += enemy.name + " переможений";
-                changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
+                $("#popup4").show();
+                lootCommands = document.getElementById("loot_commands");
+                listItem = document.createElement("LI");
+                listItemText = document.createTextNode("Вихід");
+                listItem.onclick = function() {exitLoot()};
+                listItem.appendChild(listItemText);
+                lootCommands.appendChild(listItem);
+                lootEnemy();
             }
             else {
                 enemyAttackTest(enemy, heroA);
@@ -62,8 +86,14 @@ function heroAttackTest(heroA, enemy, locationName) {
                 locationName.eventCheck1 = false;
                 eventLog.innerHTML += enemy.name + " вбитий" + "<br>";
                 eventLog.innerHTML += enemy.name + " переможений";
-                changeActionList("Обшукати,lootEnemy()", "Вихід,exitLoot()");
-            }
+                $("#popup4").show();
+                lootCommands = document.getElementById("loot_commands");
+                listItem = document.createElement("LI");
+                listItemText = document.createTextNode("Вихід");
+                listItem.onclick = function() {exitLoot()};
+                listItem.appendChild(listItemText);
+                lootCommands.appendChild(listItem);
+                lootEnemy();            }
             else {
                 enemyAttackTest(enemy, heroA);
             }

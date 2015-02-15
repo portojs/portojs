@@ -31,7 +31,7 @@ function changeActionList(action1, action2, action3, action4, action5, action6) 
         actionList.appendChild(listItem);
     }
 }
-
+/*
 function heroAttack(heroA, enemy, locationName) {
     var attackerAttackRoll = rolls.d20();
     var attackerTotalAtRoll = attackerAttackRoll + heroA.tohit;
@@ -141,7 +141,7 @@ function enemyAttack(enemy, heroA) {
     document.getElementById("hero_hp").innerHTML = heroA.hp;
     document.getElementById("enemy_hp").innerHTML = enemy.hp;
 }
-
+*/
 function critical(attacker, roll) {
     var i;
     var attackerCrit = attacker.weapon.crit.split(",");
@@ -151,7 +151,7 @@ function critical(attacker, roll) {
         }
     }
 }
-
+/*
 function lootEnemy() {
     var i;
     document.getElementById("loot").style.visibility = 'visible';
@@ -168,7 +168,7 @@ function lootEnemy() {
     }
     changeActionList("Вихід,exitLoot()");
 }
-
+*/
 function take(itemName) {
     var i;
     var j;
@@ -210,6 +210,10 @@ function updateInventory(itemTrue, itemQuantity, itemId) {
 }
 
 function exitLoot(){
+    $("#popup1").hide();
+    $("#popup2").hide();
+    $("#popup3").hide();
+    $("#popup4").hide();
     changeLocation(currentLocation);
 }
 
