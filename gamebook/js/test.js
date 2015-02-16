@@ -1,16 +1,42 @@
 /**
  * Created by Peter on 02.02.2015.
  */
+function heroMove(character) {
+    miniatureWaiting(character);
+    availableCells(character);
+}
+
+function miniatureWaiting(character) {
+    setInterval(function(){
+        if (document.getElementById(character).style.opacity == 0.2) {
+            document.getElementById(character).style.opacity = 1.0;
+        }
+        else {
+            document.getElementById(character).style.opacity = 0.2;
+        }
+    }, 500);
+}
+
+function availableCells(character) {
+    document.getElementById("event_field").innerHTML = document.getElementById(character).coords;
+}
 
 function heroAttack(enemy, locationName) {
     $("#popup3").show();
+    var listItem;
+    var listItemText;
     var battleCommands = document.getElementById("battle_commands");
     while (battleCommands.hasChildNodes()) {
         battleCommands.removeChild(battleCommands.childNodes[0]);
     }
-    var listItem = document.createElement("LI");
+    listItem = document.createElement("LI");
+    listItem.onclick = function() {heroMove("hero_miniature")};
+    listItemText = document.createTextNode("Іти");
+    listItem.appendChild(listItemText);
+    battleCommands.appendChild(listItem);
+    listItem = document.createElement("LI");
     listItem.onclick = function() {heroAttackTest(hero, enemy, locationName)};
-    var listItemText = document.createTextNode("Атакувати");
+    listItemText = document.createTextNode("Атакувати");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);
 }
@@ -56,7 +82,7 @@ function heroAttackTest(heroA, enemy, locationName) {
             eventLog.innerHTML += "Вдалий удар!" + "<br>";
             eventLog.innerHTML += "Загальні пошкодження: " + finalDamage + "<br>";
             defenderHP -= finalDamage;
-            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "<br>;";
+            eventLog.innerHTML += enemy.name + " здоров'я залишилось: " + defenderHP + "<br>";
             enemy.hp = defenderHP;
             if (enemy.hp <= 0) {
                 enemy.alive = false;
