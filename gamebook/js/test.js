@@ -8,17 +8,31 @@ function heroMove(character) {
 
 function miniatureWaiting(character) {
     setInterval(function(){
-        if (document.getElementById(character).style.opacity == 0.2) {
-            document.getElementById(character).style.opacity = 1.0;
-        }
-        else {
+        document.getElementById(character).style.opacity == 0.2 ?
+            document.getElementById(character).style.opacity = 1.0 :
             document.getElementById(character).style.opacity = 0.2;
-        }
     }, 500);
 }
 
 function availableCells(character) {
-    document.getElementById("event_field").innerHTML = document.getElementById(character).coords;
+    var offset = $("#" + character).offset();
+    var movementCell;
+    var offset2 = $("#battle_graphics").offset();
+    if (offset.top !== (offset2.top + 20)) {
+        movementCell = document.createElement("P");
+        movementCell.setAttribute("id", "movement_cell_1");
+        movementCell.setAttribute("class", "movement_cell");
+        document.getElementById("battle_graphics").appendChild(movementCell);
+        $("#movement_cell_1").offset({top: (offset.top - 10), left: offset.left});
+    }
+    if (offset.left !== (offset2.top + 20)) {
+        movementCell = document.createElement("P");
+        movementCell.setAttribute("id", "movement_cell_2");
+        movementCell.setAttribute("class", "movement_cell");
+        document.getElementById("battle_graphics").appendChild(movementCell);
+        $("#movement_cell_2").offset({top: (offset.top - 10), left: offset.left});
+    }
+    if (offset.top !== (offset2.top))
 }
 
 function heroAttack(enemy, locationName) {

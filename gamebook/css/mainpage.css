@@ -144,12 +144,19 @@ li:hover {
     text-align: left;
     vertical-align: top;
 }
+#battle_graphics {
+    padding: 20px;
+}
 #hero_miniature {
-    margin: 20px;
     height: 10px;
     width: 10px;
     background: red;
     opacity: 0.2;
+}
+.movement_cell {
+    height: 10px;
+    width: 10px;
+    background: yellow;
 }
 .b-popup .b-popup-content4 {
     margin: 200px auto 0 auto;
