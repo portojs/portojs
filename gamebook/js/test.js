@@ -6,6 +6,11 @@ function heroMove(character) {
     availableCells(character);
 }
 
+function moveAction(character, currentCoords) {
+    alert("Alert");
+    $("#" + character).offset({top: currentCoords.top, left: currentCoords.left});
+}
+
 function miniatureWaiting(character) {
     setInterval(function(){
         document.getElementById(character).style.opacity == 0.2 ?
@@ -23,16 +28,33 @@ function availableCells(character) {
         movementCell.setAttribute("id", "movement_cell_1");
         movementCell.setAttribute("class", "movement_cell");
         document.getElementById("battle_graphics").appendChild(movementCell);
-        $("#movement_cell_1").offset({top: (offset.top - 10), left: offset.left});
+        $("#movement_cell_1")
+            .offset({top: (offset.top - 20), left: offset.left})
+            .on("click", function() {
+                moveAction(character, this.offset);
+            })
     }
-    if (offset.left !== (offset2.top + 20)) {
+    if (offset.left !== (offset2.left + 20)) {
         movementCell = document.createElement("P");
         movementCell.setAttribute("id", "movement_cell_2");
         movementCell.setAttribute("class", "movement_cell");
         document.getElementById("battle_graphics").appendChild(movementCell);
-        $("#movement_cell_2").offset({top: (offset.top - 10), left: offset.left});
+        $("#movement_cell_2").offset({top: offset.top, left: (offset.left - 20)});
     }
-    if (offset.top !== (offset2.top))
+    if (offset.top !== (offset2.top + 150)) {
+        movementCell = document.createElement("P");
+        movementCell.setAttribute("id", "movement_cell_3");
+        movementCell.setAttribute("class", "movement_cell");
+        document.getElementById("battle_graphics").appendChild(movementCell);
+        $("#movement_cell_3").offset({top: (offset.top + 20), left: offset.left});
+    }
+    if (offset.left !== (offset2.left + 400)) {
+        movementCell = document.createElement("P");
+        movementCell.setAttribute("id", "movement_cell_4");
+        movementCell.setAttribute("class", "movement_cell");
+        document.getElementById("battle_graphics").appendChild(movementCell);
+        $("#movement_cell_4").offset({top: offset.top, left: (offset.left + 20)});
+    }
 }
 
 function heroAttack(enemy, locationName) {
