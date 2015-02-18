@@ -6,9 +6,12 @@ function heroMove(character) {
     availableCells(character);
 }
 
-function moveAction(character, currentCoords) {
-    alert("Alert");
-    $("#" + character).offset({top: currentCoords.top, left: currentCoords.left});
+function moveAction(character, currCoords) {
+    while (document.getElementById("battle_field").hasChildNodes()) {
+        document.getElementById("battle_field").removeChild(document.getElementById("battle_field").childNodes[0]);
+    }
+    $("#" + character).offset({top: currCoords.top, left: currCoords.left});
+    availableCells(character);
 }
 
 function miniatureWaiting(character) {
@@ -23,37 +26,53 @@ function availableCells(character) {
     var offset = $("#" + character).offset();
     var movementCell;
     var offset2 = $("#battle_graphics").offset();
+// movement UP
     if (offset.top !== (offset2.top + 20)) {
         movementCell = document.createElement("P");
         movementCell.setAttribute("id", "movement_cell_1");
         movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_graphics").appendChild(movementCell);
+        document.getElementById("battle_field").appendChild(movementCell);
         $("#movement_cell_1")
             .offset({top: (offset.top - 20), left: offset.left})
             .on("click", function() {
-                moveAction(character, this.offset);
-            })
+                moveAction(character, $("#movement_cell_1").offset());
+            });
     }
+// movement LEFT
     if (offset.left !== (offset2.left + 20)) {
         movementCell = document.createElement("P");
         movementCell.setAttribute("id", "movement_cell_2");
         movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_graphics").appendChild(movementCell);
-        $("#movement_cell_2").offset({top: offset.top, left: (offset.left - 20)});
+        document.getElementById("battle_field").appendChild(movementCell);
+        $("#movement_cell_2")
+            .offset({top: offset.top, left: (offset.left - 20)})
+            .on("click", function() {
+                moveAction(character, $("#movement_cell_2").offset());
+            });
     }
-    if (offset.top !== (offset2.top + 150)) {
+// movement DOWN
+    if (offset.top !== (offset2.top + 180)) {
         movementCell = document.createElement("P");
         movementCell.setAttribute("id", "movement_cell_3");
         movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_graphics").appendChild(movementCell);
-        $("#movement_cell_3").offset({top: (offset.top + 20), left: offset.left});
+        document.getElementById("battle_field").appendChild(movementCell);
+        $("#movement_cell_3")
+            .offset({top: (offset.top + 20), left: offset.left})
+            .on("click", function() {
+                moveAction(character, $("#movement_cell_3").offset());
+            });
     }
+// movement RIGHT
     if (offset.left !== (offset2.left + 400)) {
         movementCell = document.createElement("P");
         movementCell.setAttribute("id", "movement_cell_4");
         movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_graphics").appendChild(movementCell);
-        $("#movement_cell_4").offset({top: offset.top, left: (offset.left + 20)});
+        document.getElementById("battle_field").appendChild(movementCell);
+        $("#movement_cell_4")
+            .offset({top: offset.top, left: (offset.left + 20)})
+            .on("click", function() {
+                moveAction(character, $("#movement_cell_4").offset());
+            });
     }
 }
 
