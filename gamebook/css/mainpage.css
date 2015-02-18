@@ -153,6 +153,12 @@ li:hover {
     background: red;
     opacity: 0.2;
 }
+#battle_field {
+    display: table;
+    border: darkgrey 1px solid;
+    height: 240px;
+    width: 460px;
+}
 .movement_cell {
     height: 20px;
     width: 20px;
