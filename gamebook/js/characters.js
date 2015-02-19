@@ -57,7 +57,7 @@ var hero = {
     charisma: 15,
     intelligence: 16,
     tohit: 5,
-    move: 5,
+    move: 6,
     ac: 20,
     weapon: itemArray[0]
 };

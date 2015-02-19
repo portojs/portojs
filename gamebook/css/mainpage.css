@@ -164,6 +164,11 @@ li:hover {
     width: 20px;
     background: yellow;
 }
+.temp_cell {
+    height: 20px;
+    width: 20px;
+    background: lightyellow;
+}
 #movement_counter {
     display: inline-block;
 }

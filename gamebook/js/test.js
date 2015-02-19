@@ -83,17 +83,43 @@ function availableCells(miniature, battleFieldCoords, character, characterAPs) {
                     moveAction(miniature, $("#movement_cell_4").offset(), battleFieldCoords, character, characterAPs);
                 });
         }
-        if (characterAps > 1) {
-            tempCells(miniature, battleFieldCoords);
-        }
+        tempCells(charCoords, battleFieldCoords, characterAPs);
     }
     else {
         document.getElementById("movement_counter").innerHTML = "Очки ходу: ЗАКІНЧИЛИСЯ";
     }
 }
 
-function tempCells (miniature, battleFieldCoords) {
-
+function tempCells (charCoords, battleFieldCoords, characterAPs) {
+    var i;
+    var j;
+    var xLeft;
+    var xRight;
+    var yUp;
+    var yDown;
+    var tempCell;
+    var counter;
+    /*
+    alert("Miniature TOP: " + charCoords.top + "/n" + "Miniature LEFT: " +
+    charCoords.left + "/n" + "Box TOP: " + battleFieldCoords.top + "/n" +
+    "Box LEFT: " + battleFieldCoords.left);
+    */
+    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
+    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
+    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
+    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
+    if (characterAPs > xLeft && xLeft > 0) {
+        counter = 20;
+        for (j = xLeft; j > 0; j--) {
+            tempCell = document.createElement("P");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1")
+                .offset({top: (charCoords.top), left: (charCoords.left + counter)});
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
 }
 
 function heroAttack(enemy, locationName) {
