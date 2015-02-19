@@ -228,7 +228,6 @@ function showInventory() {
     }
     for (i = 0; i < heroInventory.length; i++) {
         var listItem = document.createElement("LI");
-//        currentItem = heroInventory[i];
         listItem.setAttribute("onclick", "openItemDescription(this.innerHTML)");
         var listItemText = document.createTextNode(heroInventory[i].name + " (" + heroInventory[i].quantity + ")");
         listItem.appendChild(listItemText);

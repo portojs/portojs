@@ -164,6 +164,9 @@ li:hover {
     width: 20px;
     background: yellow;
 }
+#movement_counter {
+    display: inline-block;
+}
 .b-popup .b-popup-content4 {
     margin: 200px auto 0 auto;
     width: 500px;

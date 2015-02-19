@@ -1,13 +1,14 @@
-/**
- * Created by Peter on 02.02.2015.
- */
-function heroMove(character) {
+/*** Created by Peter on 02.02.2015.*/
+
+function heroMove(miniature, character) {
+    var characterAPs = character.move;
+    document.getElementById("movement_counter").innerHTML = "Очки ходу: " + characterAPs;
     var battleFieldCoords = $("#battle_field").offset();
-    miniatureWaiting(character, battleFieldCoords);
-    availableCells(character, battleFieldCoords);
+    miniatureWaiting(miniature, battleFieldCoords);
+    availableCells(miniature, battleFieldCoords, character, characterAPs);
 }
 
-function moveAction(character, currCoords) {
+function moveAction(miniature, currCoords, battleFieldCoords, character, characterAPs) {
     while (document.getElementById("battle_field").hasChildNodes()) {
         document.getElementById("battle_field").removeChild(document.getElementById("battle_field").childNodes[0]);
     }
@@ -15,71 +16,84 @@ function moveAction(character, currCoords) {
     heroMiniature = document.createElement("P");
     heroMiniature.setAttribute("id", "hero_miniature");
     document.getElementById("battle_field").appendChild(heroMiniature);
-    $("#" + character).offset({top: currCoords.top, left: currCoords.left});
-    availableCells(character);
+    $("#" + miniature).offset({top: currCoords.top, left: currCoords.left});
+    characterAPs--;
+    document.getElementById("movement_counter").innerHTML = "Очки ходу: " + characterAPs;
+    availableCells(miniature, battleFieldCoords, character, characterAPs);
 }
 
-function miniatureWaiting(character, battleFieldCoords) {
-    $("#" + character).offset({top: battleFieldCoords.top, left: battleFieldCoords.left});
+function miniatureWaiting(miniature, battleFieldCoords) {
+    $("#" + miniature).offset({top: battleFieldCoords.top, left: battleFieldCoords.left});
     setInterval(function(){
-        document.getElementById(character).style.opacity == 0.2 ?
-            document.getElementById(character).style.opacity = 1.0 :
-            document.getElementById(character).style.opacity = 0.2;
+        document.getElementById(miniature).style.opacity == 0.2 ?
+            document.getElementById(miniature).style.opacity = 1.0 :
+            document.getElementById(miniature).style.opacity = 0.2;
     }, 500);
 }
 
-function availableCells(character, battleFieldCoords) {
-    var charCoords = $("#" + character).offset();
+function availableCells(miniature, battleFieldCoords, character, characterAPs) {
     var movementCell;
-    var offset2 = $("#battle_graphics").offset();
-// movement UP
-    if (charCoords.top !== (battleFieldCoords.top)) {
-        movementCell = document.createElement("P");
-        movementCell.setAttribute("id", "movement_cell_1");
-        movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_field").appendChild(movementCell);
-        $("#movement_cell_1")
-            .offset({top: (charCoords.top - 20), left: charCoords.left})
-            .on("click", function() {
-                moveAction(character, $("#movement_cell_1").offset());
-            });
+    var charCoords = $("#" + miniature).offset();
+    if (characterAPs > 0) {
+        // movement UP
+        if (charCoords.top !== (battleFieldCoords.top)) {
+            movementCell = document.createElement("P");
+            movementCell.setAttribute("id", "movement_cell_1");
+            movementCell.setAttribute("class", "movement_cell");
+            document.getElementById("battle_field").appendChild(movementCell);
+            $("#movement_cell_1")
+                .offset({top: (charCoords.top - 20), left: charCoords.left})
+                .on("click", function () {
+                    moveAction(miniature, $("#movement_cell_1").offset(), battleFieldCoords, character, characterAPs);
+                });
+        }
+        // movement LEFT
+        if (charCoords.left !== (battleFieldCoords.left)) {
+            movementCell = document.createElement("P");
+            movementCell.setAttribute("id", "movement_cell_2");
+            movementCell.setAttribute("class", "movement_cell");
+            document.getElementById("battle_field").appendChild(movementCell);
+            $("#movement_cell_2")
+                .offset({top: charCoords.top, left: (charCoords.left - 20)})
+                .on("click", function () {
+                    moveAction(miniature, $("#movement_cell_2").offset(), battleFieldCoords, character, characterAPs);
+                });
+        }
+        // movement DOWN
+        if (charCoords.top !== (battleFieldCoords.top + 220)) {
+            movementCell = document.createElement("P");
+            movementCell.setAttribute("id", "movement_cell_3");
+            movementCell.setAttribute("class", "movement_cell");
+            document.getElementById("battle_field").appendChild(movementCell);
+            $("#movement_cell_3")
+                .offset({top: (charCoords.top + 20), left: charCoords.left})
+                .on("click", function () {
+                    moveAction(miniature, $("#movement_cell_3").offset(), battleFieldCoords, character, characterAPs);
+                });
+        }
+        // movement RIGHT
+        if (charCoords.left !== (battleFieldCoords.left + 440)) {
+            movementCell = document.createElement("P");
+            movementCell.setAttribute("id", "movement_cell_4");
+            movementCell.setAttribute("class", "movement_cell");
+            document.getElementById("battle_field").appendChild(movementCell);
+            $("#movement_cell_4")
+                .offset({top: charCoords.top, left: (charCoords.left + 20)})
+                .on("click", function () {
+                    moveAction(miniature, $("#movement_cell_4").offset(), battleFieldCoords, character, characterAPs);
+                });
+        }
+        if (characterAps > 1) {
+            tempCells(miniature, battleFieldCoords);
+        }
     }
-// movement LEFT
-    if (charCoords.left !== (battleFieldCoords.left)) {
-        movementCell = document.createElement("P");
-        movementCell.setAttribute("id", "movement_cell_2");
-        movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_field").appendChild(movementCell);
-        $("#movement_cell_2")
-            .offset({top: charCoords.top, left: (charCoords.left - 20)})
-            .on("click", function() {
-                moveAction(character, $("#movement_cell_2").offset());
-            });
+    else {
+        document.getElementById("movement_counter").innerHTML = "Очки ходу: ЗАКІНЧИЛИСЯ";
     }
-// movement DOWN
-    if (charCoords.top !== (battleFieldCoords.top + 240)) {
-        movementCell = document.createElement("P");
-        movementCell.setAttribute("id", "movement_cell_3");
-        movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_field").appendChild(movementCell);
-        $("#movement_cell_3")
-            .offset({top: (charCoords.top + 20), left: charCoords.left})
-            .on("click", function() {
-                moveAction(character, $("#movement_cell_3").offset());
-            });
-    }
-// movement RIGHT
-    if (charCoords.left !== (battleFieldCoords.left + 460)) {
-        movementCell = document.createElement("P");
-        movementCell.setAttribute("id", "movement_cell_4");
-        movementCell.setAttribute("class", "movement_cell");
-        document.getElementById("battle_field").appendChild(movementCell);
-        $("#movement_cell_4")
-            .offset({top: charCoords.top, left: (charCoords.left + 20)})
-            .on("click", function() {
-                moveAction(character, $("#movement_cell_4").offset());
-            });
-    }
+}
+
+function tempCells (miniature, battleFieldCoords) {
+
 }
 
 function heroAttack(enemy, locationName) {
@@ -95,7 +109,7 @@ function heroAttack(enemy, locationName) {
     heroMiniature.setAttribute("id", "hero_miniature");
     document.getElementById("battle_field").appendChild(heroMiniature);
     listItem = document.createElement("LI");
-    listItem.onclick = function() {heroMove("hero_miniature")};
+    listItem.onclick = function() {heroMove("hero_miniature", hero)};
     listItemText = document.createTextNode("Іти");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);

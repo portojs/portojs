@@ -57,6 +57,7 @@ var hero = {
     charisma: 15,
     intelligence: 16,
     tohit: 5,
+    move: 5,
     ac: 20,
     weapon: itemArray[0]
 };
@@ -119,4 +120,3 @@ var bandit1 = {
 
 var currentContainer;
 var currentLocation;
-var currentItem;
