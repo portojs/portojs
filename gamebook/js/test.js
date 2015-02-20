@@ -99,16 +99,10 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var yDown;
     var tempCell;
     var counter;
-    /*
-    alert("Miniature TOP: " + charCoords.top + "/n" + "Miniature LEFT: " +
-    charCoords.left + "/n" + "Box TOP: " + battleFieldCoords.top + "/n" +
-    "Box LEFT: " + battleFieldCoords.left);
-    */
     xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
     xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
     yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
     yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
-//    alert(xLeft + "," + xRight + "," + yUp + "," + yDown);
     if (characterAPs > xLeft && xLeft > 0) {
         counter = 20;
         for (j = xLeft; j > 0; j--) {
@@ -124,7 +118,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     }
     else if (characterAPs > 1 && xLeft > 0) {
         counter = 20;
-        for (j = characterAPs; j > 0; j--) {
+        for (j = (characterAPs - 1); j > 0; j--) {
             tempCell = document.createElement("DIV");
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
@@ -150,7 +144,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     }
     else if (characterAPs > 1 && xRight > 0) {
         counter = 20;
-        for (j = characterAPs; j > 0; j--) {
+        for (j = (characterAPs - 1); j > 0; j--) {
             tempCell = document.createElement("DIV");
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
@@ -159,6 +153,112 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             $("#temp_cell_1")
                 .offset({top: (charCoords.top), left: (charCoords.left + counter)});
             document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    if (characterAPs > yUp && yUp > 0) {
+        counter = 20;
+        for (j = yUp; j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            counter += 20;
+            $("#temp_cell_1")
+                .offset({top: (charCoords.top - counter), left: charCoords.left});
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    else if (characterAPs > 1 && yUp > 0) {
+        counter = 20;
+        for (j = (characterAPs - 1); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            counter += 20;
+            $("#temp_cell_1")
+                .offset({top: (charCoords.top - counter), left: charCoords.left});
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    if (characterAPs > yDown && yDown > 0) {
+        counter = 20;
+        for (j = yDown; j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            counter += 20;
+            $("#temp_cell_1")
+                .offset({top: (charCoords.top + counter), left: charCoords.left});
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    else if (characterAPs > 1 && yDown > 0) {
+        counter = 20;
+        for (j = (characterAPs - 1); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            counter += 20;
+            $("#temp_cell_1")
+                .offset({top: (charCoords.top + counter), left: charCoords.left});
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    if (charCoords.top > battleFieldCoords.top && charCoords.left > battleFieldCoords.left) {
+        counter = 20;
+        if (characterAPs > xLeft) {
+            for (j = (xLeft + 1); j = 0; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top - 20), left: (charCoords.left - counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
+        }
+        else if (xLeft > characterAPs) {
+            for (j = (characterAPs - 1); j = 0; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top - 20), left: (charCoords.left - counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
+        }
+    }
+    if (charCoords.top < (battleFieldCoords.top + 220) && charCoords.left < (battleFieldCoords.left + 440)) {
+        counter = 20;
+        if (xRight >= 0 && characterAPs > xRight) {
+            for (j = xRight; j != -1; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top + 20), left: (charCoords.left + counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
+        }
+        else if (characterAPs > 1 && xRight > (characterAPs - 1)) {
+            for (j = characterAPs; j != 1; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top + 20), left: (charCoords.left + counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
         }
     }
 }
