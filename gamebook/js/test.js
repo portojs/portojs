@@ -210,7 +210,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     if (charCoords.top > battleFieldCoords.top && charCoords.left > battleFieldCoords.left) {
         counter = 20;
         if (characterAPs > xLeft) {
-            for (j = (xLeft + 1); j = 0; j--) {
+            for (j = (xLeft + 1); j != 0; j--) {
                 tempCell = document.createElement("DIV");
                 tempCell.setAttribute("class", "temp_cell");
                 tempCell.setAttribute("id", "temp_cell_1");
@@ -221,8 +221,8 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
                 counter += 20;
             }
         }
-        else if (xLeft > characterAPs) {
-            for (j = (characterAPs - 1); j = 0; j--) {
+        else if (xLeft > characterAPs || characterAPs == xLeft) {
+            for (j = (characterAPs - 1); j != 0; j--) {
                 tempCell = document.createElement("DIV");
                 tempCell.setAttribute("class", "temp_cell");
                 tempCell.setAttribute("id", "temp_cell_1");
