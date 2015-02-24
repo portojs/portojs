@@ -103,6 +103,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
     yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
     yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
+    // H-line left
     if (characterAPs > xLeft && xLeft > 0) {
         counter = 20;
         for (j = xLeft; j > 0; j--) {
@@ -129,6 +130,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
+    // H-line right
     if (characterAPs > xRight && xRight > 0) {
         counter = 20;
         for (j = xRight; j > 0; j--) {
@@ -155,6 +157,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
+    // V-line up
     if (characterAPs > yUp && yUp > 0) {
         counter = 20;
         for (j = yUp; j > 0; j--) {
@@ -181,6 +184,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
+    // V-line down
     if (characterAPs > yDown && yDown > 0) {
         counter = 20;
         for (j = yDown; j > 0; j--) {
@@ -207,6 +211,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
+    // 1st H-line above left
     if (charCoords.top > battleFieldCoords.top && charCoords.left > battleFieldCoords.left) {
         counter = 20;
         if ((characterAPs - 1) > xLeft) {
@@ -234,9 +239,10 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             }
         }
     }
+    // 2nd H-line above left
     if (charCoords.top > (battleFieldCoords.top + 20) && charCoords.left > battleFieldCoords.left) {
         counter = 20;
-        if ((characterAPs - 2) > xLeft) {
+        if (xLeft >= 0 && (characterAPs - 2) > xLeft) {
             for (j = (xLeft + 1); j != 0; j--) {
                 tempCell = document.createElement("DIV");
                 tempCell.setAttribute("class", "temp_cell");
@@ -248,8 +254,8 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
                 counter += 20;
             }
         }
-        else if (xLeft > (characterAPs - 2) || (characterAPs - 2) == xLeft) {
-            for (j = (characterAPs - 1); j != 0; j--) {
+        else if (characterAPs > 1 && xLeft >= (characterAPs - 2)) {
+            for (j = (characterAPs); j != 2; j--) {
                 tempCell = document.createElement("DIV");
                 tempCell.setAttribute("class", "temp_cell");
                 tempCell.setAttribute("id", "temp_cell_1");
@@ -261,6 +267,35 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             }
         }
     }
+    // 3rd H-line above left
+    if (charCoords.top > (battleFieldCoords.top + 40) && charCoords.left > battleFieldCoords.left) {
+        counter = 20;
+        if (xLeft >= 0 && (characterAPs - 3) > xLeft) {
+            for (j = (xLeft + 1); j != 0; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top - 60), left: (charCoords.left - counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
+        }
+        else if (characterAPs > 1 && xLeft > (characterAPs - 3)) {
+            for (j = (characterAPs); j != 2; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1")
+                    .offset({top: (charCoords.top - 60), left: (charCoords.left - counter)});
+                document.getElementById("temp_cell_1").removeAttribute("id");
+                counter += 20;
+            }
+        }
+    }
+    // 1st H-line below right
     if (charCoords.top < (battleFieldCoords.top + 220) && charCoords.left < (battleFieldCoords.left + 440)) {
         counter = 20;
         if (xRight >= 0 && characterAPs > xRight) {
