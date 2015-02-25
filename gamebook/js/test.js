@@ -128,6 +128,78 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             counter += 20;
             check (tempCellCoords, battleFieldCoords);
         }
+        // 2nd H-line above
+        counter = 40;
+        for (j = ((characterAPs * 2) - 3); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 40), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+        // 3rd H-line above
+        counter = 60;
+        for (j = ((characterAPs * 2) - 5); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 60), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+        // 4th H-line above
+        counter = 80;
+        for (j = ((characterAPs * 2) - 7); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 80), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+        // 5th H-line above
+        counter = 100;
+        for (j = ((characterAPs * 2) - 9); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 100), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+        // 6th H-line above
+        counter = 120;
+        for (j = ((characterAPs * 2) - 11); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 120), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+        // 7th H-line above
+        counter = 140;
+        for (j = ((characterAPs * 2) - 13); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 140), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
     }
     // 2nd H-line above
 
