@@ -98,11 +98,40 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var yUp;
     var yDown;
     var tempCell;
+    var tempCellCoords;
     var counter;
-    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
-    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
-    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
-    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
+//    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
+//    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
+//    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
+//    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
+    function check(tempCellCoords, battleFieldCoords) {
+        if (tempCellCoords.top < battleFieldCoords.top ||
+            tempCellCoords.left < battleFieldCoords.left ||
+            tempCellCoords.top > (battleFieldCoords.top + 220) ||
+            tempCellCoords.left > (battleFieldCoords.left + 440)) {
+            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+        }
+        if (document.getElementById("temp_cell_1")) {
+            document.getElementById("temp_cell_1").removeAttribute("id");
+        }
+    }
+    if (characterAPs > 1) {
+        // 1st H-line above
+        counter = 20;
+        for (j = ((characterAPs * 2) - 1); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({top: (charCoords.top - 20), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = $("#temp_cell_1").offset();
+            counter += 20;
+            check (tempCellCoords, battleFieldCoords);
+        }
+    }
+    // 2nd H-line above
+
+    /*
     // H-line left
     if (characterAPs > xLeft && xLeft > 0) {
         counter = 20;
@@ -283,7 +312,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             }
         }
         else if (characterAPs > 1 && xLeft > (characterAPs - 3)) {
-            for (j = (characterAPs); j != 2; j--) {
+            for (j = (characterAPs); j != 3; j--) {
                 tempCell = document.createElement("DIV");
                 tempCell.setAttribute("class", "temp_cell");
                 tempCell.setAttribute("id", "temp_cell_1");
@@ -322,7 +351,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
                 counter += 20;
             }
         }
-    }
+    } */
 }
 
 function heroAttack(enemy, locationName) {
