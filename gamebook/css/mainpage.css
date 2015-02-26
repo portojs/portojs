@@ -166,7 +166,6 @@ li:hover {
 }
 .temp_cell {
     height: 20px;
-    width: 20px;
     background: lightyellow;
 }
 #movement_counter {

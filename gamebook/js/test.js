@@ -98,6 +98,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var counterCenterLine;
     var offsetVal;
     var offsetTop;
+    var lineWidth;
 //    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
 //    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
 //    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
@@ -113,20 +114,22 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
-    function drawLinesUp(lineWidth, innerOffsetVal, innerOffsetTop) {
+    function drawLinesUp(innerCounter, innerOffsetVal, innerOffsetTop) {
+            lineWidth = ((characterAPs * 2) - innerOffsetVal);
+ //           alert(lineWidth);
             tempCell = document.createElement("DIV");
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
-            document.getElementById("temp_cell_1").style.width = lineWidth;
+ //           document.getElementById("temp_cell_1").style.width = (lineWidth + "px");
+            $("#temp_cell_1").width(lineWidth);
             document.getElementById("battle_field").appendChild(tempCell);
             $("#temp_cell_1").offset({
                 top: (charCoords.top - innerOffsetTop),
-                left: ((charCoords.left - ((characterAPs + 1) * 20)))
+                left: ((charCoords.left - ((characterAPs * 20) - innerCounter)))
             });
-            innerCounter += 20;
             check ($("#temp_cell_1").offset(), battleFieldCoords);
-        }
     }
+/*
     function drawLineUp(innerCounter, innerOffsetVal, innerOffsetTop) {
         for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
             tempCell = document.createElement("DIV");
@@ -141,6 +144,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             check ($("#temp_cell_1").offset(), battleFieldCoords);
         }
     }
+*/
     function drawLineDown(innerCounter, innerOffsetVal, innerOffsetTop) {
         for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
             tempCell = document.createElement("DIV");
@@ -176,13 +180,14 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
         offsetVal = 1;
         offsetTop = 20;
         for (i = 1; i < (characterAPs + 1); i++) {
-            drawLineUp(counter, offsetVal, offsetTop);
+//            drawLineUp(counter, offsetVal, offsetTop);
+            drawLinesUp(counter, offsetVal, offsetTop);
             drawLineDown(counter, offsetVal, offsetTop);
             counter += 20;
             offsetVal += 2;
             offsetTop += 20;
             if (checkFlag) {
-                drawCenterLine();
+//                drawCenterLine();
                 checkFlag = false;
             }
         }
