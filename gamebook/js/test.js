@@ -34,6 +34,7 @@ function miniatureWaiting(miniature, battleFieldCoords) {
 function availableCells(miniature, battleFieldCoords, character, characterAPs) {
     var movementCell;
     var charCoords = $("#" + miniature).offset();
+    tempCells(charCoords, battleFieldCoords, characterAPs);
     if (characterAPs > 0) {
         // movement UP
         if (charCoords.top !== (battleFieldCoords.top)) {
@@ -83,7 +84,6 @@ function availableCells(miniature, battleFieldCoords, character, characterAPs) {
                     moveAction(miniature, $("#movement_cell_4").offset(), battleFieldCoords, character, characterAPs);
                 });
         }
-        tempCells(charCoords, battleFieldCoords, characterAPs);
     }
     else {
         document.getElementById("movement_counter").innerHTML = "Очки ходу: ЗАКІНЧИЛИСЯ";
@@ -92,10 +92,10 @@ function availableCells(miniature, battleFieldCoords, character, characterAPs) {
 
 function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var i;
+    var j;
     var tempCell;
-    var tempCellId;
-    var tempCellCoords;
     var counter;
+    var counterCenterLine;
     var offsetVal;
     var offsetTop;
 //    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
@@ -103,38 +103,88 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
 //    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
 //    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
     function check(tempCellCoords, battleFieldCoords) {
-        alert (tempCellCoords.top);
-        if (tempCellCoords.top < battleFieldCoords.top ||
-            tempCellCoords.left < battleFieldCoords.left ||
-            tempCellCoords.top > (battleFieldCoords.top + 220) ||
-            tempCellCoords.left > (battleFieldCoords.left + 440)) {
-            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
-        }
+//        if (tempCellCoords.top < battleFieldCoords.top ||
+//            tempCellCoords.left < battleFieldCoords.left ||
+//            tempCellCoords.top > (battleFieldCoords.top + 220) ||
+//            tempCellCoords.left > (battleFieldCoords.left + 440)) {
+//            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+//        }
         if (document.getElementById("temp_cell_1")) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
-    function drawLineUp(counter, offsetVal, offsetTop) {
-        for (i = ((characterAPs * 2) - offsetVal); i > 0; i--) {
+    function drawLinesUp(lineWidth, innerOffsetVal, innerOffsetTop) {
             tempCell = document.createElement("DIV");
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
-            tempCellId = $("#temp_cell_1");
+            document.getElementById("temp_cell_1").style.width = lineWidth;
             document.getElementById("battle_field").appendChild(tempCell);
-            tempCellId.offset({top: (charCoords.top - offsetTop), left: ((charCoords.left - (characterAPs * 20)) + counter)});
-            tempCellCoords = tempCellId.offset();
-            check (tempCellCoords, battleFieldCoords);
+            $("#temp_cell_1").offset({
+                top: (charCoords.top - innerOffsetTop),
+                left: ((charCoords.left - ((characterAPs + 1) * 20)))
+            });
+            innerCounter += 20;
+            check ($("#temp_cell_1").offset(), battleFieldCoords);
+        }
+    }
+    function drawLineUp(innerCounter, innerOffsetVal, innerOffsetTop) {
+        for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({
+                top: (charCoords.top - innerOffsetTop),
+                left: ((charCoords.left - (characterAPs * 20)) + innerCounter)
+            });
+            innerCounter += 20;
+            check ($("#temp_cell_1").offset(), battleFieldCoords);
+        }
+    }
+    function drawLineDown(innerCounter, innerOffsetVal, innerOffsetTop) {
+        for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({
+                top: (charCoords.top + innerOffsetTop),
+                left: ((charCoords.left - (characterAPs * 20)) + innerCounter)
+            });
+            innerCounter += 20;
+            check ($("#temp_cell_1").offset(), battleFieldCoords);
+        }
+    }
+    function drawCenterLine() {
+        counterCenterLine = 20;
+        for (j = ((characterAPs * 2) + 1); j > 0; j--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            $("#temp_cell_1").offset({
+                top: charCoords.top,
+                left: ((charCoords.left - ((characterAPs + 1) * 20)) + counterCenterLine)
+            });
+            counterCenterLine += 20;
+            check($("#temp_cell_1").offset(), battleFieldCoords);
         }
     }
     if (characterAPs > 1) {
+        var checkFlag = true;
         counter = 20;
         offsetVal = 1;
         offsetTop = 20;
-        for (i = 1; i < characterAPs; i++) {
+        for (i = 1; i < (characterAPs + 1); i++) {
             drawLineUp(counter, offsetVal, offsetTop);
+            drawLineDown(counter, offsetVal, offsetTop);
             counter += 20;
             offsetVal += 2;
             offsetTop += 20;
+            if (checkFlag) {
+                drawCenterLine();
+                checkFlag = false;
+            }
         }
     }
 
