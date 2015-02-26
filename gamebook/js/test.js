@@ -92,19 +92,18 @@ function availableCells(miniature, battleFieldCoords, character, characterAPs) {
 
 function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var i;
-    var j;
-    var xLeft;
-    var xRight;
-    var yUp;
-    var yDown;
     var tempCell;
+    var tempCellId;
     var tempCellCoords;
     var counter;
+    var offsetVal;
+    var offsetTop;
 //    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
 //    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
 //    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
 //    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
     function check(tempCellCoords, battleFieldCoords) {
+        alert (tempCellCoords.top);
         if (tempCellCoords.top < battleFieldCoords.top ||
             tempCellCoords.left < battleFieldCoords.left ||
             tempCellCoords.top > (battleFieldCoords.top + 220) ||
@@ -115,6 +114,31 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("temp_cell_1").removeAttribute("id");
         }
     }
+    function drawLineUp(counter, offsetVal, offsetTop) {
+        for (i = ((characterAPs * 2) - offsetVal); i > 0; i--) {
+            tempCell = document.createElement("DIV");
+            tempCell.setAttribute("class", "temp_cell");
+            tempCell.setAttribute("id", "temp_cell_1");
+            tempCellId = $("#temp_cell_1");
+            document.getElementById("battle_field").appendChild(tempCell);
+            tempCellId.offset({top: (charCoords.top - offsetTop), left: ((charCoords.left - (characterAPs * 20)) + counter)});
+            tempCellCoords = tempCellId.offset();
+            check (tempCellCoords, battleFieldCoords);
+        }
+    }
+    if (characterAPs > 1) {
+        counter = 20;
+        offsetVal = 1;
+        offsetTop = 20;
+        for (i = 1; i < characterAPs; i++) {
+            drawLineUp(counter, offsetVal, offsetTop);
+            counter += 20;
+            offsetVal += 2;
+            offsetTop += 20;
+        }
+    }
+
+    /*
     if (characterAPs > 1) {
         // 1st H-line above
         counter = 20;
@@ -201,6 +225,8 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             check (tempCellCoords, battleFieldCoords);
         }
     }
+    */
+
     // 2nd H-line above
 
     /*
