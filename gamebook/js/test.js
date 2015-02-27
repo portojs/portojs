@@ -111,12 +111,10 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
         else if (tempCellCoords.left < battleFieldCoords.left) {
             $("#temp_cell_1").offset({left: battleFieldCoords.left});
             $("#temp_cell_1").width($("#temp_cell_1").width() - (battleFieldCoords.left - tempCellCoords.left));
-        }
+        }/*
         else if ((tempCellCoords.left + $("#temp_cell_1").width()) > (battleFieldCoords.left + 440)) {
             $("#temp_cell_1").width((tempCellCoords.left + $("#temp_cell_1").width()) - (battleFieldCoords.left + 440));
-        }
-//            tempCellCoords.left > (battleFieldCoords.left + 440)) {
-//            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+        }*/
         if (document.getElementById("temp_cell_1")) {
             document.getElementById("temp_cell_1").removeAttribute("id");
     }
@@ -213,15 +211,15 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
         offsetVal = 1;
         offsetTop = 20;
         for (i = 1; i < (characterAPs + 1); i++) {
+            if (checkFlag) {
+                drawLineCenter();
+                checkFlag = false;
+            }
             drawLinesUp(counter, offsetVal, offsetTop);
             drawLinesDown(counter, offsetVal, offsetTop);
             counter += 20;
             offsetVal += 2;
             offsetTop += 20;
-            if (checkFlag) {
-                drawLineCenter();
-                checkFlag = false;
-            }
         }
     }
 
