@@ -104,47 +104,74 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
 //    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
 //    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
     function check(tempCellCoords, battleFieldCoords) {
-//        if (tempCellCoords.top < battleFieldCoords.top ||
-//            tempCellCoords.left < battleFieldCoords.left ||
-//            tempCellCoords.top > (battleFieldCoords.top + 220) ||
+        if (tempCellCoords.top < battleFieldCoords.top ||
+            tempCellCoords.top > battleFieldCoords.top + 220) {
+            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+        }
+        if (tempCellCoords.left < battleFieldCoords.left && (tempCellCoords.left + $("#temp_cell_1").width()) <= battleFieldCoords.left) {
+            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+        }
 //            tempCellCoords.left > (battleFieldCoords.left + 440)) {
 //            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
-//        }
         if (document.getElementById("temp_cell_1")) {
             document.getElementById("temp_cell_1").removeAttribute("id");
-        }
     }
+}
     function drawLinesUp(innerCounter, innerOffsetVal, innerOffsetTop) {
-            lineWidth = ((characterAPs * 2) - innerOffsetVal);
- //           alert(lineWidth);
+            lineWidth = (((characterAPs * 2) - innerOffsetVal) * 20);
             tempCell = document.createElement("DIV");
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
- //           document.getElementById("temp_cell_1").style.width = (lineWidth + "px");
-            $("#temp_cell_1").width(lineWidth);
             document.getElementById("battle_field").appendChild(tempCell);
+            document.getElementById("temp_cell_1").style.width = lineWidth +"px";
             $("#temp_cell_1").offset({
                 top: (charCoords.top - innerOffsetTop),
                 left: ((charCoords.left - ((characterAPs * 20) - innerCounter)))
             });
             check ($("#temp_cell_1").offset(), battleFieldCoords);
     }
-/*
-    function drawLineUp(innerCounter, innerOffsetVal, innerOffsetTop) {
-        for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
-            tempCell = document.createElement("DIV");
-            tempCell.setAttribute("class", "temp_cell");
-            tempCell.setAttribute("id", "temp_cell_1");
-            document.getElementById("battle_field").appendChild(tempCell);
-            $("#temp_cell_1").offset({
-                top: (charCoords.top - innerOffsetTop),
-                left: ((charCoords.left - (characterAPs * 20)) + innerCounter)
-            });
-            innerCounter += 20;
-            check ($("#temp_cell_1").offset(), battleFieldCoords);
-        }
+    function drawLinesDown(innerCounter, innerOffsetVal, innerOffsetTop) {
+        lineWidth = (((characterAPs * 2) - innerOffsetVal) * 20);
+        tempCell = document.createElement("DIV");
+        tempCell.setAttribute("class", "temp_cell");
+        tempCell.setAttribute("id", "temp_cell_1");
+        document.getElementById("battle_field").appendChild(tempCell);
+        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
+        $("#temp_cell_1").offset({
+            top: (charCoords.top + innerOffsetTop),
+            left: ((charCoords.left - ((characterAPs * 20) - innerCounter)))
+        });
+        check ($("#temp_cell_1").offset(), battleFieldCoords);
     }
-*/
+    function drawLineCenter() {
+        lineWidth = (((characterAPs * 2) + 1) * 20);
+        tempCell = document.createElement("DIV");
+        tempCell.setAttribute("class", "temp_cell");
+        tempCell.setAttribute("id", "temp_cell_1");
+        document.getElementById("battle_field").appendChild(tempCell);
+        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
+        $("#temp_cell_1").offset({
+            top: charCoords.top,
+            left: ((charCoords.left - (characterAPs * 20)))
+        });
+        check ($("#temp_cell_1").offset(), battleFieldCoords);
+    }
+    /*
+        function drawLineUp(innerCounter, innerOffsetVal, innerOffsetTop) {
+            for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
+                tempCell = document.createElement("DIV");
+                tempCell.setAttribute("class", "temp_cell");
+                tempCell.setAttribute("id", "temp_cell_1");
+                document.getElementById("battle_field").appendChild(tempCell);
+                $("#temp_cell_1").offset({
+                    top: (charCoords.top - innerOffsetTop),
+                    left: ((charCoords.left - (characterAPs * 20)) + innerCounter)
+                });
+                innerCounter += 20;
+                check ($("#temp_cell_1").offset(), battleFieldCoords);
+            }
+        }
+
     function drawLineDown(innerCounter, innerOffsetVal, innerOffsetTop) {
         for (j = ((characterAPs * 2) - innerOffsetVal); j > 0; j--) {
             tempCell = document.createElement("DIV");
@@ -159,6 +186,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             check ($("#temp_cell_1").offset(), battleFieldCoords);
         }
     }
+
     function drawCenterLine() {
         counterCenterLine = 20;
         for (j = ((characterAPs * 2) + 1); j > 0; j--) {
@@ -174,20 +202,20 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             check($("#temp_cell_1").offset(), battleFieldCoords);
         }
     }
+    */
     if (characterAPs > 1) {
         var checkFlag = true;
         counter = 20;
         offsetVal = 1;
         offsetTop = 20;
         for (i = 1; i < (characterAPs + 1); i++) {
-//            drawLineUp(counter, offsetVal, offsetTop);
             drawLinesUp(counter, offsetVal, offsetTop);
-            drawLineDown(counter, offsetVal, offsetTop);
+            drawLinesDown(counter, offsetVal, offsetTop);
             counter += 20;
             offsetVal += 2;
             offsetTop += 20;
             if (checkFlag) {
-//                drawCenterLine();
+                drawLineCenter();
                 checkFlag = false;
             }
         }
