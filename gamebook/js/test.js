@@ -108,8 +108,12 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             tempCellCoords.top > battleFieldCoords.top + 220) {
             document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
         }
-        if (tempCellCoords.left < battleFieldCoords.left && (tempCellCoords.left + $("#temp_cell_1").width()) <= battleFieldCoords.left) {
-            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
+        else if (tempCellCoords.left < battleFieldCoords.left) {
+            $("#temp_cell_1").offset({left: battleFieldCoords.left});
+            $("#temp_cell_1").width($("#temp_cell_1").width() - (battleFieldCoords.left - tempCellCoords.left));
+        }
+        else if ((tempCellCoords.left + $("#temp_cell_1").width()) > (battleFieldCoords.left + 440)) {
+            $("#temp_cell_1").width((tempCellCoords.left + $("#temp_cell_1").width()) - (battleFieldCoords.left + 440));
         }
 //            tempCellCoords.left > (battleFieldCoords.left + 440)) {
 //            document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
