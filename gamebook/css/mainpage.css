@@ -152,12 +152,14 @@ li:hover {
     width: 20px;
     background: blue;
     opacity: 0.2;
+    position: relative;
 }
 #battle_field {
     display: table;
+    position: relative;
     border: darkgrey 1px solid;
     height: 240px;
-    width: 460px;
+    width: 480px;
 }
 .movement_cell {
     height: 20px;

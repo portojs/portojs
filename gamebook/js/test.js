@@ -23,7 +23,7 @@ function moveAction(miniature, currCoords, battleFieldCoords, character, charact
 }
 
 function miniatureWaiting(miniature, battleFieldCoords) {
-    $("#" + miniature).offset({top: battleFieldCoords.top, left: battleFieldCoords.left});
+    $("#" + miniature).offset({top: battleFieldCoords.top, left: (battleFieldCoords.left + 200)});
     setInterval(function(){
         document.getElementById(miniature).style.opacity == 0.2 ?
             document.getElementById(miniature).style.opacity = 1.0 :
@@ -109,12 +109,17 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
         }
         else if (tempCellCoords.left < battleFieldCoords.left) {
-            $("#temp_cell_1").offset({left: battleFieldCoords.left});
+//            alert("temp_cell_1.width - " + $("#temp_cell_1").width());
+//            alert("battleFieldCoords.left - " + battleFieldCoords.left);
+//            alert("tempCellCoords.left - " + tempCellCoords.left);
+//            alert("battleFieldCoords.left - " + battleFieldCoords.left);
             $("#temp_cell_1").width($("#temp_cell_1").width() - (battleFieldCoords.left - tempCellCoords.left));
-        }/*
+            $("#temp_cell_1").offset({left: battleFieldCoords.left});
+//            alert("temp_cell_1.width - " + $("#temp_cell_1").width());
+        }
         else if ((tempCellCoords.left + $("#temp_cell_1").width()) > (battleFieldCoords.left + 440)) {
             $("#temp_cell_1").width((tempCellCoords.left + $("#temp_cell_1").width()) - (battleFieldCoords.left + 440));
-        }*/
+        }
         if (document.getElementById("temp_cell_1")) {
             document.getElementById("temp_cell_1").removeAttribute("id");
     }
