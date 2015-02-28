@@ -99,26 +99,38 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
     var offsetVal;
     var offsetTop;
     var lineWidth;
+    var lineWidthFinal;
 //    xLeft = (charCoords.left - battleFieldCoords.left) / 20 - 1;
 //    xRight = ((battleFieldCoords.left + 440) - charCoords.left) / 20 - 1;
 //    yUp = (charCoords.top - battleFieldCoords.top) / 20 - 1;
 //    yDown = ((battleFieldCoords.top + 220) - charCoords.top) / 20 - 1;
-    function check(tempCellCoords, battleFieldCoords) {
+    function check(tempCellCoords, lineWidth, battleFieldCoords) {
         if (tempCellCoords.top < battleFieldCoords.top ||
             tempCellCoords.top > battleFieldCoords.top + 220) {
+//            alert("works?");
             document.getElementById("battle_field").removeChild(document.getElementById("temp_cell_1"));
         }
-        else if (tempCellCoords.left < battleFieldCoords.left) {
+        if (tempCellCoords.left < battleFieldCoords.left) {
+//            alert("works!");
 //            alert("temp_cell_1.width - " + $("#temp_cell_1").width());
 //            alert("battleFieldCoords.left - " + battleFieldCoords.left);
 //            alert("tempCellCoords.left - " + tempCellCoords.left);
 //            alert("battleFieldCoords.left - " + battleFieldCoords.left);
-            $("#temp_cell_1").width($("#temp_cell_1").width() - (battleFieldCoords.left - tempCellCoords.left));
+            lineWidthFinal = lineWidth - (battleFieldCoords.left - tempCellCoords.left);
             $("#temp_cell_1").offset({left: battleFieldCoords.left});
+            $("#temp_cell_1").width(lineWidthFinal);
+            lineWidthFinal = 0;
 //            alert("temp_cell_1.width - " + $("#temp_cell_1").width());
         }
-        else if ((tempCellCoords.left + $("#temp_cell_1").width()) > (battleFieldCoords.left + 440)) {
-            $("#temp_cell_1").width((tempCellCoords.left + $("#temp_cell_1").width()) - (battleFieldCoords.left + 440));
+        if ((tempCellCoords.left + lineWidth) > (battleFieldCoords.left + 440)) {
+//            alert("works2");
+            lineWidthFinal = (tempCellCoords.left + lineWidth) - (battleFieldCoords.left + 440);
+            $("#temp_cell_1").width(lineWidthFinal);
+            lineWidthFinal = 0;
+        }
+        if (tempCellCoords.left >= battleFieldCoords.left ||
+            (tempCellCoords.left + lineWidth) > (battleFieldCoords.left + 440)) {
+            $("#temp_cell_1").width(lineWidth);
         }
         if (document.getElementById("temp_cell_1")) {
             document.getElementById("temp_cell_1").removeAttribute("id");
@@ -130,12 +142,12 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
             tempCell.setAttribute("class", "temp_cell");
             tempCell.setAttribute("id", "temp_cell_1");
             document.getElementById("battle_field").appendChild(tempCell);
-            document.getElementById("temp_cell_1").style.width = lineWidth +"px";
+//            document.getElementById("temp_cell_1").style.width = lineWidth +"px";
             $("#temp_cell_1").offset({
                 top: (charCoords.top - innerOffsetTop),
                 left: ((charCoords.left - ((characterAPs * 20) - innerCounter)))
             });
-            check ($("#temp_cell_1").offset(), battleFieldCoords);
+            check ($("#temp_cell_1").offset(), lineWidth, battleFieldCoords);
     }
     function drawLinesDown(innerCounter, innerOffsetVal, innerOffsetTop) {
         lineWidth = (((characterAPs * 2) - innerOffsetVal) * 20);
@@ -143,12 +155,12 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
         tempCell.setAttribute("class", "temp_cell");
         tempCell.setAttribute("id", "temp_cell_1");
         document.getElementById("battle_field").appendChild(tempCell);
-        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
+//        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
         $("#temp_cell_1").offset({
             top: (charCoords.top + innerOffsetTop),
             left: ((charCoords.left - ((characterAPs * 20) - innerCounter)))
         });
-        check ($("#temp_cell_1").offset(), battleFieldCoords);
+        check ($("#temp_cell_1").offset(), lineWidth, battleFieldCoords);
     }
     function drawLineCenter() {
         lineWidth = (((characterAPs * 2) + 1) * 20);
@@ -156,12 +168,12 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
         tempCell.setAttribute("class", "temp_cell");
         tempCell.setAttribute("id", "temp_cell_1");
         document.getElementById("battle_field").appendChild(tempCell);
-        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
+//        document.getElementById("temp_cell_1").style.width = lineWidth +"px";
         $("#temp_cell_1").offset({
             top: charCoords.top,
             left: ((charCoords.left - (characterAPs * 20)))
         });
-        check ($("#temp_cell_1").offset(), battleFieldCoords);
+        check ($("#temp_cell_1").offset(), lineWidth, battleFieldCoords);
     }
     /*
         function drawLineUp(innerCounter, innerOffsetVal, innerOffsetTop) {
