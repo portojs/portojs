@@ -87,6 +87,7 @@ function availableCells(miniature, battleFieldCoords, character, characterAPs) {
     }
     else {
         document.getElementById("movement_counter").innerHTML = "Очки ходу: ЗАКІНЧИЛИСЯ";
+        enemyTurn();
     }
 }
 
