@@ -10,7 +10,7 @@ var loc1 = {
             document.getElementById("event_field").innerHTML = loc1.event;
             changeActionList("Оглянути розбійника,loc1.examineBandit1()",
                 "Залякати розбійника,loc1.intimidateBandit1()",
-                "Атакувати розбійника,loc1.attackBandit1()",
+                "Розпочати бій,loc1.attackBandit1()",
                 "Втекти від розбійника,loc1.escapeBandit1()");
         } else {
             document.getElementById("event_field").innerHTML = " ";

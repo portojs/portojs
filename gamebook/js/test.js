@@ -181,6 +181,7 @@ function tempCells (charCoords, battleFieldCoords, characterAPs) {
 function heroAttack(enemy, locationName) {
     $("#popup3").show();
     var heroMiniature;
+    var enemyMiniature;
     var listItem;
     var listItemText;
     var battleCommands = document.getElementById("battle_commands");
@@ -190,6 +191,9 @@ function heroAttack(enemy, locationName) {
     heroMiniature = document.createElement("DIV");
     heroMiniature.setAttribute("id", "hero_miniature");
     document.getElementById("battle_field").appendChild(heroMiniature);
+    enemyMiniature = document.createElement("DIV");
+    enemyMiniature.setAttribute("id", "enemy_miniature");
+    document.getElementById("battle_field").appendChild(enemyMiniature);
     listItem = document.createElement("LI");
     listItem.onclick = function() {heroMove("hero_miniature", hero)};
     listItemText = document.createTextNode("Іти");
@@ -200,6 +204,10 @@ function heroAttack(enemy, locationName) {
     listItemText = document.createTextNode("Атакувати");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);
+}
+
+function enemyTurn() {
+
 }
 
 function lootEnemy() {
