@@ -1,5 +1,41 @@
 /*** Created by Peter on 02.02.2015.*/
 
+function battleMain() {
+
+// list of vars
+    var hero;
+    var heroCoord;
+    var heroAPs;
+    var heroMiniature;
+    var enemyCoord;
+    var enemyMiniature;
+    var battleFieldCoords;
+    var battleCommands;
+    var listItem;
+    var listItemText;
+    var command1 = heroMove("hero_miniature", hero);
+
+// main body
+    $("#popup3").show();
+    showCommandsStart();
+
+// list of functions
+    function showCommandsStart() {
+        battleCommands = document.getElementById("battle_commands");
+        while (battleCommands.hasChildNodes()) {
+            battleCommands.removeChild(battleCommands.childNodes[0]);
+        }
+        addCommand(battleCommands, command1, "Іти");
+    }
+    function addCommand (where, command, commandName) {
+        listItem = document.createElement("LI");
+        listItem.onclick = function() {command};
+        listItemText = document.createTextNode(commandName);
+        listItem.appendChild(listItemText);
+        where.appendChild(listItem);
+    }
+}
+
 function heroMove(miniature, character) {
     var characterAPs = character.move;
     document.getElementById("movement_counter").innerHTML = "Очки ходу: " + characterAPs;
@@ -184,6 +220,7 @@ function heroAttack(enemy, locationName) {
     var enemyMiniature;
     var listItem;
     var listItemText;
+    var command1 = function() {heroMove('hero_miniature', hero)};
     var battleCommands = document.getElementById("battle_commands");
     while (battleCommands.hasChildNodes()) {
         battleCommands.removeChild(battleCommands.childNodes[0]);
@@ -195,7 +232,7 @@ function heroAttack(enemy, locationName) {
     enemyMiniature.setAttribute("id", "enemy_miniature");
     document.getElementById("battle_field").appendChild(enemyMiniature);
     listItem = document.createElement("LI");
-    listItem.onclick = function() {heroMove("hero_miniature", hero)};
+    listItem.onclick = command1;
     listItemText = document.createTextNode("Іти");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);
