@@ -1,39 +1,49 @@
 /*** Created by Peter on 02.02.2015.*/
+// simple notation
+//--- local explanation
+//+++ notes for later action
 
 function battleMain(enemy, locationName) {
 
 // list of vars
-    var heroCoord;
     var heroAPs;
-    var heroMiniature;
-    var enemyCoord;
-    var enemyMiniature;
+    var heroCoords;
+    var enemyAPs;
+    var enemyCoords;
+    var miniature;
     var battleField;
     var battleFieldCoords;
     var battleCommands;
     var listItem;
     var listItemText;
-    var command1 = function() {heroMove("hero_miniature", hero)};
+    var command1 = function() {heroMove(hero.idName, hero)};
     var command2 = function() {heroAttackTest(hero, enemy, locationName)};
     var command3 = function() {endTurn()};
     battleField = document.getElementById("battle_field");
     battleFieldCoords = $("#battle_field").offset();
+    battleCommands = document.getElementById("battle_commands");
 
 // main body
     $("#popup3").show();
+    addMiniature(hero.idName, hero.coordTop, hero.coordLeft);
+    addMiniature(bandit1.idName, bandit1.coordTop, bandit1.coordLeft);
+    heroCoords = $("#" + hero.idName).offset();
+    enemyCoords = $("#" + bandit1.idName).offset();
     showCommandsStart();
-    addMiniatures();
 
 // list of functions
     function showCommandsStart() {
-        battleCommands = document.getElementById("battle_commands");
         while (battleCommands.hasChildNodes()) {
             battleCommands.removeChild(battleCommands.childNodes[0]);
         }
         addCommand(battleCommands, command1, "Іти");
-        // add IF statement - this command should appear only if there is enemy near
-        addCommand(battleCommands, command2, "Атакувати");
-
+        //--- IF enemy is near "Attack" command is added
+        if (heroCoords.top + 20 == enemyCoords.top ||
+            heroCoords.top - 20 == enemyCoords.top ||
+            heroCoords.left + 20 == enemyCoords.left ||
+            heroCoords.left - 20 == enemyCoords.left) {
+            addCommand(battleCommands, command2, "Атакувати");
+        }
         addCommand(battleCommands, command3, "Завершити хід");
     }
     function addCommand (where, command, commandName) {
@@ -43,23 +53,20 @@ function battleMain(enemy, locationName) {
         listItem.appendChild(listItemText);
         where.appendChild(listItem);
     }
-    function addMiniatures() {
-        heroMiniature = document.createElement("DIV");
-        heroMiniature.setAttribute("id", "hero_miniature");
-        battleField.appendChild(heroMiniature);
-        heroCoord = $("#hero_miniature").offset();
-        heroCoord({top: battleFieldCoords.top,left: battleFieldCoords.left});
-        enemyMiniature = document.createElement("DIV");
-        enemyMiniature.setAttribute("id", "enemy_miniature");
-        battleField.appendChild(enemyMiniature);
-        enemyCoord = $("#enemy_miniature").offset();
+    function addMiniature(idName, coordTop, coordLeft) {
+        miniature = document.createElement("DIV");
+        miniature.setAttribute("id", idName);
+        battleField.appendChild(miniature);
+        $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
+                                left: battleFieldCoords.left + coordLeft});
     }
+    //+++ untested & uncleared
     function heroMove(miniature, hero) {
         heroAPs = hero.move;
         document.getElementById("movement_counter").innerHTML = "Очки ходу: " + heroAPs;
         miniatureWaiting(miniature, battleFieldCoords);
         availableCells(miniature, battleFieldCoords, hero, heroAPs);
-    }
+    //+++ left for much later
     function endTurn() {}
 
 }
@@ -250,14 +257,23 @@ function heroAttack(enemy, locationName) {
     var listItemText;
     var command1 = function() {heroMove('hero_miniature', hero)};
     var battleCommands = document.getElementById("battle_commands");
+/// test
+    var battleFieldCoords = $("#battle_field").offset();
+///
     while (battleCommands.hasChildNodes()) {
         battleCommands.removeChild(battleCommands.childNodes[0]);
     }
     heroMiniature = document.createElement("DIV");
     heroMiniature.setAttribute("id", "hero_miniature");
     document.getElementById("battle_field").appendChild(heroMiniature);
-    var heroC = $("#hero_miniature").offset;
-    alert(heroC);
+/// test
+//    var heroC = $("#hero_miniature").offset();
+//    heroC.top = battleFieldCoords.top + 20;
+//    heroC.left = battleFieldCoords.left + 20;
+    heroMiniature = $("#hero_miniature");
+    heroMiniature.offset({top: battleFieldCoords.top + 20,left: battleFieldCoords.left + 20});
+//    alert(heroCT);
+///
     enemyMiniature = document.createElement("DIV");
     enemyMiniature.setAttribute("id", "enemy_miniature");
     document.getElementById("battle_field").appendChild(enemyMiniature);

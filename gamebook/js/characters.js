@@ -59,7 +59,10 @@ var hero = {
     tohit: 5,
     move: 11,
     ac: 20,
-    weapon: itemArray[0]
+    weapon: itemArray[0],
+    idName: "hero_miniature",
+    coordTop: 20,
+    coordLeft: 20
 };
 
 var heroInventory = [
@@ -115,7 +118,10 @@ var bandit1 = {
         }
     ],
     alive: true,
-    present: true
+    present: true,
+    idName: "bandit1_miniature",
+    coordTop: 20,
+    coordLeft: 20
 };
 
 var currentContainer;
