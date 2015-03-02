@@ -1,23 +1,28 @@
 /*** Created by Peter on 02.02.2015.*/
 
-function battleMain() {
+function battleMain(enemy, locationName) {
 
 // list of vars
-    var hero;
     var heroCoord;
     var heroAPs;
     var heroMiniature;
     var enemyCoord;
     var enemyMiniature;
+    var battleField;
     var battleFieldCoords;
     var battleCommands;
     var listItem;
     var listItemText;
-    var command1 = heroMove("hero_miniature", hero);
+    var command1 = function() {heroMove("hero_miniature", hero)};
+    var command2 = function() {heroAttackTest(hero, enemy, locationName)};
+    var command3 = function() {endTurn()};
+    battleField = document.getElementById("battle_field");
+    battleFieldCoords = $("#battle_field").offset();
 
 // main body
     $("#popup3").show();
     showCommandsStart();
+    addMiniatures();
 
 // list of functions
     function showCommandsStart() {
@@ -26,14 +31,37 @@ function battleMain() {
             battleCommands.removeChild(battleCommands.childNodes[0]);
         }
         addCommand(battleCommands, command1, "Іти");
+        // add IF statement - this command should appear only if there is enemy near
+        addCommand(battleCommands, command2, "Атакувати");
+
+        addCommand(battleCommands, command3, "Завершити хід");
     }
     function addCommand (where, command, commandName) {
         listItem = document.createElement("LI");
-        listItem.onclick = function() {command};
+        listItem.onclick = command;
         listItemText = document.createTextNode(commandName);
         listItem.appendChild(listItemText);
         where.appendChild(listItem);
     }
+    function addMiniatures() {
+        heroMiniature = document.createElement("DIV");
+        heroMiniature.setAttribute("id", "hero_miniature");
+        battleField.appendChild(heroMiniature);
+        heroCoord = $("#hero_miniature").offset();
+        heroCoord({top: battleFieldCoords.top,left: battleFieldCoords.left});
+        enemyMiniature = document.createElement("DIV");
+        enemyMiniature.setAttribute("id", "enemy_miniature");
+        battleField.appendChild(enemyMiniature);
+        enemyCoord = $("#enemy_miniature").offset();
+    }
+    function heroMove(miniature, hero) {
+        heroAPs = hero.move;
+        document.getElementById("movement_counter").innerHTML = "Очки ходу: " + heroAPs;
+        miniatureWaiting(miniature, battleFieldCoords);
+        availableCells(miniature, battleFieldCoords, hero, heroAPs);
+    }
+    function endTurn() {}
+
 }
 
 function heroMove(miniature, character) {
@@ -228,11 +256,13 @@ function heroAttack(enemy, locationName) {
     heroMiniature = document.createElement("DIV");
     heroMiniature.setAttribute("id", "hero_miniature");
     document.getElementById("battle_field").appendChild(heroMiniature);
+    var heroC = $("#hero_miniature").offset;
+    alert(heroC);
     enemyMiniature = document.createElement("DIV");
     enemyMiniature.setAttribute("id", "enemy_miniature");
     document.getElementById("battle_field").appendChild(enemyMiniature);
     listItem = document.createElement("LI");
-    listItem.onclick = command1;
+    listItem.addEventListener("click", command1);
     listItemText = document.createTextNode("Іти");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);
@@ -241,10 +271,6 @@ function heroAttack(enemy, locationName) {
     listItemText = document.createTextNode("Атакувати");
     listItem.appendChild(listItemText);
     battleCommands.appendChild(listItem);
-}
-
-function enemyTurn() {
-
 }
 
 function lootEnemy() {
