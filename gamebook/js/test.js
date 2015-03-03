@@ -3,9 +3,10 @@
 //--- local explanation
 //+++ notes for later action
 
-function battleMain(enemy, locationName) {
+function battleMain(enemies1, locationName) {
 
 // list of vars
+    var i;
     var heroAPs;
     var heroCoords;
     var enemyAPs;
@@ -16,15 +17,32 @@ function battleMain(enemy, locationName) {
     var battleCommands;
     var listItem;
     var listItemText;
+    var heroCoordTop;
+    var heroCoordLeft;
+    var enemyCoordTop;
+    var enemyCoordLeft;
     var command1 = function() {heroMove(hero.idName, hero)};
-    var command2 = function() {heroAttackTest(hero, enemy, locationName)};
+    var command2 = function() {heroAttack(hero, enemy, locationName)};
     var command3 = function() {endTurn()};
     battleField = document.getElementById("battle_field");
     battleFieldCoords = $("#battle_field").offset();
     battleCommands = document.getElementById("battle_commands");
+    heroCoordTop = 20;
+    heroCoordLeft = 20;
+    enemyCoordTop = 100;
+    enemyCoordLeft = 100;
 
 // main body
     $("#popup3").show();
+    for (i = 0; i < heroParty.length; i++) {
+        addMiniature(heroParty[i].idName, heroCoordTop, heroCoordLeft);
+        heroCoordTop += 40;
+    }
+    for (i = 0; i < enemies1.length; i++) {
+        addMiniature(enemies1[i].idName, enemyCoordTop, enemyCoordLeft);
+        enemyCoordTop += 40;
+    }
+}
     addMiniature(hero.idName, hero.coordTop, hero.coordLeft);
     addMiniature(bandit1.idName, bandit1.coordTop, bandit1.coordLeft);
     heroCoords = $("#" + hero.idName).offset();
