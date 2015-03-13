@@ -5,6 +5,10 @@ var loc1 = {
     description: "Густий ліс, дорога прямує із півдня на північ.",
     event: "Посеред дороги стоїть розбійник з іржавою шабелю у руці.",
     eventCheck1: true,
+    encounter1: {
+        enemies1Name: 'goblin',
+        enemies1Quantity: 10
+    },
     setActions: function() {
         if (loc1.eventCheck1 == true) {
             document.getElementById("event_field").innerHTML = loc1.event;
