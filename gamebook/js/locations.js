@@ -6,7 +6,7 @@ var loc1 = {
     event: "Посеред дороги стоїть розбійник з іржавою шабелю у руці.",
     eventCheck1: true,
     encounter1: {
-        enemies1Name: 'goblin',
+        enemies1Name: enemy_1,
         enemies1Quantity: 10
     },
     setActions: function() {
