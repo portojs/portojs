@@ -6,7 +6,7 @@ var rolls = {
         return Math.floor(Math.random() * 5);
     },
     d6: function() {
-        return Math.floor(Math.random() * 7);
+        return Math.floor((Math.random() * 6) + 1);
     },
     d8: function() {
         return Math.floor(Math.random() * 9);

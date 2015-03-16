@@ -44,14 +44,14 @@ function battleMain(locationName) {
 
 // main body
     $("#popup3").show();
-    alert(locationName.encounter1.enemies1Name.hp);
-    /*
-    for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
-        enemyObjectName = 'enemy'+i;
-        enemies.push(enemyObjectName);
-        enemyObjectName.hp = locationName.encounter1.enemies1Name.hp + locationName.encounter1.enemies1Name.hpModifier;
+//    alert(locationName.encounter1.enemies1Name.hp + locationName.encounter1.enemies1Name.hpModifier);
 
-    }*/
+    for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
+//        enemyObjectName = 'enemy'+i;
+        enemies.push(i);
+//        enemies[i].hp = (locationName.encounter1.enemies1Name.hp + locationName.encounter1.enemies1Name.hpModifier);
+        alert(locationName.encounter1.enemies1Name.hp());
+    }
 /*    for (i = 0; i < heroParty.length; i++) {
         addMiniature(heroParty[i].idName, heroCoordTop, heroCoordLeft);
         heroCoordTop += 40;

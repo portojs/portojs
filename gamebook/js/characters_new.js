@@ -28,7 +28,7 @@ var hero_4 = {
 var enemy_1 = {
     name: 'Goblin',
     move: 7,
-    hp: rolls.d6(),
+    hp: rolls.d6,
     hpModifier: 1,
     initiative: 6
 };
