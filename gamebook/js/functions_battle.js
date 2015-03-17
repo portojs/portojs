@@ -44,23 +44,31 @@ function battleMain(locationName) {
 
 // main body
     $("#popup3").show();
-//    alert(locationName.encounter1.enemies1Name.hp + locationName.encounter1.enemies1Name.hpModifier);
-
+    alert(heroParty[0].name);
+    heroCoordTop = 20;
+    heroCoordLeft = 20;
+    enemyCoordTop = 20;
+    enemyCoordLeft = 200;
+    //-- populating the enemy list
     for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
-//        enemyObjectName = 'enemy'+i;
-        enemies.push(i);
-//        enemies[i].hp = (locationName.encounter1.enemies1Name.hp + locationName.encounter1.enemies1Name.hpModifier);
-        alert(locationName.encounter1.enemies1Name.hp());
+        enemies.push({
+            id: 'enemy' + i,
+            hp: locationName.encounter1.enemies1Name.hp() + locationName.encounter1.enemies1Name.hpModifier,
+            init: locationName.encounter1.enemies1Name.initiative + rolls.d20()
+        });
     }
-/*    for (i = 0; i < heroParty.length; i++) {
-        addMiniature(heroParty[i].idName, heroCoordTop, heroCoordLeft);
+
+    //-- placing hero party on map
+    for (i = 0; i < heroParty.length; i++) {
+        addMiniature(heroParty[i].name, heroCoordTop, heroCoordLeft);
         heroCoordTop += 40;
     }
-    for (i = 0; i < enemies1.length; i++) {
-        addMiniature(enemies1[i].idName, enemyCoordTop, enemyCoordLeft);
-        enemyCoordTop += 40;
+    //-- placing enemies on map
+    for (i = 0; i < enemies.length; i++) {
+        addMiniature(enemies1[i].id, enemyCoordTop, enemyCoordLeft);
+        enemyCoordTop += 20;
     }
-}
+/*
 addMiniature(hero.idName, hero.coordTop, hero.coordLeft);
 addMiniature(bandit1.idName, bandit1.coordTop, bandit1.coordLeft);
 heroCoords = $("#" + hero.idName).offset();

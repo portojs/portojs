@@ -3,16 +3,16 @@
  */
 var rolls = {
     d4: function() {
-        return Math.floor(Math.random() * 5);
+        return Math.floor((Math.random() * 4) + 1);
     },
     d6: function() {
         return Math.floor((Math.random() * 6) + 1);
     },
     d8: function() {
-        return Math.floor(Math.random() * 9);
+        return Math.floor((Math.random() * 8) + 1);
     },
     d20: function() {
-        return Math.floor(Math.random() * 21);
+        return Math.floor((Math.random() * 20) + 1);
     }
 };
 
