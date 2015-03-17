@@ -15,7 +15,6 @@ function battleMain(locationName) {
     var i;
     // vars for creating a list of enemies
     var enemies = [];
-    var enemyObjectName;
     //
     var heroAPs;
     var heroCoords;
@@ -44,11 +43,6 @@ function battleMain(locationName) {
 
 // main body
     $("#popup3").show();
-    alert(heroParty[0].name);
-    heroCoordTop = 20;
-    heroCoordLeft = 20;
-    enemyCoordTop = 20;
-    enemyCoordLeft = 200;
     //-- populating the enemy list
     for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
         enemies.push({
@@ -65,7 +59,7 @@ function battleMain(locationName) {
     }
     //-- placing enemies on map
     for (i = 0; i < enemies.length; i++) {
-        addMiniature(enemies1[i].id, enemyCoordTop, enemyCoordLeft);
+        addMiniature(enemies[i].id, enemyCoordTop, enemyCoordLeft);
         enemyCoordTop += 20;
     }
 /*
@@ -101,8 +95,8 @@ showCommandsStart();
         miniature = document.createElement("DIV");
         miniature.setAttribute("id", idName);
         battleField.appendChild(miniature);
-        $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
-            left: battleFieldCoords.left + coordLeft});
+ //       $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
+ //           left: battleFieldCoords.left + coordLeft});
     }
         //+++ untested & uncleared
     function heroMove(miniature, hero) {

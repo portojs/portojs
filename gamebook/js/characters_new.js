@@ -1,7 +1,6 @@
 /**
  * Created by Peter on 12.03.2015.
  */
-var heroParty = [hero_1, hero_2, hero_3, hero_4];
 
 var hero_1 = {
     name: 'Boromir',
@@ -30,6 +29,8 @@ var hero_4 = {
     hp: 30,
     initiative: 5
 };
+
+var heroParty = [hero_1, hero_2, hero_3, hero_4];
 
 var enemy_1 = {
     name: 'Goblin',
