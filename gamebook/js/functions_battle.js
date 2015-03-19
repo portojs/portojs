@@ -9,7 +9,8 @@
 //+++ should be received from the location variable
 
 function battleMain(locationName) {
-
+// show battle window
+    openBattle();
 // list of vars
     // general vars
     var i;
@@ -42,7 +43,6 @@ function battleMain(locationName) {
     enemyCoordLeft = 100;
 
 // main body
-    $("#popup3").show();
     //-- populating the enemy list
     for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
         enemies.push({
@@ -54,11 +54,11 @@ function battleMain(locationName) {
 
     //-- placing hero party on map
     for (i = 0; i < heroParty.length; i++) {
-        addMiniature(heroParty[i].name, heroCoordTop, heroCoordLeft);
+        addMiniature(heroParty[i].name, heroCoordTop, heroCoordLeft, "hero_miniature");
         heroCoordTop += 40;
     }
     //-- placing enemies on map
-    for (i = 0; i < enemies.length; i++) {
+/*    for (i = 0; i < enemies.length; i++) {
         addMiniature(enemies[i].id, enemyCoordTop, enemyCoordLeft);
         enemyCoordTop += 20;
     }
@@ -91,12 +91,18 @@ showCommandsStart();
         listItem.appendChild(listItemText);
         where.appendChild(listItem);
     }
-    function addMiniature(idName, coordTop, coordLeft) {
+    function addMiniature(idName, coordTop, coordLeft, className) {
         miniature = document.createElement("DIV");
         miniature.setAttribute("id", idName);
+//        alert(battleFieldCoords.top);
+//        alert(coordTop);
+//        alert(battleFieldCoords.top + coordTop);
+        document.getElementById(idName).className = className;
         battleField.appendChild(miniature);
- //       $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
- //           left: battleFieldCoords.left + coordLeft});
+//        var temp = $("#" + idName).offset();
+        $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
+            left: battleFieldCoords.left + coordLeft});
+//        alert(temp.top);
     }
         //+++ untested & uncleared
     function heroMove(miniature, hero) {
