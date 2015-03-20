@@ -7,7 +7,7 @@ var loc1 = {
     eventCheck1: true,
     encounter1: {
         enemies1Name: enemy_1,
-        enemies1Quantity: 10
+        enemies1Quantity: 5
     },
     setActions: function() {
         if (loc1.eventCheck1 == true) {
