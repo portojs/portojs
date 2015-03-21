@@ -3,28 +3,28 @@
  */
 
 var hero_1 = {
-    name: 'Boromir',
+    name: 'Боромір',
     move: 6,
     hp: 45,
     initiative: 4
 };
 
 var hero_2 = {
-    name: 'Aragorn',
+    name: 'Арагорн',
     move: 8,
     hp: 38,
     initiative: 6
 };
 
 var hero_3 = {
-    name: 'Frodo',
+    name: 'Фродо',
     move: 4,
     hp: 20,
     initiative: 8
 };
 
 var hero_4 = {
-    name: 'Gandalf',
+    name: 'Гендальф',
     move: 6,
     hp: 30,
     initiative: 5

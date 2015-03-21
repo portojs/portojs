@@ -56,11 +56,13 @@ function battleMain(locationName) {
     //-- placing hero party on map & rolling initiative
     for (i = 0; i < heroParty.length; i++) {
         addMiniature(heroParty[i].name, heroCoordTop, heroCoordLeft, "hero_miniature");
+        /*
         heroParty[i].init = heroParty[i].initiative + rolls.d20();
         heroInitList.push({
             id: heroParty[i].name,
             init: heroParty[i].init
         });
+        */
         heroCoordTop += 40;
     }
     //-- placing enemies on map
@@ -85,25 +87,37 @@ function battleMain(locationName) {
         while (battleCommands.hasChildNodes()) {
             battleCommands.removeChild(battleCommands.childNodes[0]);
         }
-        listItem = document.createElement("LI");
-        listItemText = document.createTextNode();
-//        Math.max();
+        //--- showing the name of the hero with highest initiative
+        document.getElementById("current_hero_name").innerHTML = heroParty[0].name;
         addCommand(battleCommands, command1, "Іти");
         //--- IF enemy is near "Attack" command is added
+        /*
         if (heroCoords.top + 20 == enemyCoords.top ||
             heroCoords.top - 20 == enemyCoords.top ||
             heroCoords.left + 20 == enemyCoords.left ||
             heroCoords.left - 20 == enemyCoords.left) {
             addCommand(battleCommands, command2, "Атакувати");
         }
+        */
         addCommand(battleCommands, command3, "Завершити хід");
     }
+
     function rollHeroesInitative() {
         for (i = 0; i < heroParty.length; i++) {
             heroParty[i].init = heroParty[i].initiative + rolls.d20();
-            heroInitList.push(heroParty[i].init);
         }
+        //--- sorting hero party in the order of rolled initiative, with the highest going first
+        heroParty.sort(function (a, b) {
+            if (a.init < b.init) {
+                return 1;
+            }
+            if (a.init > b.init) {
+                return -1;
+            }
+            return 0;
+        });
     }
+
     function addCommand (where, command, commandName) {
         listItem = document.createElement("LI");
         listItem.onclick = command;
@@ -111,19 +125,16 @@ function battleMain(locationName) {
         listItem.appendChild(listItemText);
         where.appendChild(listItem);
     }
+
     function addMiniature(idName, coordTop, coordLeft, classId) {
         miniature = document.createElement("DIV");
         miniature.setAttribute("id", idName);
-//        alert(battleFieldCoords.top);
-//        alert(coordTop);
-//        alert(battleFieldCoords.top + coordTop);
         battleField.appendChild(miniature);
         document.getElementById(idName).className = classId;
-//        var temp = $("#" + idName).offset();
         $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
             left: battleFieldCoords.left + coordLeft});
-//        alert(temp.top);
     }
+
         //+++ untested & uncleared
     function heroMove(miniature, hero) {
         heroAPs = hero.move;
