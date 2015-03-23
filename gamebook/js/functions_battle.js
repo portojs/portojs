@@ -1,12 +1,14 @@
 /**
  * Created by Peter on 12.03.2015.
  */
+///---------------------NOTES--------------------------------------------
 // simple notation
 //--- local explanation
 //+++ notes for later action
 
 //+++ deleted argument "enemies1", because I think info on enemies
 //+++ should be received from the location variable
+///----------------------------------------------------------------------
 
 function battleMain(locationName) {
 // show battle window
@@ -16,7 +18,10 @@ function battleMain(locationName) {
     var i;
     // vars for creating a list of enemies
     var enemies = [];
-    //
+    // displaying commands
+    var enemyLocation;
+    var heroLocation;
+
     var heroInitList = [];
     var heroAPs;
     var heroCoords;
@@ -41,10 +46,10 @@ function battleMain(locationName) {
     heroCoordTop = 20;
     heroCoordLeft = 20;
     enemyCoordTop = 20;
-    enemyCoordLeft = 400;
+    enemyCoordLeft = 40;
 
 // main body
-    //-- populating the enemy list
+    //-- populating enemy list
     for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
         enemies.push({
             id: 'enemy' + i,
@@ -90,16 +95,17 @@ function battleMain(locationName) {
         //--- showing the name of the hero with highest initiative
         document.getElementById("current_hero_name").innerHTML = heroParty[0].name;
         addCommand(battleCommands, command1, "Іти");
-        //--- IF enemy is near "Attack" command is added
-        /*
-        if (heroCoords.top + 20 == enemyCoords.top ||
-            heroCoords.top - 20 == enemyCoords.top ||
-            heroCoords.left + 20 == enemyCoords.left ||
-            heroCoords.left - 20 == enemyCoords.left) {
-            addCommand(battleCommands, command2, "Атакувати");
+        //--- check for nearby enemies and add "Attack" command if there are
+        for (i = 0; i < enemies.length; i++) {
+            heroLocation = document.getElementById(heroParty[0].name).getBoundingClientRect();
+            enemyLocation = document.getElementById(enemies[i].id).getBoundingClientRect();
+            if (enemyLocation.top == heroLocation.top + 20 ||
+                enemyLocation.top == heroLocation.top - 20 ||
+                enemyLocation.left == heroLocation.left + 20 ||
+                enemyLocation.left == heroLocation.left - 20) {
+                return addCommand(battleCommands, command2, "Атакувати");
+            }
         }
-        */
-        addCommand(battleCommands, command3, "Завершити хід");
     }
 
     function rollHeroesInitative() {
