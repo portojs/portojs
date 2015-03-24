@@ -158,6 +158,13 @@ li:hover {
     opacity: 0.2;
     position: relative;
 }
+.hero_miniature_current {
+    height: 20px;
+    width: 20px;
+    background: blue;
+    opacity: 1.0;
+    position: relative;
+}
 .enemy_miniature {
     height: 20px;
     width: 20px;
@@ -165,6 +172,17 @@ li:hover {
     opacity: 0.2;
     position: relative;
 }
+.enemy_miniature_adjacent {
+    height: 20px;
+    width: 20px;
+    background: red;
+    opacity: 1.0;
+    position: relative;
+}
+.enemy_miniature_adjacent:hover {
+    background: #800000;
+}
+
 #battle_field {
     display: table;
     position: relative;

@@ -6,6 +6,7 @@ var hero_1 = {
     name: 'Боромір',
     move: 6,
     hp: 45,
+    tohit: 5,
     initiative: 4
 };
 
@@ -13,6 +14,7 @@ var hero_2 = {
     name: 'Арагорн',
     move: 8,
     hp: 38,
+    tohit: 6,
     initiative: 6
 };
 
@@ -20,6 +22,7 @@ var hero_3 = {
     name: 'Фродо',
     move: 4,
     hp: 20,
+    tohit: 2,
     initiative: 8
 };
 
@@ -27,6 +30,7 @@ var hero_4 = {
     name: 'Гендальф',
     move: 6,
     hp: 30,
+    tohit: 4,
     initiative: 5
 };
 

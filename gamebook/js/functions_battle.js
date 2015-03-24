@@ -21,7 +21,9 @@ function battleMain(locationName) {
     // displaying commands
     var enemyLocation;
     var heroLocation;
-
+    // attack vars
+    var heroAttackRoll;
+    var currentHero;
     var heroInitList = [];
     var heroAPs;
     var heroCoords;
@@ -38,8 +40,9 @@ function battleMain(locationName) {
     var enemyCoordTop;
     var enemyCoordLeft;
     var command1 = function() {heroMove(hero.idName, hero)};
-    var command2 = function() {heroAttack(hero, enemy, locationName)};
-    var command3 = function() {endTurn()};
+    var command2 = function() {heroAttack(heroParty[0])};
+//    var command9 = function() {heroAttack(heroParty[0], enemy, locationName)};
+//    var command3 = function() {endTurn()};
     battleField = document.getElementById("battle_field");
     battleFieldCoords = $("#battle_field").offset();
     battleCommands = document.getElementById("battle_commands");
@@ -61,13 +64,6 @@ function battleMain(locationName) {
     //-- placing hero party on map & rolling initiative
     for (i = 0; i < heroParty.length; i++) {
         addMiniature(heroParty[i].name, heroCoordTop, heroCoordLeft, "hero_miniature");
-        /*
-        heroParty[i].init = heroParty[i].initiative + rolls.d20();
-        heroInitList.push({
-            id: heroParty[i].name,
-            init: heroParty[i].init
-        });
-        */
         heroCoordTop += 40;
     }
     //-- placing enemies on map
@@ -76,17 +72,21 @@ function battleMain(locationName) {
         enemyCoordTop += 40;
     }
     //-- roll & list initiatives for hero party
-    rollHeroesInitative();
+    rollHeroesInitiative();
+
+    /*//-- unfinished endTurn-like function
+    function() {
+        currentHero = heroParty[0];
+        showCommandsStart(currentHero);
+        while (abcdefg) {
+
+        }
+    }
+    */
+
     //-- show commands
     showCommandsStart();
 
-    /*
-    addMiniature(hero.idName, hero.coordTop, hero.coordLeft);
-    addMiniature(bandit1.idName, bandit1.coordTop, bandit1.coordLeft);
-    heroCoords = $("#" + hero.idName).offset();
-    enemyCoords = $("#" + bandit1.idName).offset();
-    showCommandsStart();
-    */
 // list of functions
     function showCommandsStart() {
         while (battleCommands.hasChildNodes()) {
@@ -99,16 +99,17 @@ function battleMain(locationName) {
         for (i = 0; i < enemies.length; i++) {
             heroLocation = document.getElementById(heroParty[0].name).getBoundingClientRect();
             enemyLocation = document.getElementById(enemies[i].id).getBoundingClientRect();
-            if (enemyLocation.top == heroLocation.top + 20 ||
-                enemyLocation.top == heroLocation.top - 20 ||
-                enemyLocation.left == heroLocation.left + 20 ||
-                enemyLocation.left == heroLocation.left - 20) {
+            if (enemyLocation.top == heroLocation.top + 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
+                enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
+                document.getElementById(heroParty[0].name).className = "hero_miniature_current";
                 return addCommand(battleCommands, command2, "Атакувати");
             }
         }
     }
 
-    function rollHeroesInitative() {
+    function rollHeroesInitiative() {
         for (i = 0; i < heroParty.length; i++) {
             heroParty[i].init = heroParty[i].initiative + rolls.d20();
         }
@@ -141,6 +142,25 @@ function battleMain(locationName) {
             left: battleFieldCoords.left + coordLeft});
     }
 
+    function heroAttack(hero) {
+        //--- highlighting adjacent enemies
+        for (i = 0; i < enemies.length; i++) {
+            heroLocation = document.getElementById(heroParty[0].name).getBoundingClientRect();
+            enemyLocation = document.getElementById(enemies[i].id).getBoundingClientRect();
+            if (enemyLocation.top == heroLocation.top + 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
+                enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
+                document.getElementById(enemies[i].id).className = "enemy_miniature_adjacent";
+                document.getElementById(enemies[i].id).addEventListener("click", function () {hit(heroParty[0])});
+            }
+        }
+    }
+
+    function hit(hero) {
+        heroAttackRoll = hero.tohit + rolls.d20();
+        document.getElementById("battle_log").innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll;
+    }
         //+++ untested & uncleared
     function heroMove(miniature, hero) {
         heroAPs = hero.move;
