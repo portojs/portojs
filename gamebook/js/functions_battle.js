@@ -152,14 +152,30 @@ function battleMain(locationName) {
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
                 document.getElementById(enemies[i].id).className = "enemy_miniature_adjacent";
-                document.getElementById(enemies[i].id).addEventListener("click", function () {hit(heroParty[0])});
+                document.getElementById(enemies[i].id).addEventListener("click", function () {hit(heroParty[0], this.id)});
             }
         }
     }
 
-    function hit(hero) {
+    function hit(hero, enemy_id) {
         heroAttackRoll = hero.tohit + rolls.d20();
-        document.getElementById("battle_log").innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll;
+        document.getElementById("battle_log").innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
+        if (heroAttackRoll >= locationName.encounter1.enemies1Name.ac) {
+            var enemyFind = findEnemy(enemy_id);
+            var heroHit = hero.damage();
+            alert(heroHit);
+            enemyFind.hp = enemyFind.hp - heroHit;
+            document.getElementById("battle_log").innerHTML += hero.name + " влучив." + "</br>";
+            document.getElementById("battle_log").innerHTML += locationName.encounter1.enemies1Name.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
+        }
+    }
+
+    function findEnemy(enemy_id) {
+        var look = {};
+        for (i = 0; i < enemies.length; i++) {
+            look[enemies[i].id] = enemies[i];
+        }
+        return look[enemy_id]
     }
         //+++ untested & uncleared
     function heroMove(miniature, hero) {
