@@ -8,7 +8,7 @@ var hero_1 = {
     hp: 45,
     ac: 24,
     tohit: 5,
-    damage: (rolls.d8) + 3,
+    damage: (rolls.d8()) + 3,
     initiative: 4
 };
 
@@ -18,7 +18,7 @@ var hero_2 = {
     hp: 38,
     ac: 21,
     tohit: 6,
-    damage: (rolls.d8) + 2,
+    damage: (rolls.d8()) + 2,
     initiative: 6
 };
 
@@ -28,7 +28,7 @@ var hero_3 = {
     hp: 20,
     ac: 17,
     tohit: 2,
-    damage: (rolls.d6) + 1,
+    damage: (rolls.d6()) + 1,
     initiative: 8
 };
 
@@ -38,7 +38,7 @@ var hero_4 = {
     hp: 30,
     ac: 20,
     tohit: 4,
-    damage: (rolls.d8) + 2,
+    damage: (rolls.d8()) + 2,
     initiative: 5
 };
 

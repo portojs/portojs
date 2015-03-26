@@ -21,8 +21,12 @@ function battleMain(locationName) {
     // displaying commands
     var enemyLocation;
     var heroLocation;
-    // attack vars
+    // hero attack vars
     var heroAttackRoll;
+    var battleLog = document.getElementById("battle_log");
+    // enemy turn vars
+    var adjacentHeroes = [];
+
     var currentHero;
     var heroInitList = [];
     var heroAPs;
@@ -57,7 +61,7 @@ function battleMain(locationName) {
         enemies.push({
             id: 'enemy' + i,
             hp: locationName.encounter1.enemies1Name.hp() + locationName.encounter1.enemies1Name.hpModifier,
-            init: locationName.encounter1.enemies1Name.initiative + rolls.d20()
+            init: 0
         });
     }
 
@@ -73,7 +77,7 @@ function battleMain(locationName) {
     }
     //-- roll & list initiatives for hero party
     rollHeroesInitiative();
-
+    rollEnemiesInitiative();
     /*//-- unfinished endTurn-like function
     function() {
         currentHero = heroParty[0];
@@ -125,6 +129,22 @@ function battleMain(locationName) {
         });
     }
 
+    function rollEnemiesInitiative() {
+        for (i = 0; i < enemies.length; i++) {
+            enemies[i].init = locationName.encounter1.enemies1Name.initiative + rolls.d20();
+        }
+        //--- sorting hero party in the order of rolled initiative, with the highest going first
+        enemies.sort(function (a, b) {
+            if (a.init < b.init) {
+                return 1;
+            }
+            if (a.init > b.init) {
+                return -1;
+            }
+            return 0;
+        });
+    }
+
     function addCommand (where, command, commandName) {
         listItem = document.createElement("LI");
         listItem.onclick = command;
@@ -152,22 +172,45 @@ function battleMain(locationName) {
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
                 document.getElementById(enemies[i].id).className = "enemy_miniature_adjacent";
-                document.getElementById(enemies[i].id).addEventListener("click", function () {hit(heroParty[0], this.id)});
+                document.getElementById(enemies[i].id).addEventListener("click", function () {heroHit(heroParty[0], this.id)});
             }
         }
     }
 
-    function hit(hero, enemy_id) {
+    function heroHit(hero, enemy_id) {
         heroAttackRoll = hero.tohit + rolls.d20();
-        document.getElementById("battle_log").innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
+        battleLog.innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
         if (heroAttackRoll >= locationName.encounter1.enemies1Name.ac) {
             var enemyFind = findEnemy(enemy_id);
-            var heroHit = hero.damage();
-            alert(heroHit);
+            var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
-            document.getElementById("battle_log").innerHTML += hero.name + " влучив." + "</br>";
-            document.getElementById("battle_log").innerHTML += locationName.encounter1.enemies1Name.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
+            battleLog.innerHTML += hero.name + " влучив." + "</br>";
+            battleLog.innerHTML += locationName.encounter1.enemies1Name.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
         }
+        else {
+            battleLog.innerHTML += hero.name + " не влучив." + "</br>";
+        }
+        changeInitOrder(heroParty);
+        enemyTurn();
+    }
+
+    function changeInitOrder(arrayName) {
+        arrayName.push(arrayName.shift());
+    }
+
+    function enemyTurn() {
+        // nearby heroes
+        enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
+        for (i = 0; i < heroParty.length; i++) {
+            heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
+            if (enemyLocation.top == heroLocation.top + 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
+                enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
+                enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
+                adjacentHeroes.push = heroParty[i].name;
+            }
+        }
+        alert(adjacentHeroes);
     }
 
     function findEnemy(enemy_id) {

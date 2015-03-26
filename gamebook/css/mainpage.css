@@ -132,6 +132,10 @@ li:hover {
     box-shadow: 0 0 10px #000;
     display: table;
 }
+.b-popup-content3 div {
+    float: left;
+}
+
 #battle_commands {
     padding: 20px;
     height: 250px;
@@ -141,6 +145,7 @@ li:hover {
 #battle_log {
     padding: 20px;
     height: 250px;
+    overflow: auto;
     text-align: left;
     vertical-align: top;
 }
