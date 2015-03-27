@@ -49,6 +49,8 @@ var enemy_1 = {
     move: 7,
     hp: rolls.d6,
     ac: 14,
+    tohit: 2,
+    damage: rolls.d4,
     hpModifier: 1,
     initiative: 2
 };

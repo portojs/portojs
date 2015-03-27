@@ -16,6 +16,7 @@ function battleMain(locationName) {
 // list of vars
     // general vars
     var i;
+    var enemyName = locationName.encounter1.enemies1Name;
     // vars for creating a list of enemies
     var enemies = [];
     // displaying commands
@@ -60,7 +61,7 @@ function battleMain(locationName) {
     for (i = 0; i < locationName.encounter1.enemies1Quantity; i++) {
         enemies.push({
             id: 'enemy' + i,
-            hp: locationName.encounter1.enemies1Name.hp() + locationName.encounter1.enemies1Name.hpModifier,
+            hp: enemyName.hp() + enemyName.hpModifier,
             init: 0
         });
     }
@@ -78,21 +79,12 @@ function battleMain(locationName) {
     //-- roll & list initiatives for hero party
     rollHeroesInitiative();
     rollEnemiesInitiative();
-    /*//-- unfinished endTurn-like function
-    function() {
-        currentHero = heroParty[0];
-        showCommandsStart(currentHero);
-        while (abcdefg) {
-
-        }
-    }
-    */
 
     //-- show commands
-    showCommandsStart();
+    heroTurn();
 
 // list of functions
-    function showCommandsStart() {
+    function heroTurn() {
         while (battleCommands.hasChildNodes()) {
             battleCommands.removeChild(battleCommands.childNodes[0]);
         }
@@ -131,7 +123,7 @@ function battleMain(locationName) {
 
     function rollEnemiesInitiative() {
         for (i = 0; i < enemies.length; i++) {
-            enemies[i].init = locationName.encounter1.enemies1Name.initiative + rolls.d20();
+            enemies[i].init = enemyName.initiative + rolls.d20();
         }
         //--- sorting hero party in the order of rolled initiative, with the highest going first
         enemies.sort(function (a, b) {
@@ -180,12 +172,12 @@ function battleMain(locationName) {
     function heroHit(hero, enemy_id) {
         heroAttackRoll = hero.tohit + rolls.d20();
         battleLog.innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
-        if (heroAttackRoll >= locationName.encounter1.enemies1Name.ac) {
+        if (heroAttackRoll >= enemyName.ac) {
             var enemyFind = findEnemy(enemy_id);
             var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
-            battleLog.innerHTML += locationName.encounter1.enemies1Name.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
+            battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
         }
         else {
             battleLog.innerHTML += hero.name + " не влучив." + "</br>";
@@ -199,7 +191,15 @@ function battleMain(locationName) {
     }
 
     function enemyTurn() {
-        // nearby heroes
+        // are there adjacent heroes?
+        if (heroNear()) {
+            // attack random adjacent hero
+            attackRandomHero()
+        }
+    }
+
+    // enemy turn - are there any adjacent heroes?
+    function heroNear() {
         enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
         for (i = 0; i < heroParty.length; i++) {
             heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
@@ -210,9 +210,31 @@ function battleMain(locationName) {
                 adjacentHeroes.push = heroParty[i].name;
             }
         }
-        alert(adjacentHeroes);
+        return adjacentHeroes.length != -1;
     }
 
+    // enemy turn - attack random adjacent hero
+    function attackRandomHero() {
+        var randomHero;
+        var enemyAttackRoll;
+        var enemyDamage;
+        randomHero = (Math.floor((Math.random() * (adjacentHeroes.length + 1)) + 1)) - 1;
+        enemyAttackRoll = enemyName.tohit + rolls.d20();
+        battleLog.innerHTML += enemyName.name + " атакує. Атака: " + enemyAttackRoll + "</br>";
+        if (enemyAttackRoll >= heroParty[randomHero].ac) {
+            enemyDamage = enemyName.damage();
+            heroParty[randomHero].hp = heroParty[randomHero].hp - enemyDamage;
+            battleLog.innerHTML += enemyName.name + " влучив." + "</br>";
+            battleLog.innerHTML += heroParty[randomHero].name + " втратив " + enemyDamage + " здоров'я. Залишлиося: " + heroParty[randomHero].hp + "</br>";
+        }
+        else {
+            battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
+        }
+        changeInitOrder(enemies);
+        heroTurn();
+    }
+
+    // define array index of a particular enemy from his/her id property
     function findEnemy(enemy_id) {
         var look = {};
         for (i = 0; i < enemies.length; i++) {
