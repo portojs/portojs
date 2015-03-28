@@ -90,6 +90,7 @@ function battleMain(locationName) {
         }
         //--- showing the name of the hero with highest initiative
         document.getElementById("current_hero_name").innerHTML = heroParty[0].name;
+        document.getElementById(heroParty[0].name).className = "hero_miniature_current";
         addCommand(battleCommands, command1, "Іти");
         //--- check for nearby enemies and add "Attack" command if there are
         for (i = 0; i < enemies.length; i++) {
@@ -99,7 +100,6 @@ function battleMain(locationName) {
                 enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
-                document.getElementById(heroParty[0].name).className = "hero_miniature_current";
                 return addCommand(battleCommands, command2, "Атакувати");
             }
         }
@@ -164,16 +164,19 @@ function battleMain(locationName) {
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
                 document.getElementById(enemies[i].id).className = "enemy_miniature_adjacent";
-                document.getElementById(enemies[i].id).addEventListener("click", function () {heroHit(heroParty[0], this.id)});
+                document.getElementById(enemies[i].id).myId = enemies[i].id;
+                document.getElementById(enemies[i].id).addEventListener("click", heroHits, false);
             }
         }
     }
 
-    function heroHit(hero, enemy_id) {
+    function heroHits(evt) {
+        var hero = heroParty[0];
+        var enemyId = evt.target.myId;
         heroAttackRoll = hero.tohit + rolls.d20();
         battleLog.innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
         if (heroAttackRoll >= enemyName.ac) {
-            var enemyFind = findEnemy(enemy_id);
+            var enemyFind = findEnemy(enemyId);
             var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
@@ -181,6 +184,11 @@ function battleMain(locationName) {
         }
         else {
             battleLog.innerHTML += hero.name + " не влучив." + "</br>";
+        }
+        document.getElementById(heroParty[0].name).className = "hero_miniature";
+        for (i = 0; i < enemies.length; i++) {
+            document.getElementById(enemies[i].id).className = "enemy_miniature";
+            document.getElementById(enemies[i].id).removeEventListener("click", heroHits, false);
         }
         changeInitOrder(heroParty);
         enemyTurn();
@@ -195,6 +203,14 @@ function battleMain(locationName) {
         if (heroNear()) {
             // attack random adjacent hero
             attackRandomHero()
+        }
+        else {
+            var findHero = [];
+            enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
+            for (i = 0; i < heroParty.length; i++) {
+                heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
+                findHero[i] = +(heroLocation.top - enemyLocation.top) + +(heroLocation.left - enemyLocation.left);
+            }
         }
     }
 
