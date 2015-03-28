@@ -1,4 +1,5 @@
-body, p {
+body, p, h1, h2, ul {
     padding: 0;
     margin: 0;
 }
+
