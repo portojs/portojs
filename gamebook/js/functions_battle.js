@@ -27,6 +27,7 @@ function battleMain(locationName) {
     var battleLog = document.getElementById("battle_log");
     // enemy turn vars
     var adjacentHeroes = [];
+    var closestHero;
 
     var currentHero;
     var heroInitList = [];
@@ -44,17 +45,23 @@ function battleMain(locationName) {
     var heroCoordLeft;
     var enemyCoordTop;
     var enemyCoordLeft;
-    var command1 = function() {heroMove(hero.idName, hero)};
-    var command2 = function() {heroAttack(heroParty[0])};
+    var command1 = function () {
+        heroMove(hero.idName, hero)
+    };
+    var command2 = function () {
+        heroAttack(heroParty[0])
+    };
 //    var command9 = function() {heroAttack(heroParty[0], enemy, locationName)};
-//    var command3 = function() {endTurn()};
+    var command3 = function () {
+        endHeroTurn()
+    };
     battleField = document.getElementById("battle_field");
     battleFieldCoords = $("#battle_field").offset();
     battleCommands = document.getElementById("battle_commands");
     heroCoordTop = 20;
     heroCoordLeft = 20;
     enemyCoordTop = 20;
-    enemyCoordLeft = 40;
+    enemyCoordLeft = 100;
 
 // main body
     //-- populating enemy list
@@ -92,6 +99,7 @@ function battleMain(locationName) {
         document.getElementById("current_hero_name").innerHTML = heroParty[0].name;
         document.getElementById(heroParty[0].name).className = "hero_miniature_current";
         addCommand(battleCommands, command1, "Іти");
+        addCommand(battleCommands, command3, "Завершити хід");
         //--- check for nearby enemies and add "Attack" command if there are
         for (i = 0; i < enemies.length; i++) {
             heroLocation = document.getElementById(heroParty[0].name).getBoundingClientRect();
@@ -137,7 +145,7 @@ function battleMain(locationName) {
         });
     }
 
-    function addCommand (where, command, commandName) {
+    function addCommand(where, command, commandName) {
         listItem = document.createElement("LI");
         listItem.onclick = command;
         listItemText = document.createTextNode(commandName);
@@ -150,8 +158,10 @@ function battleMain(locationName) {
         miniature.setAttribute("id", idName);
         battleField.appendChild(miniature);
         document.getElementById(idName).className = classId;
-        $("#" + idName).offset({top: battleFieldCoords.top + coordTop,
-            left: battleFieldCoords.left + coordLeft});
+        $("#" + idName).offset({
+            top: battleFieldCoords.top + coordTop,
+            left: battleFieldCoords.left + coordLeft
+        });
     }
 
     function heroAttack(hero) {
@@ -185,6 +195,10 @@ function battleMain(locationName) {
         else {
             battleLog.innerHTML += hero.name + " не влучив." + "</br>";
         }
+        endHeroTurn()
+    }
+
+    function endHeroTurn() {
         document.getElementById(heroParty[0].name).className = "hero_miniature";
         for (i = 0; i < enemies.length; i++) {
             document.getElementById(enemies[i].id).className = "enemy_miniature";
@@ -194,13 +208,18 @@ function battleMain(locationName) {
         enemyTurn();
     }
 
+    function endEnemyTurn() {
+        changeInitOrder(enemies);
+        heroTurn();
+    }
+
     function changeInitOrder(arrayName) {
         arrayName.push(arrayName.shift());
     }
 
     function enemyTurn() {
         // are there adjacent heroes?
-        if (heroNear()) {
+        if (heroNear() == true) {
             // attack random adjacent hero
             attackRandomHero()
         }
@@ -209,8 +228,17 @@ function battleMain(locationName) {
             enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
             for (i = 0; i < heroParty.length; i++) {
                 heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
-                findHero[i] = +(heroLocation.top - enemyLocation.top) + +(heroLocation.left - enemyLocation.left);
+                findHero.push({
+                    coord: Math.abs((heroLocation.top - enemyLocation.top)) + Math.abs((heroLocation.left - enemyLocation.left)),
+                    name: heroParty[i].name
+                });
             }
+            findHero.sort(function (a, b) {
+                return a.coord - b.coord;
+            });
+            closestHero = findHero[0];
+            alert(closestHero.name + " + " + enemies[0].id);
+            endEnemyTurn();
         }
     }
 
@@ -226,7 +254,7 @@ function battleMain(locationName) {
                 adjacentHeroes.push = heroParty[i].name;
             }
         }
-        return adjacentHeroes.length != -1;
+        return adjacentHeroes.length >= 1;
     }
 
     // enemy turn - attack random adjacent hero
@@ -246,8 +274,7 @@ function battleMain(locationName) {
         else {
             battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
         }
-        changeInitOrder(enemies);
-        heroTurn();
+        endEnemyTurn();
     }
 
     // define array index of a particular enemy from his/her id property
@@ -258,14 +285,12 @@ function battleMain(locationName) {
         }
         return look[enemy_id]
     }
-        //+++ untested & uncleared
+
+    //+++ untested & uncleared
     function heroMove(miniature, hero) {
         heroAPs = hero.move;
         document.getElementById("movement_counter").innerHTML = "Очки ходу: " + heroAPs;
         miniatureWaiting(miniature, battleFieldCoords);
         availableCells(miniature, battleFieldCoords, hero, heroAPs);
-    }
-        //+++ left for much later
-    function endTurn() {
     }
 }
