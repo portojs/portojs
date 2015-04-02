@@ -28,13 +28,15 @@ function battleMain(locationName) {
     // enemy turn vars
     var adjacentHeroes = [];
     var closestHero;
+    var enemyAPs = locationName.encounter1.enemies1Name.move;
+    var closestHeroLocation;
+    var enemyOffset;
+    var enemyIdJq;
 
     var currentHero;
     var heroInitList = [];
     var heroAPs;
     var heroCoords;
-    var enemyAPs;
-    var enemyCoords;
     var miniature;
     var battleField;
     var battleFieldCoords;
@@ -237,7 +239,42 @@ function battleMain(locationName) {
                 return a.coord - b.coord;
             });
             closestHero = findHero[0];
-            alert(closestHero.name + " + " + enemies[0].id);
+            closestHeroLocation = document.getElementById(closestHero.name).getBoundingClientRect();
+            enemyIdJq = $("#" + enemies[0].id);
+            enemyOffset = enemyIdJq.offset();
+            while (enemyAPs > 0) {
+                //// ATTENTION!!!!! = this code crashes computer
+                enemyAPs = enemyAPs - 1;
+                if (heroNear() == true) {
+                    attackRandomHero();
+                    break;
+                }
+                if (enemyLocation.top > closestHeroLocation.top) {
+//                    alert(enemies[0].id);
+                    alert(enemyOffset.top + " " + enemyOffset.left);
+                    enemyIdJq.offset({top: enemyOffset.top - 20, left: enemyOffset.left});
+                    continue;
+                }
+                if (enemyLocation.top < closestHeroLocation.top) {
+//                    alert(enemies[0].id);
+                    alert(enemyOffset.top + " " + enemyOffset.left);
+                    enemyIdJq.offset({top: enemyOffset.top + 20, left: enemyOffset.left});
+                    continue;
+                }
+                if (enemyLocation.left > closestHeroLocation.left) {
+//                    alert(enemies[0].id);
+                    alert(enemyOffset.top + " " + enemyOffset.left);
+                    enemyIdJq.offset({top: enemyOffset.top, left: enemyOffset.left - 20});
+                    continue;
+                }
+                if (enemyLocation.left < closestHeroLocation.left) {
+//                    alert(enemies[0].id);
+                    alert(enemyOffset.top + " " + enemyOffset.left);
+                    enemyIdJq.offset({top: enemyOffset.top, left: enemyOffset.left + 20});
+                }
+            }
+            enemyAPs = locationName.encounter1.enemies1Name.move;
+//            alert(closestHero.name + " + " + enemies[0].id);
             endEnemyTurn();
         }
     }

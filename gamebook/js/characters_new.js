@@ -46,7 +46,7 @@ var heroParty = [hero_1, hero_2, hero_3, hero_4];
 
 var enemy_1 = {
     name: 'Гоблін',
-    move: 7,
+    move: 5,
     hp: rolls.d6,
     ac: 14,
     tohit: 2,
