@@ -5,5 +5,5 @@ $(document).ready(function() {
     var chaptersMenu = $("#chapters");
     chaptersMenu.find("li");
     chaptersMenu.first("li");
-    chaptersMenu.last("li");
+    chaptersMenu.last("li").text("Angmar");
 });
