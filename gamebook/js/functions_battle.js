@@ -243,31 +243,34 @@ function battleMain(locationName) {
             });
             closestHero = findHero[0];
             closestHeroLocation = document.getElementById(closestHero.name).getBoundingClientRect();
-            for (i = 0; i < enemyAPs; i++) {
-                enemyIdJq = $("#" + enemies[0].id);
+            i = enemyAPs;
+            enemyIdJq = $("#" + enemies[0].id);
+            while (i > 0) {
+                i--;
                 enemyOffset = enemyIdJq.offset();
-                alert(enemyOffset.top + " " + enemyOffset.left + " " + enemyAPs);
-                //// ATTENTION!!!!! = this code crashes computer
                 if (heroNear() == true) {
+                    alert("Attacking!");
+                    i = enemyAPs;
                     attackRandomHero();
                 }
-                if (enemyLocation.top > closestHeroLocation.top) {
+                else if (enemyLocation.top > closestHeroLocation.top) {
+                    alert("Moving up");
                     enemyIdJq.offset({top: (enemyOffset.top - 20), left: enemyOffset.left});
-                    continue;
                 }
-                if (enemyLocation.top < closestHeroLocation.top) {
+                else if (enemyLocation.top < closestHeroLocation.top) {
+                    alert("Moving down");
                     enemyIdJq.offset({top: (enemyOffset.top + 20), left: enemyOffset.left});
-                    continue;
                 }
-                if (enemyLocation.left > closestHeroLocation.left) {
+                else if (enemyLocation.left > closestHeroLocation.left) {
+                    alert("Moving left - hero:" + closestHeroLocation.top + " " + closestHeroLocation.left + "</br>enemy: " + enemyOffset.top + " " + enemyOffset.left);
                     enemyIdJq.offset({top: enemyOffset.top, left: (enemyOffset.left - 20)});
-                    continue;
                 }
-                if (enemyLocation.left < closestHeroLocation.left) {
+                else {
+                    alert("Moving right");
                     enemyIdJq.offset({top: enemyOffset.top, left: (enemyOffset.left + 20)});
                 }
             }
-//            alert(closestHero.name + " + " + enemies[0].id);
+            i = enemyAPs;
             endEnemyTurn();
         }
     }
@@ -275,15 +278,19 @@ function battleMain(locationName) {
     // enemy turn - are there any adjacent heroes?
     function heroNear() {
         enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
+//        alert("Enemy location: " + enemyLocation.top + " " + enemyLocation.left + "/n Hero location: " + heroLocation.top + " " + heroLocation.left);
         for (i = 0; i < heroParty.length; i++) {
             heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
             if (enemyLocation.top == heroLocation.top + 20 && enemyLocation.left == heroLocation.left ||
                 enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
-                adjacentHeroes.push = heroParty[i].name;
+                alert("Adjacent hero found!");
+                adjacentHeroes.push(heroParty[i].name);
+                alert("Adjacent hero name: " + heroParty[i].name);
             }
         }
+        alert("Adjacent heroes nr: " + adjacentHeroes.length);
         return adjacentHeroes.length >= 1;
     }
 
@@ -304,6 +311,7 @@ function battleMain(locationName) {
         else {
             battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
         }
+        alert("Turn ended!");
         endEnemyTurn();
     }
 
