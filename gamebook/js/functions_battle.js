@@ -299,14 +299,18 @@ function battleMain(locationName) {
         var randomHero;
         var enemyAttackRoll;
         var enemyDamage;
-        randomHero = (Math.floor((Math.random() * (adjacentHeroes.length + 1)) + 1)) - 1;
+        if (adjacentHeroes.length > 1) {
+            randomHero = (Math.floor((Math.random() * (adjacentHeroes.length + 1)) + 1)) - 1;
+        } else {
+            randomHero = 0;
+        }
         enemyAttackRoll = enemyName.tohit + rolls.d20();
         battleLog.innerHTML += enemyName.name + " атакує. Атака: " + enemyAttackRoll + "</br>";
         if (enemyAttackRoll >= heroParty[randomHero].ac) {
             enemyDamage = enemyName.damage();
             heroParty[randomHero].hp = heroParty[randomHero].hp - enemyDamage;
             battleLog.innerHTML += enemyName.name + " влучив." + "</br>";
-            battleLog.innerHTML += heroParty[randomHero].name + " втратив " + enemyDamage + " здоров'я. Залишлиося: " + heroParty[randomHero].hp + "</br>";
+            battleLog.innerHTML += adjacentHeroes[randomHero] + " втратив " + enemyDamage + " здоров'я. Залишлиося: " + heroParty[randomHero].hp + "</br>";
         }
         else {
             battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
@@ -315,7 +319,7 @@ function battleMain(locationName) {
         endEnemyTurn();
     }
 
-    // define array index of a particular enemy from his/her id property
+    // find array index of a particular enemy from his/her id property
     function findEnemy(enemy_id) {
         var look = {};
         for (i = 0; i < enemies.length; i++) {
