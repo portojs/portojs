@@ -221,6 +221,7 @@ function battleMain(locationName) {
     }
 
     function enemyTurn() {
+        alert("Current enemy: " + enemies[0].id);
         // are there adjacent heroes?
         if (heroNear() == true) {
             // attack random adjacent hero
@@ -243,14 +244,15 @@ function battleMain(locationName) {
             });
             closestHero = findHero[0];
             closestHeroLocation = document.getElementById(closestHero.name).getBoundingClientRect();
-            i = enemyAPs;
             enemyIdJq = $("#" + enemies[0].id);
-            while (i > 0) {
-                i--;
+            enemyAPs = locationName.encounter1.enemies1Name.move;
+            while (enemyAPs > 0) {
+                alert("APs left: " + enemyAPs);
+                enemyAPs--;
                 enemyOffset = enemyIdJq.offset();
                 if (heroNear() == true) {
                     alert("Attacking!");
-                    i = enemyAPs;
+                    enemyAPs = 0;
                     attackRandomHero();
                 }
                 else if (enemyLocation.top > closestHeroLocation.top) {
@@ -270,7 +272,6 @@ function battleMain(locationName) {
                     enemyIdJq.offset({top: enemyOffset.top, left: (enemyOffset.left + 20)});
                 }
             }
-            i = enemyAPs;
             endEnemyTurn();
         }
     }
@@ -286,7 +287,7 @@ function battleMain(locationName) {
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
                 alert("Adjacent hero found!");
-                adjacentHeroes.push(heroParty[i].name);
+                adjacentHeroes.push(i);
                 alert("Adjacent hero name: " + heroParty[i].name);
             }
         }
@@ -306,16 +307,17 @@ function battleMain(locationName) {
         }
         enemyAttackRoll = enemyName.tohit + rolls.d20();
         battleLog.innerHTML += enemyName.name + " атакує. Атака: " + enemyAttackRoll + "</br>";
-        if (enemyAttackRoll >= heroParty[randomHero].ac) {
+        if (enemyAttackRoll >= heroParty[adjacentHeroes[randomHero]].ac) {
             enemyDamage = enemyName.damage();
-            heroParty[randomHero].hp = heroParty[randomHero].hp - enemyDamage;
+            heroParty[adjacentHeroes[randomHero]].hp -= enemyDamage;
             battleLog.innerHTML += enemyName.name + " влучив." + "</br>";
-            battleLog.innerHTML += adjacentHeroes[randomHero] + " втратив " + enemyDamage + " здоров'я. Залишлиося: " + heroParty[randomHero].hp + "</br>";
+            battleLog.innerHTML += heroParty[adjacentHeroes[randomHero]].name + " втратив " + enemyDamage + " здоров'я. Залишлиося: " + heroParty[adjacentHeroes[randomHero]].hp + "</br>";
         }
         else {
             battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
         }
         alert("Turn ended!");
+        adjacentHeroes = [];
         endEnemyTurn();
     }
 
