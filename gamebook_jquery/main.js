@@ -2,6 +2,10 @@
  * Created by Peter on 27.03.2015.
  */
 $(document).ready(function() {
+    var heroList = $(".herolist");
+    var action = $(".action");
+
+    // calling Ranger Vision
     $(".actions").on("click", "#rangerVision", function(){
         var enemy = $("#enemy");
         var enemyHealth = enemy.data("hp");
@@ -13,7 +17,19 @@ $(document).ready(function() {
         enemy.find("p").remove();
         enemy.append(enemyDescription);
     });
-    $("herolist").on("click", "#coldeyes", function() {
 
+    // filtering actions by characters
+    heroList.on("click", "#coldeyes", function() {
+        action.filter(".highlight").removeClass("highlight");
+        action.filter(".coldeyes").addClass("highlight");
     });
+    heroList.on("click", "#bloodyaxe", function() {
+        action.filter(".highlight").removeClass("highlight");
+        action.filter(".bloodyaxe").addClass("highlight");
+    });
+    heroList.on("click", "#shadowskill", function() {
+        action.filter(".highlight").removeClass("highlight");
+        action.filter(".shadowskill").addClass("highlight");
+    });
+
 });

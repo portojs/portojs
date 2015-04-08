@@ -6,3 +6,7 @@ body, p, h1, h2, ul {
 .select li:hover {
     background-color: #afd9ee;
 }
+
+.highlight {
+    color: red;
+}
