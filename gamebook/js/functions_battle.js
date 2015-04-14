@@ -221,6 +221,7 @@ function battleMain(locationName) {
     }
 
     function enemyTurn() {
+        pathFinding();
         alert("Current enemy: " + enemies[0].id);
         // are there adjacent heroes?
         if (heroNear() == true) {
@@ -273,6 +274,26 @@ function battleMain(locationName) {
                 }
             }
             endEnemyTurn();
+        }
+    }
+
+    function pathFinding() {
+        var blockedTerrain = [];
+        var openList = [];
+        var closedList = [];
+        var currentSquare = document.getElementById(enemies[0].id).getBoundingClientRect();
+        // populate blockedTerrain
+        for (i = 1; i < enemies.length; i ++) {
+            blockedTerrain.push({coord: document.getElementById(enemies[i].id).getBoundingClientRect()});
+        }
+        for (i = 0; i < heroParty.length; i++) {
+            blockedTerrain.push({coord: document.getElementById(heroParty[i].name).getBoundingClientRect()});
+        }
+        // populate openList
+        openList.push({coord: document.getElementById(enemies[0].id).getBoundingClientRect()});
+        // check adjacent squares vs blcckedTerrain list
+        for (i = 0; i < blockedTerrain.length; i++) {
+            if (blockedTerrain.coords.top == currentSquare.top + 20)
         }
     }
 
