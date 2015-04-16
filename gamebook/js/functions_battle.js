@@ -281,7 +281,7 @@ function battleMain(locationName) {
         var blockedTerrain = [];
         var openList = [];
         var closedList = [];
-        var currentSquare = document.getElementById(enemies[0].id).getBoundingClientRect();
+        var currentCell = document.getElementById(enemies[0].id).getBoundingClientRect();
         // populate blockedTerrain
         for (i = 1; i < enemies.length; i ++) {
             blockedTerrain.push({coord: document.getElementById(enemies[i].id).getBoundingClientRect()});
@@ -289,11 +289,135 @@ function battleMain(locationName) {
         for (i = 0; i < heroParty.length; i++) {
             blockedTerrain.push({coord: document.getElementById(heroParty[i].name).getBoundingClientRect()});
         }
-        // populate openList
+        // add current enemy cell to openList
         openList.push({coord: document.getElementById(enemies[0].id).getBoundingClientRect()});
-        // check adjacent squares vs blcckedTerrain list
+        // populate openList with adjacent squares vs blcckedTerrain list
+//////////////   WORK ON THIS CODE
+        // testing. maybe it'd be better to put the following in a separate function
+        var cellAboveTop = currentCell.top + 20;
+        var cellAboveLeft = currentCell.left;
+        var isBlocked = isCellInList(blockedTerrain, cellAboveTop, cellAboveLeft);
+        var isClosed = isCellInList(closedList, cellAboveTop, cellAboveLeft);
+        var isOpen = isCellInOpenList(openList, cellAboveTop, cellAboveLeft);
+    }
+
+    function isCellInList(list, checkCellTop, checkCellLeft) {
+        for (i = 0; i < list.length; i++) {
+            if (list[i].coord.top == checkCellTop
+                && list[i].coord.left == checkCellLeft) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function isCellInOpenList(list, checkCellTop, checkCellLeft) {
+        for (i = 0; i < list.length; i++) {
+        }
+    }
+
+//////////////////////////////////////
+/// outdated
+    function checkAdjacentCells (currentCell, blockedTerrain, closedList, openList) {
+        // check cellUp
         for (i = 0; i < blockedTerrain.length; i++) {
-            if (blockedTerrain.coords.top == currentSquare.top + 20)
+            if (blockedTerrain[i].coord.top == (currentCell.top + 20) &&
+                blockedTerrain[i].coord.left == currentCell.left) {
+                break;
+            }
+        }
+        for (i = 0; i < closedList.length; i++) {
+            if (closedList[i].coord.top == (currentCell.top + 20) &&
+                closedList[i].coord.left == currentCell.left) {
+                break;
+            }
+        }
+        for (i = 0; i < openList.length; i++) {
+            if (openList[i].coord.top == (currentCell.top + 20) &&
+                openList[i].coord.left == currentCell.left) {
+                if (openList[i].g > (currentCell.g + 10)) {
+                    openList[i].g = currentCell.g + 10;
+                    openList[i].parent = currentCell;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        // check cellDown
+        for (i = 0; i < blockedTerrain.length; i++) {
+            if (blockedTerrain[i].coord.top == (currentCell.top - 20) &&
+                blockedTerrain[i].coord.left == currentCell.left) {
+                break;
+            }
+        }
+        for (i = 0; i < closedList.length; i++) {
+            if (closedList[i].coord.top == (currentCell.top - 20) &&
+                closedList[i].coord.left == currentCell.left) {
+                break;
+            }
+        }
+        for (i = 0; i < openList.length; i++) {
+            if (openList[i].coord.top == (currentCell.top - 20) &&
+                openList[i].coord.left == currentCell.left) {
+                if (openList[i].g > (currentCell.g + 10)) {
+                    openList[i].g = currentCell.g + 10;
+                    openList[i].parent = currentCell;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        // check cellLeft
+        for (i = 0; i < blockedTerrain.length; i++) {
+            if (blockedTerrain[i].coord.top == (currentCell.top) &&
+                blockedTerrain[i].coord.left == currentCell.left + 20) {
+                break;
+            }
+        }
+        for (i = 0; i < closedList.length; i++) {
+            if (closedList[i].coord.top == (currentCell.top) &&
+                closedList[i].coord.left == currentCell.left + 20) {
+                break;
+            }
+        }
+        for (i = 0; i < openList.length; i++) {
+            if (openList[i].coord.top == (currentCell.top) &&
+                openList[i].coord.left == currentCell.left + 20) {
+                if (openList[i].g > (currentCell.g + 10)) {
+                    openList[i].g = currentCell.g + 10;
+                    openList[i].parent = currentCell;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        // check cellRight
+        for (i = 0; i < blockedTerrain.length; i++) {
+            if (blockedTerrain[i].coord.top == (currentCell.top) &&
+                blockedTerrain[i].coord.left == currentCell.left - 20) {
+                break;
+            }
+        }
+        for (i = 0; i < closedList.length; i++) {
+            if (closedList[i].coord.top == (currentCell.top) &&
+                closedList[i].coord.left == currentCell.left - 20) {
+                break;
+            }
+        }
+        for (i = 0; i < openList.length; i++) {
+            if (openList[i].coord.top == (currentCell.top) &&
+                openList[i].coord.left == currentCell.left - 20) {
+                if (openList[i].g > (currentCell.g + 10)) {
+                    openList[i].g = currentCell.g + 10;
+                    openList[i].parent = currentCell;
+                }
+                else {
+                    break;
+                }
+            }
         }
     }
 
