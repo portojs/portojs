@@ -221,7 +221,7 @@ function battleMain(locationName) {
     }
 
     function enemyTurn() {
-        pathFinding();
+        pathFinding(heroParty[0]);
         alert("Current enemy: " + enemies[0].id);
         // are there adjacent heroes?
         if (heroNear() == true) {
@@ -276,12 +276,14 @@ function battleMain(locationName) {
             endEnemyTurn();
         }
     }
-
-    function pathFinding() {
+///////////// test in tiny bits
+    function pathFinding(hero) {
+        var heroCoords = document.getElementById(hero.name).getBoundingClientRect();
         var blockedTerrain = [];
         var openList = [];
         var closedList = [];
-        var currentCell = document.getElementById(enemies[0].id).getBoundingClientRect();
+        var startCellCoord = document.getElementById(enemies[0].id).getBoundingClientRect();
+        var currentCell = {coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0};
         // populate blockedTerrain
         for (i = 1; i < enemies.length; i ++) {
             blockedTerrain.push({coord: document.getElementById(enemies[i].id).getBoundingClientRect()});
@@ -290,141 +292,54 @@ function battleMain(locationName) {
             blockedTerrain.push({coord: document.getElementById(heroParty[i].name).getBoundingClientRect()});
         }
         // add current enemy cell to openList
-        openList.push({coord: document.getElementById(enemies[0].id).getBoundingClientRect()});
-        // populate openList with adjacent squares vs blcckedTerrain list
+        openList.push({coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0});
+        // populate openList with adjacent squares vs blockedTerrain list
 //////////////   WORK ON THIS CODE
         // testing. maybe it'd be better to put the following in a separate function
-        var cellAboveTop = currentCell.top + 20;
-        var cellAboveLeft = currentCell.left;
-        var isBlocked = isCellInList(blockedTerrain, cellAboveTop, cellAboveLeft);
-        var isClosed = isCellInList(closedList, cellAboveTop, cellAboveLeft);
-        var isOpen = isCellInOpenList(openList, cellAboveTop, cellAboveLeft);
+        var cellAboveTopCoor = currentCell.top + 20;
+        var cellAboveLeftCoor = currentCell.left;
+        var isBlocked = isCellInList(blockedTerrain, cellAboveTopCoor, cellAboveLeftCoor);
+        var isClosed = isCellInList(closedList, cellAboveTopCoor, cellAboveLeftCoor);
+        var isOpen = isCellInOpenList(openList, cellAboveTopCoor, cellAboveLeftCoor, currentCell);
     }
 
     function isCellInList(list, checkCellTop, checkCellLeft) {
         for (i = 0; i < list.length; i++) {
-            if (list[i].coord.top == checkCellTop
-                && list[i].coord.left == checkCellLeft) {
+            if (list[i].coord.top === checkCellTop
+                && list[i].coord.left === checkCellLeft) {
                 return true;
             }
         }
         return false;
     }
 
-    function isCellInOpenList(list, checkCellTop, checkCellLeft) {
+    function isCellInOpenList(list, checkCellTop, checkCellLeft, currentCell) {
         for (i = 0; i < list.length; i++) {
+            if (list[i].coord.top === checkCellTop
+                && list[i].coord.left === checkCellLeft) {
+                if (list[i].g > currentCell.g + 20) {
+                    list[i].g = currentCell.g + 20;
+                    list[i].parent = currentCell;
+                }
+                return
+            }
         }
+        list.push({coordTop: checkCellTop,
+            coordLeft: checkCellLeft,
+            parent: currentCell,
+            g: currentCell.g + 20,
+            h: calculateH(checkCellTop, checkCellLeft, heroCoords.top, heroCoords.left),
+            f: this.g + this.h})
     }
 
-//////////////////////////////////////
-/// outdated
-    function checkAdjacentCells (currentCell, blockedTerrain, closedList, openList) {
-        // check cellUp
-        for (i = 0; i < blockedTerrain.length; i++) {
-            if (blockedTerrain[i].coord.top == (currentCell.top + 20) &&
-                blockedTerrain[i].coord.left == currentCell.left) {
-                break;
-            }
-        }
-        for (i = 0; i < closedList.length; i++) {
-            if (closedList[i].coord.top == (currentCell.top + 20) &&
-                closedList[i].coord.left == currentCell.left) {
-                break;
-            }
-        }
-        for (i = 0; i < openList.length; i++) {
-            if (openList[i].coord.top == (currentCell.top + 20) &&
-                openList[i].coord.left == currentCell.left) {
-                if (openList[i].g > (currentCell.g + 10)) {
-                    openList[i].g = currentCell.g + 10;
-                    openList[i].parent = currentCell;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        // check cellDown
-        for (i = 0; i < blockedTerrain.length; i++) {
-            if (blockedTerrain[i].coord.top == (currentCell.top - 20) &&
-                blockedTerrain[i].coord.left == currentCell.left) {
-                break;
-            }
-        }
-        for (i = 0; i < closedList.length; i++) {
-            if (closedList[i].coord.top == (currentCell.top - 20) &&
-                closedList[i].coord.left == currentCell.left) {
-                break;
-            }
-        }
-        for (i = 0; i < openList.length; i++) {
-            if (openList[i].coord.top == (currentCell.top - 20) &&
-                openList[i].coord.left == currentCell.left) {
-                if (openList[i].g > (currentCell.g + 10)) {
-                    openList[i].g = currentCell.g + 10;
-                    openList[i].parent = currentCell;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        // check cellLeft
-        for (i = 0; i < blockedTerrain.length; i++) {
-            if (blockedTerrain[i].coord.top == (currentCell.top) &&
-                blockedTerrain[i].coord.left == currentCell.left + 20) {
-                break;
-            }
-        }
-        for (i = 0; i < closedList.length; i++) {
-            if (closedList[i].coord.top == (currentCell.top) &&
-                closedList[i].coord.left == currentCell.left + 20) {
-                break;
-            }
-        }
-        for (i = 0; i < openList.length; i++) {
-            if (openList[i].coord.top == (currentCell.top) &&
-                openList[i].coord.left == currentCell.left + 20) {
-                if (openList[i].g > (currentCell.g + 10)) {
-                    openList[i].g = currentCell.g + 10;
-                    openList[i].parent = currentCell;
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        // check cellRight
-        for (i = 0; i < blockedTerrain.length; i++) {
-            if (blockedTerrain[i].coord.top == (currentCell.top) &&
-                blockedTerrain[i].coord.left == currentCell.left - 20) {
-                break;
-            }
-        }
-        for (i = 0; i < closedList.length; i++) {
-            if (closedList[i].coord.top == (currentCell.top) &&
-                closedList[i].coord.left == currentCell.left - 20) {
-                break;
-            }
-        }
-        for (i = 0; i < openList.length; i++) {
-            if (openList[i].coord.top == (currentCell.top) &&
-                openList[i].coord.left == currentCell.left - 20) {
-                if (openList[i].g > (currentCell.g + 10)) {
-                    openList[i].g = currentCell.g + 10;
-                    openList[i].parent = currentCell;
-                }
-                else {
-                    break;
-                }
-            }
-        }
+    function calculateH(startTopCoord, startLeftCoord, endTopCoord, endLeftCoord) {
+        return Math.abs(startTopCoord - endTopCoord) + Math.abs(startLeftCoord - endLeftCoord)
     }
+//////////////////////////////////////
 
     // enemy turn - are there any adjacent heroes?
     function heroNear() {
         enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
-//        alert("Enemy location: " + enemyLocation.top + " " + enemyLocation.left + "/n Hero location: " + heroLocation.top + " " + heroLocation.left);
         for (i = 0; i < heroParty.length; i++) {
             heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
             if (enemyLocation.top == heroLocation.top + 20 && enemyLocation.left == heroLocation.left ||
