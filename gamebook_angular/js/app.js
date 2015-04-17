@@ -2,15 +2,26 @@
  * Created by Peter on 16.04.2015.
  */
 (function() {
-    var app = angular.module('store', []);
+    var app = angular.module('dreams', []);
 
-    app.controller('storeController', function() {
-        this.product = gem;
+    app.controller('DreamsController', function() {
+        this.products = gems;
     });
 
-    var gem = {
-        name: 'Ruby',
-        price: 2,
-        desc: 'Great gem'
-    }
+    var gems = [
+        {
+            name: 'Ruby',
+            price: 20,
+            description: 'Great gem',
+            canPurchase: true,
+            soldOut: false
+        },
+        {
+            name: 'Amethist',
+            price: 1,
+            description: 'Poor gem',
+            canPurchase: true,
+            soldOut: false
+        }
+    ];
 })();

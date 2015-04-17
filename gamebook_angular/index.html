@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html ng-app="store">
+<html ng-app="dreams">
 <head lang="en">
     <meta charset="UTF-8">
     <!-- global script files -->
     <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript" src="../gamebook_angular/js/app.js"></script>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <title></title>
 </head>
-<body>
-    <script type="text/javascript" src="../js/angular.min.js"></script>
-    <script type="text/javascript" src="../gamebook_angular/js/app.js"></script>
-
+<body ng-controller="DreamsController as dreams">
     <p>
-        I am {{6 + 4}}
+        {{"Hello, Angular!"}}
     </p>
+    <div ng-repeat="product in dreams.products">
+        <h1>{{product.name}}</h1>
+        <h2>${{product.price}}</h2>
+        <p>{{product.description}}</p>
+        <button ng-show="product.canPurchase">Add to Cart</button>
+    </div>
 </body>
 </html>
