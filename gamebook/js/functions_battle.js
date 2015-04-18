@@ -9,6 +9,43 @@
 //+++ deleted argument "enemies1", because I think info on enemies
 //+++ should be received from the location variable
 ///----------------------------------------------------------------------
+function test(){
+    var i;
+    var currentCell = {coordTop: 200, coordLeft: 200, g: 20, h: 0, f: 0};
+    var openList = [{coordTop: 240, coordLeft: 200, g: 20, h: 0, f: 0}];
+    checkCells(currentCell.coordTop + 20, currentCell.coordLeft);
+    function checkCells(topCoord, leftCoord) {
+         checkOpenList(topCoord, leftCoord);
+    }
+
+    function checkOpenList(checkCellTop, checkCellLeft) {
+        for (i = 0; i < openList.length; i++) {
+            if (openList[i].coordTop === checkCellTop
+                && openList[i].coordLeft === checkCellLeft) {
+                if (openList[i].g > currentCell.g + 20) {
+                    openList[i].g = currentCell.g + 20;
+                    openList[i].parent = currentCell;
+                    alert("New parent");
+                    return;
+                }
+                alert("Old parent");
+                return;
+            }
+        }
+        openList.push({coordTop: checkCellTop,
+            coordLeft: checkCellLeft,
+            parent: currentCell,
+            g: currentCell.g + 20,
+            h: calculateH(checkCellTop, checkCellLeft, 500, 500),
+            f: this.g + this.h});
+        alert("Open list populated");
+        alert("H: " + openList[1].h)
+    }
+    function calculateH(startTopCoord, startLeftCoord, endTopCoord, endLeftCoord) {
+        return (Math.abs(startTopCoord - endTopCoord) + Math.abs(startLeftCoord - endLeftCoord)) / 20;
+    }
+}
+
 
 function battleMain(locationName) {
 // show battle window
@@ -277,51 +314,65 @@ function battleMain(locationName) {
         }
     }
 ///////////// test in tiny bits
-    function pathFinding(hero) {
+    function preparePathfinding(hero) {
+        // declarations
         var heroCoords = document.getElementById(hero.name).getBoundingClientRect();
         var blockedTerrain = [];
         var openList = [];
         var closedList = [];
+        // initial setting & populate blockedTerrain
         var startCellCoord = document.getElementById(enemies[0].id).getBoundingClientRect();
         var currentCell = {coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0};
-        // populate blockedTerrain
-        for (i = 1; i < enemies.length; i ++) {
-            blockedTerrain.push({coord: document.getElementById(enemies[i].id).getBoundingClientRect()});
+        for (i = 1; i < enemies.length; i++) {
+            var allCoord = document.getElementById(enemies[i].id).getBoundingClientRect();
+            blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
         for (i = 0; i < heroParty.length; i++) {
-            blockedTerrain.push({coord: document.getElementById(heroParty[i].name).getBoundingClientRect()});
+            allCoord = document.getElementById(heroParty[i].name).getBoundingClientRect();
+            blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
         // add current enemy cell to openList
         openList.push({coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0});
-        // populate openList with adjacent squares vs blockedTerrain list
 //////////////   WORK ON THIS CODE
         // testing. maybe it'd be better to put the following in a separate function
-        var cellAboveTopCoor = currentCell.top + 20;
-        var cellAboveLeftCoor = currentCell.left;
-        var isBlocked = isCellInList(blockedTerrain, cellAboveTopCoor, cellAboveLeftCoor);
-        var isClosed = isCellInList(closedList, cellAboveTopCoor, cellAboveLeftCoor);
-        var isOpen = isCellInOpenList(openList, cellAboveTopCoor, cellAboveLeftCoor, currentCell);
+        checkCells(currentCell.top + 20, currentCell.left);
+        checkCells(currentCell.top - 20, currentCell.left);
+        checkCells(currentCell.top, currentCell.left + 20);
+        checkCells(currentCell.top, currentCell.left - 20);
     }
 
-    function isCellInList(list, checkCellTop, checkCellLeft) {
+    function checkCells(topCoord, leftCoord) {
+        var isBlocked = checkList(blockedTerrain, topCoord, leftCoord);
+        if (isBlocked === true) {
+            return;
+        }
+        var isClosed = checkList(closedList, topCoord, leftCoord);
+        if (isClosed === true) {
+            return;
+        }
+        checkOpenList(openList, topCoord, leftCoord);
+    }
+
+    function checkList(list, checkCellTop, checkCellLeft) {
         for (i = 0; i < list.length; i++) {
-            if (list[i].coord.top === checkCellTop
-                && list[i].coord.left === checkCellLeft) {
+            if (list[i].coordTop === checkCellTop
+                && list[i].coordLeft === checkCellLeft) {
                 return true;
             }
         }
         return false;
     }
 
-    function isCellInOpenList(list, checkCellTop, checkCellLeft, currentCell) {
+    function checkOpenList(list, checkCellTop, checkCellLeft) {
         for (i = 0; i < list.length; i++) {
-            if (list[i].coord.top === checkCellTop
-                && list[i].coord.left === checkCellLeft) {
+            if (list[i].coordTop === checkCellTop
+                && list[i].coordLeft === checkCellLeft) {
                 if (list[i].g > currentCell.g + 20) {
                     list[i].g = currentCell.g + 20;
                     list[i].parent = currentCell;
+                    return;
                 }
-                return
+                return;
             }
         }
         list.push({coordTop: checkCellTop,
