@@ -11,15 +11,27 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <title></title>
 </head>
-<body ng-controller="DreamsController as dreams">
+<body class="list-group" ng-controller="DreamsController as dreams">
     <p>
-        {{"Hello, Angular!"}}
+        {{"Choose your mercenary today!"}}
     </p>
-    <div ng-repeat="product in dreams.products">
-        <h1>{{product.name}}</h1>
-        <h2>${{product.price}}</h2>
-        <p>{{product.description}}</p>
-        <button ng-show="product.canPurchase">Add to Cart</button>
-    </div>
+        <div class="list-group-item" ng-repeat="mercenary in dreams.mercenaries">
+            <h3>
+                {{mercenary.name}}
+                <em class="pull-right">{{mercenary.price | currency}}</em>
+            </h3>
+            <div class="gallery" ng-show="{{mercenary.images.length}}">
+                <div class="img-wrap">
+                    <img ng-src="{{mercenary.images[0]}}" />
+                </div>
+                <ul class="img-thumbnails clearfix">
+                    <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
+                        <img ng-src="{{image}}" />
+                    </li>
+                </ul>
+            </div>
+            <p>{{mercenary.description}}</p>
+            <button ng-show="mercenary.canPurchase">Add to Cart</button>
+        </div>
 </body>
 </html>
