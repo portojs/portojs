@@ -17,28 +17,34 @@
 </head>
 <body>
     <h1>Jquery Gamebook</h1>
-    <h2>Blackhornes Castle</h2>
-    <h3>Dungeon corridor</h3>
-    <p>Brick walls are barely lit by scarcely placed torches. Behind is a nasty looking iron grating, blocking the way back. Before you is a big ugly Troll with a rusty trident in its hand. It seems it's going to attack you:</p>
-    <ul class="herolist select">Select a hero to highlight his actions:
-        <li id="coldeyes">Cold-Eyes</li>
-        <li id="bloodyaxe">Bloody Axe</li>
-        <li id="shadowskill">Shadowskill</li>
-    </ul>
-    <p>Your actions:</p>
-    <ul class="actions select">
-        <li class="action shadowskill" id="rangerVision">Invoke Ranger's Vision</li>
-        <li class="action bloodyaxe" >Attack with your axe</li>
-        <li class="action coldeyes">Take a defensive position behind your shield</li>
-    </ul>
+    <div class="location">
+        <h2>Blackhornes Castle</h2>
+        <h3>Dungeon corridor</h3>
 
-    <div id="enemy" data-hp="120">Cave Troll:
-        <p>Looks big, ugly and extremely dangerous.</p>
+        <a class="expand" href="#">Detailed description</a>
+        <p class="detailedDescription">Brick walls are barely lit by scarcely placed torches. Behind is a nasty looking iron grating, blocking the way back. Before you is a big ugly Troll with a rusty trident in its hand. It seems it's going to attack you:</p>
+
+        <ul class="herolist select">Select a hero to highlight his actions:
+            <li id="coldeyes">Cold-Eyes</li>
+            <li id="bloodyaxe">Bloody Axe</li>
+            <li id="shadowskill">Shadowskill</li>
+        </ul>
+
+        <p>Your actions:</p>
+        <ul class="actions select">
+            <li class="action shadowskill" id="rangerVision">Invoke Ranger's Vision</li>
+            <li class="action bloodyaxe" >Attack with your axe</li>
+            <li class="action coldeyes">Take a defensive position behind your shield</li>
+        </ul>
+
+        <div id="enemy" data-hp="120">Cave Troll:
+            <p>Looks big, ugly and extremely dangerous.</p>
+        </div>
+
+        <h4>Current hero:</h4>
+        <p class="details coldeyes">A tall seasoned warrior, learned in the ways of sword and shield.</p>
+        <p class="details bloodyaxe">A hulk of a man with big knotted muscles, hefting an axe.</p>
+        <p class="details shadowskill">A slim tall man with chiseled features, all dressed in black.</p>
     </div>
-
-    <h4>Current hero:</h4>
-    <p class="details coldeyes">A tall seasoned warrior, learned in the ways of sword and shield.</p>
-    <p class="details bloodyaxe">A hulk of a man with big knotted muscles, hefting an axe.</p>
-    <p class="details shadowskill">A slim tall man with chiseled features, all dressed in black.</p>
 </body>
 </html>

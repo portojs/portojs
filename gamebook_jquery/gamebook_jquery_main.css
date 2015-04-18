@@ -10,3 +10,8 @@ body, p, h1, h2, ul {
 .highlight {
     color: red;
 }
+
+.detailedDescription {
+    display: none;
+    text-decoration: none;
+}

@@ -6,21 +6,24 @@ $(document).ready(function() {
     var heroList = $(".herolist");
     var action = $(".action");
     var enemy = $("#enemy");
+    var coldEyes = ".coldeyes";
+    var bloodyAxe = ".bloodyaxe";
+    var shadowSkill = ".shadowskill";
 
-    // hiding things for later
+    // hide things for later
     details.filter(".coldeyes").hide();
     details.filter(".bloodyaxe").hide();
     details.filter(".shadowskill").hide();
 
     // functions
-    function showHeroDetails() {
+    function showHeroDetails(heroName) {
         details.filter(".bloodyaxe").hide();
         details.filter(".shadowskill").hide();
         details.filter(".coldeyes").hide();
-        details.filter(".coldeyes").slideToggle();
+        details.filter(heroName).slideToggle();
     }
 
-    // calling Ranger Vision
+    // call Ranger Vision
     $(".actions").on("click", "#rangerVision", function(){
         var enemyHealth = enemy.data("hp");
         var command1 = $("<li>Call Ranger's Speed</li>");
@@ -31,31 +34,34 @@ $(document).ready(function() {
         enemy.find("p").remove();
         enemy.append(enemyDescription);
     });
-
-    // filtering actions by characters
+    // show detailed description for location
+    $(".location").on("click", ".expand", function () {
+        $(this).closest(".location").find(".detailedDescription").fadeToggle();
+    });
+    // filter actions by characters
     heroList.on("click", "#coldeyes", function() {
         action.filter(".highlight").removeClass("highlight");
         action.filter(".coldeyes").addClass("highlight");
     });
-    heroList.on("mouseenter", "#coldeyes", showHeroDetails);
+    heroList.on("mouseenter", "#coldeyes", function() {showHeroDetails(coldEyes)});
     heroList.on("mouseleave", "#coldeyes", function() {
-        details.filter(".coldeyes").slideToggle();
+        details.filter(".coldeyes").slideUp();
     });
         heroList.on("click", "#bloodyaxe", function() {
         action.filter(".highlight").removeClass("highlight");
         action.filter(".bloodyaxe").addClass("highlight");
     });
-    heroList.on("mouseenter", "#bloodyaxe", showHeroDetails);
+    heroList.on("mouseenter", "#bloodyaxe", function() {showHeroDetails(bloodyAxe)});
     heroList.on("mouseleave", "#bloodyaxe", function() {
-        details.filter(".bloodyaxe").slideToggle();
+        details.filter(".bloodyaxe").slideUp();
     });
     heroList.on("click", "#shadowskill", function() {
         action.filter(".highlight").removeClass("highlight");
         action.filter(".shadowskill").addClass("highlight");
     });
-    heroList.on("mouseenter", "#shadowskill", showHeroDetails);
+    heroList.on("mouseenter", "#shadowskill", function() {showHeroDetails(shadowSkill)});
     heroList.on("mouseleave", "#shadowskill", function() {
-        details.filter(".shadowskill").slideToggle();
+        details.filter(".shadowskill").slideUp();
     });
 
 });
