@@ -35,11 +35,20 @@ $(document).ready(function() {
         enemy.append(enemyDescription);
     });
     // show detailed description for location
-    $(".location").on("click", ".expand", function () {
+    $(".location").on("click", ".expand", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
         $(this).closest(".location").find(".detailedDescription").fadeToggle();
     });
     // filter actions by characters
     heroList.on("click", "#coldeyes", function() {
+        $(this).toggleClass('highlighted');
+        if ($(this).hasClass('highlighted')) {
+            $(this).animate({'top': '-10px'}, 'fast');
+        }
+        else {
+            $(this).animate({'top': '0px'}, 'fast');
+        }
         action.filter(".highlight").removeClass("highlight");
         action.filter(".coldeyes").addClass("highlight");
     });
@@ -47,7 +56,15 @@ $(document).ready(function() {
     heroList.on("mouseleave", "#coldeyes", function() {
         details.filter(".coldeyes").slideUp();
     });
-        heroList.on("click", "#bloodyaxe", function() {
+
+    heroList.on("click", "#bloodyaxe", function() {
+        $(this).toggleClass('highlighted');
+        if ($(this).hasClass('highlighted')) {
+            $(this).animate({'top': '-10px'}, 'fast');
+        }
+        else {
+            $(this).animate({'top': '0px'}, 'fast');
+        }
         action.filter(".highlight").removeClass("highlight");
         action.filter(".bloodyaxe").addClass("highlight");
     });
@@ -55,7 +72,15 @@ $(document).ready(function() {
     heroList.on("mouseleave", "#bloodyaxe", function() {
         details.filter(".bloodyaxe").slideUp();
     });
+
     heroList.on("click", "#shadowskill", function() {
+        $(this).toggleClass('highlighted');
+        if ($(this).hasClass('highlighted')) {
+            $(this).animate({'top': '-10px'}, 'fast');
+        }
+        else {
+            $(this).animate({'top': '0px'}, 'fast');
+        }
         action.filter(".highlight").removeClass("highlight");
         action.filter(".shadowskill").addClass("highlight");
     });

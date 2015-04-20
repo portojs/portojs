@@ -10,11 +10,11 @@
 
     app.controller('TabController', function() {
         this.tab = 1;
-        this.selectTab = function(setTab) {
-            this.tab = setTab;
+        this.setTab = function(newValue) {
+            this.tab = newValue;
         };
-        this.isSelected = function(checkTab) {
-            return this.tab === checkTab;
+        this.isSet = function(tabName) {
+            return this.tab === tabName;
         };
     });
 
