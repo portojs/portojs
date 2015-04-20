@@ -10,40 +10,17 @@
 //+++ should be received from the location variable
 ///----------------------------------------------------------------------
 function test(){
-    var i;
-    var currentCell = {coordTop: 200, coordLeft: 200, g: 20, h: 0, f: 0};
-    var openList = [{coordTop: 240, coordLeft: 200, g: 20, h: 0, f: 0}];
-    checkCells(currentCell.coordTop + 20, currentCell.coordLeft);
-    function checkCells(topCoord, leftCoord) {
-         checkOpenList(topCoord, leftCoord);
-    }
-
-    function checkOpenList(checkCellTop, checkCellLeft) {
-        for (i = 0; i < openList.length; i++) {
-            if (openList[i].coordTop === checkCellTop
-                && openList[i].coordLeft === checkCellLeft) {
-                if (openList[i].g > currentCell.g + 20) {
-                    openList[i].g = currentCell.g + 20;
-                    openList[i].parent = currentCell;
-                    alert("New parent");
-                    return;
-                }
-                alert("Old parent");
-                return;
-            }
+    var openList = [{f: 0},{f:10},{f:20},{f:15},{f:28},{f:5}];
+    openList.sort(function (a, b) {
+        if (a.f < b.f) {
+            return -1;
         }
-        openList.push({coordTop: checkCellTop,
-            coordLeft: checkCellLeft,
-            parent: currentCell,
-            g: currentCell.g + 20,
-            h: calculateH(checkCellTop, checkCellLeft, 500, 500),
-            f: this.g + this.h});
-        alert("Open list populated");
-        alert("H: " + openList[1].h)
-    }
-    function calculateH(startTopCoord, startLeftCoord, endTopCoord, endLeftCoord) {
-        return (Math.abs(startTopCoord - endTopCoord) + Math.abs(startLeftCoord - endLeftCoord)) / 20;
-    }
+        if (a.f > b.f) {
+            return 1;
+        }
+        return 0;
+    });
+    alert(openList[5].f);
 }
 
 
@@ -313,16 +290,18 @@ function battleMain(locationName) {
             endEnemyTurn();
         }
     }
-///////////// test in tiny bits
+
     function preparePathfinding(hero) {
         // declarations
         var heroCoords = document.getElementById(hero.name).getBoundingClientRect();
         var blockedTerrain = [];
         var openList = [];
         var closedList = [];
-        // initial setting & populate blockedTerrain
+        // initial setting
         var startCellCoord = document.getElementById(enemies[0].id).getBoundingClientRect();
+        openList.push({coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0});
         var currentCell = {coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0};
+        // populate blockedTerrain
         for (i = 1; i < enemies.length; i++) {
             var allCoord = document.getElementById(enemies[i].id).getBoundingClientRect();
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
@@ -331,17 +310,35 @@ function battleMain(locationName) {
             allCoord = document.getElementById(heroParty[i].name).getBoundingClientRect();
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
-        // add current enemy cell to openList
-        openList.push({coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0});
-//////////////   WORK ON THIS CODE
-        // testing. maybe it'd be better to put the following in a separate function
-        checkCells(currentCell.top + 20, currentCell.left);
-        checkCells(currentCell.top - 20, currentCell.left);
-        checkCells(currentCell.top, currentCell.left + 20);
-        checkCells(currentCell.top, currentCell.left - 20);
+        checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
     }
 
-    function checkCells(topCoord, leftCoord) {
+    function checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords) {
+        // remove current cell from openList and put it into closedList
+        closedList.push(openList.pop());
+        // check adjacent cells and populate openList
+        checkCell(blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top + 20, currentCell.left);
+        checkCell(blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top - 20, currentCell.left);
+        checkCell(blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top, currentCell.left + 20);
+        checkCell(blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top, currentCell.left - 20);
+        // sort openList (cell with  lowest F comes first)
+        openList.sort(function (a, b) {
+            if (a.f < b.f) {
+                return -1;
+            }
+            if (a.f > b.f) {
+                return 1;
+            }
+            return 0;
+        });
+        currentCell = openList[0];
+        checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
+    }
+
+    function checkCell(blockedTerrain, openList, closedList, currentCell, heroCoords, topCoord, leftCoord) {
+        if (heroCoords.top === topCoord && heroCoords.left === leftCoord) {
+            setPath(currentCell);
+        }
         var isBlocked = checkList(blockedTerrain, topCoord, leftCoord);
         if (isBlocked === true) {
             return;
@@ -350,20 +347,20 @@ function battleMain(locationName) {
         if (isClosed === true) {
             return;
         }
-        checkOpenList(openList, topCoord, leftCoord);
+        checkOpenList(currentCell, heroCoords, openList, topCoord, leftCoord);
     }
 
-    function checkList(list, checkCellTop, checkCellLeft) {
+    function checkList(list, topCoord, leftCoord) {
         for (i = 0; i < list.length; i++) {
-            if (list[i].coordTop === checkCellTop
-                && list[i].coordLeft === checkCellLeft) {
+            if (list[i].coordTop === topCoord
+                && list[i].coordLeft === leftCoord) {
                 return true;
             }
         }
         return false;
     }
 
-    function checkOpenList(list, checkCellTop, checkCellLeft) {
+    function checkOpenList(currentCell, heroCoords, list, checkCellTop, checkCellLeft) {
         for (i = 0; i < list.length; i++) {
             if (list[i].coordTop === checkCellTop
                 && list[i].coordLeft === checkCellLeft) {
@@ -385,6 +382,11 @@ function battleMain(locationName) {
 
     function calculateH(startTopCoord, startLeftCoord, endTopCoord, endLeftCoord) {
         return Math.abs(startTopCoord - endTopCoord) + Math.abs(startLeftCoord - endLeftCoord)
+    }
+
+    function setPath(currentCell) {
+        var f = currentCell.f;
+        var route = [currentCell.parent]
     }
 //////////////////////////////////////
 

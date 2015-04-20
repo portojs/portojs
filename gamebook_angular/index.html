@@ -20,17 +20,41 @@
                 {{mercenary.name}}
                 <em class="pull-right">{{mercenary.price | currency}}</em>
             </h3>
-            <div class="gallery" ng-show="{{mercenary.images.length}}">
-                <div class="img-wrap">
-                    <img ng-src="{{mercenary.images[0]}}" />
+            <div ng-show="mercenary.images.length">
+                <div ng-show="mercenary.images">
+                    <img class="img img-circle img-thumbnail center-block" ng-src="{{mercenary.images[0]}}" />
+                    <ul class="clearfix">
+                        <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
+                            <img ng-src="{{image}}" />
+                        </li>
+                    </ul>
                 </div>
-                <ul class="img-thumbnails clearfix">
-                    <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
-                        <img ng-src="{{image}}" />
+            </div>
+            <section ng-controller="TabController as tab">
+                <ul class="nav nav-pills">
+                    <li ng-class="{active:tab.isSelected(1)}">
+                        <a href="#" ng-click="tab.selectTab(1)">Description</a>
+                    </li>
+                    <li ng-class="{active:tab.isSelected(2)}">
+                        <a href="#" ng-click="tab.selectTab(2)">Specifications</a>
+                    </li>
+                    <li ng-class="{active:tab.isSelected(3)}">
+                        <a href="#" ng-click="tab.selectTab(3)">Reviews</a>
                     </li>
                 </ul>
+            </section>
+            <div class="panel" ng-show="tab.isSelected(1)">
+                <h4>Description</h4>
+                <blockquote>{{mercenary.description}}</blockquote>
             </div>
-            <p>{{mercenary.description}}</p>
+            <div class="panel" ng-show="tab.isSelected(2)">
+                <h4>Specifications</h4>
+                <blockquote>{{mercenary.specifications}}</blockquote>
+            </div>
+            <div class="panel" ng-show="tab.isSelected(3)">
+                <h4>Reviews</h4>
+                <blockquote>{{mercenary.reviews}}</blockquote>
+            </div>
             <button ng-show="mercenary.canPurchase">Add to Cart</button>
         </div>
 </body>
