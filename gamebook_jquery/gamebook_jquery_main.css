@@ -20,6 +20,10 @@ body, p, h1, h2, ul {
     display: none;
 }
 
+.heroTitle {
+    opacity: 0;
+}
+
 .highlighted {
     background-color: yellow;
 }

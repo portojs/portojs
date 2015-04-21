@@ -6,6 +6,7 @@ $(document).ready(function() {
     var heroList = $(".herolist");
     var action = $(".action");
     var enemy = $("#enemy");
+    var heroTitles = $(".heroTitle");
     var coldEyes = ".coldeyes";
     var bloodyAxe = ".bloodyaxe";
     var shadowSkill = ".shadowskill";
@@ -16,11 +17,24 @@ $(document).ready(function() {
     details.filter(".shadowskill").hide();
 
     // functions
-    function showHeroDetails(heroName) {
+    function showHeroDetails(heroTitle, heroName) {
         details.filter(".bloodyaxe").hide();
         details.filter(".shadowskill").hide();
         details.filter(".coldeyes").hide();
         details.filter(heroName).slideToggle();
+        heroTitles.text($(heroTitle).text());
+        heroTitles.animate({"opacity": "1", "top": "-14px"});
+    }
+    function highlightHero(heroTitle, heroName) {
+        $(heroTitle).toggleClass('highlighted');
+        if ($(heroTitle).hasClass('highlighted')) {
+            $(heroTitle).animate({'top': '-10px'}, 'fast');
+        }
+        else {
+            $(heroTitle).animate({'top': '0px'}, 'fast');
+        }
+        action.filter(".highlight").removeClass("highlight");
+        action.filter(heroName).addClass("highlight");
     }
 
     // call Ranger Vision
@@ -41,52 +55,25 @@ $(document).ready(function() {
         $(this).closest(".location").find(".detailedDescription").fadeToggle();
     });
     // filter actions by characters
-    heroList.on("click", "#coldeyes", function() {
-        $(this).toggleClass('highlighted');
-        if ($(this).hasClass('highlighted')) {
-            $(this).animate({'top': '-10px'}, 'fast');
-        }
-        else {
-            $(this).animate({'top': '0px'}, 'fast');
-        }
-        action.filter(".highlight").removeClass("highlight");
-        action.filter(".coldeyes").addClass("highlight");
-    });
-    heroList.on("mouseenter", "#coldeyes", function() {showHeroDetails(coldEyes)});
+    heroList.on("click", "#coldeyes", function() {highlightHero("#coldeyes", coldEyes)});
+    heroList.on("mouseenter", "#coldeyes", function() {showHeroDetails("#coldeyes", coldEyes)});
     heroList.on("mouseleave", "#coldeyes", function() {
         details.filter(".coldeyes").slideUp();
+        $(this).closest(".location").find(".heroTitle").animate({"opacity": "0", "top": "0px"});
     });
 
-    heroList.on("click", "#bloodyaxe", function() {
-        $(this).toggleClass('highlighted');
-        if ($(this).hasClass('highlighted')) {
-            $(this).animate({'top': '-10px'}, 'fast');
-        }
-        else {
-            $(this).animate({'top': '0px'}, 'fast');
-        }
-        action.filter(".highlight").removeClass("highlight");
-        action.filter(".bloodyaxe").addClass("highlight");
-    });
-    heroList.on("mouseenter", "#bloodyaxe", function() {showHeroDetails(bloodyAxe)});
+    heroList.on("click", "#bloodyaxe", function() {highlightHero("#bloodyaxe", bloodyAxe)});
+    heroList.on("mouseenter", "#bloodyaxe", function() {showHeroDetails("#bloodyaxe", bloodyAxe)});
     heroList.on("mouseleave", "#bloodyaxe", function() {
         details.filter(".bloodyaxe").slideUp();
+        $(this).closest(".location").find(".heroTitle").animate({"opacity": "0", "top": "0px"});
     });
 
-    heroList.on("click", "#shadowskill", function() {
-        $(this).toggleClass('highlighted');
-        if ($(this).hasClass('highlighted')) {
-            $(this).animate({'top': '-10px'}, 'fast');
-        }
-        else {
-            $(this).animate({'top': '0px'}, 'fast');
-        }
-        action.filter(".highlight").removeClass("highlight");
-        action.filter(".shadowskill").addClass("highlight");
-    });
-    heroList.on("mouseenter", "#shadowskill", function() {showHeroDetails(shadowSkill)});
+    heroList.on("click", "#shadowskill", function() {highlightHero("#shadowskill", shadowSkill)});
+    heroList.on("mouseenter", "#shadowskill", function() {showHeroDetails("#shadowskill", shadowSkill)});
     heroList.on("mouseleave", "#shadowskill", function() {
         details.filter(".shadowskill").slideUp();
+        $(this).closest(".location").find(".heroTitle").animate({"opacity": "0", "top": "0px"});
     });
 
 });
