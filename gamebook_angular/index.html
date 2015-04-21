@@ -11,49 +11,61 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <title></title>
 </head>
-<body class="list-group" ng-controller="DreamsController as dreams">
-    <p>
-        {{"Choose your mercenary today!"}}
+<body ng-controller="DreamsController as dreams">
+<div class="list-group">
+    <h1 class="text-center">MERCENARY INC.</h1>
+    <p class="text-center">
+        {{"- Choose your mercenary today! -"}}
     </p>
         <div class="list-group-item" ng-repeat="mercenary in dreams.mercenaries">
             <h3>
                 {{mercenary.name}}
                 <em class="pull-right">{{mercenary.price | currency}}</em>
             </h3>
-            <section ng-show="mercenary.images.length">
-                <img ng-src="{{mercenary.images[0]}}" />
-                <ul class="list-inline thumbs">
-                    <li class="thumbnail" ng-repeat="image in mercenary.images">
+            <div ng-show="mercenary.images.length" ng-controller="GalleryController as gallery">
+                <div class="img-wrap">
+                    <img ng-src="{{mercenary.images[gallery.current]}}" />
+                </div>
+                <ul class="img-thumbnails clearfix">
+                    <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
                         <img ng-src="{{image}}" />
                     </li>
                 </ul>
-            </section>
-            <section class="tab" ng-controller="TabController as tab">
+            </div>
+            <section ng-controller="TabController as tab">
                 <ul class="nav nav-pills">
                     <li ng-class="{ active: tab.isSet(1) }">
-                        <a href ng-click="tab.setTab(1)">Description</a>
+                        <a href="" ng-click="tab.setTab(1)">Description</a>
                     </li>
                     <li ng-class="{ active: tab.isSet(2) }">
-                        <a href ng-click="tab.setTab(2)">Specifications</a>
+                        <a href="" ng-click="tab.setTab(2)">Specifications</a>
                     </li>
                     <li ng-class="{ active: tab.isSet(3) }">
-                        <a href ng-click="tab.setTab(3)">Reviews</a>
+                        <a href="" ng-click="tab.setTab(3)">Reviews</a>
                     </li>
                 </ul>
+                <div ng-show="tab.isSet(1)">
+                    <h4>Description</h4>
+                    <blockquote>{{mercenary.description}}</blockquote>
+                </div>
+                <div ng-show="tab.isSet(2)">
+                    <h4>Specifications</h4>
+                    <blockquote>{{mercenary.specifications}}</blockquote>
+                </div>
+                <div ng-show="tab.isSet(3)">
+                    <h4>Reviews</h4>
+                    <li ng-repeat="review in mercenary.reviews">
+                        <blockquote>
+                            <strong> Stars</strong>
+
+                            <cite class="clearfix">-</cite>
+                        </blockquote>
+                    </li>
+                    <blockquote>{{mercenary.reviews}}</blockquote>
+                </div>
             </section>
-            <div ng-show="tab.isSet(1)">
-                <h4>Description</h4>
-                <blockquote>{{mercenary.description}}</blockquote>
-            </div>
-            <div ng-show="tab.isSet(2)">
-                <h4>Specifications</h4>
-                <blockquote>{{mercenary.specifications}}</blockquote>
-            </div>
-            <div ng-show="tab.isSet(3)">
-                <h4>Reviews</h4>
-                <blockquote>{{mercenary.reviews}}</blockquote>
-            </div>
             <button ng-show="mercenary.canPurchase">Add to Cart</button>
         </div>
+</div>
 </body>
 </html>
