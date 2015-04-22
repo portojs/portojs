@@ -10,17 +10,6 @@
 //+++ should be received from the location variable
 ///----------------------------------------------------------------------
 function test(){
-    var openList = [{f: 0},{f:10},{f:20},{f:15},{f:28},{f:5}];
-    openList.sort(function (a, b) {
-        if (a.f < b.f) {
-            return -1;
-        }
-        if (a.f > b.f) {
-            return 1;
-        }
-        return 0;
-    });
-    alert(openList[5].f);
 }
 
 
@@ -40,16 +29,10 @@ function battleMain(locationName) {
     var heroAttackRoll;
     var battleLog = document.getElementById("battle_log");
     // enemy turn vars
-    var findHero = [];
     var adjacentHeroes = [];
-    var closestHero;
     var enemyAPs = locationName.encounter1.enemies1Name.move;
-    var closestHeroLocation;
     var enemyOffset;
     var enemyIdJq;
-
-    var currentHero;
-    var heroInitList = [];
     var heroAPs;
     var heroCoords;
     var miniature;
@@ -235,60 +218,53 @@ function battleMain(locationName) {
     }
 
     function enemyTurn() {
-        pathFinding(heroParty[0]);
-        alert("Current enemy: " + enemies[0].id);
+        alert("Enemy turn begins!");
         // are there adjacent heroes?
-        if (heroNear() == true) {
+        if (heroNear() === true) {
             // attack random adjacent hero
             attackRandomHero()
         }
         else {
-            // taking coordinates of all heroes
-            findHero = [];
-            enemyLocation = document.getElementById(enemies[0].id).getBoundingClientRect();
-            for (i = 0; i < heroParty.length; i++) {
-                heroLocation = document.getElementById(heroParty[i].name).getBoundingClientRect();
-                findHero.push({
-                    coord: Math.abs((heroLocation.top - enemyLocation.top)) + Math.abs((heroLocation.left - enemyLocation.left)),
-                    name: heroParty[i].name
-                });
-            }
-            // sorting heroes by nearness
-            findHero.sort(function (a, b) {
-                return a.coord - b.coord;
-            });
-            closestHero = findHero[0];
-            closestHeroLocation = document.getElementById(closestHero.name).getBoundingClientRect();
-            enemyIdJq = $("#" + enemies[0].id);
-            enemyAPs = locationName.encounter1.enemies1Name.move;
+            alert("Prepare for pathfinding!");
+            // find the shortest path
+            var shortestPath = findPath();
+            alert("Shortest path found!");
             while (enemyAPs > 0) {
-                alert("APs left: " + enemyAPs);
-                enemyAPs--;
-                enemyOffset = enemyIdJq.offset();
-                if (heroNear() == true) {
-                    alert("Attacking!");
-                    enemyAPs = 0;
-                    attackRandomHero();
-                }
-                else if (enemyLocation.top > closestHeroLocation.top) {
-                    alert("Moving up");
-                    enemyIdJq.offset({top: (enemyOffset.top - 20), left: enemyOffset.left});
-                }
-                else if (enemyLocation.top < closestHeroLocation.top) {
-                    alert("Moving down");
-                    enemyIdJq.offset({top: (enemyOffset.top + 20), left: enemyOffset.left});
-                }
-                else if (enemyLocation.left > closestHeroLocation.left) {
-                    alert("Moving left - hero:" + closestHeroLocation.top + " " + closestHeroLocation.left + "</br>enemy: " + enemyOffset.top + " " + enemyOffset.left);
-                    enemyIdJq.offset({top: enemyOffset.top, left: (enemyOffset.left - 20)});
-                }
-                else {
-                    alert("Moving right");
-                    enemyIdJq.offset({top: enemyOffset.top, left: (enemyOffset.left + 20)});
+                for (i = shortestPath.length; i >= 0; i--) {
+                    if (heroNear() === true) {
+                        alert("Attacking!");
+                        enemyAPs = 0;
+                        attackRandomHero();
+                    }
+                    alert("APs left: " + enemyAPs);
+                    enemyAPs--;
+                    enemyOffset = enemyIdJq.offset();
+                    enemyIdJq.offset({top: (shortestPath[i].coordTop - 20), left: shortestPath[i].coordLeft});
                 }
             }
-            endEnemyTurn();
         }
+        endEnemyTurn();
+    }
+
+    function findPath() {
+        // create array with all paths
+        var allPaths = [];
+        for (i = 0; i < heroParty.length; i++) {
+            allPaths.push(preparePathfinding(heroParty[i]));
+        }
+        alert("All paths found!");
+        // sort this array with the shortest path first
+        allPaths.sort(function (a, b) {
+            if (a.length < b.length) {
+                return -1;
+            }
+            if (a.length > b.length) {
+                return 1;
+            }
+            return 0;
+        });
+        // return the shortest path
+        return allPaths[0];
     }
 
     function preparePathfinding(hero) {
@@ -300,10 +276,12 @@ function battleMain(locationName) {
         var startCellCoord;
         var currentCell;
         var allCoord;
+        alert("Declaration complete!");
         // initial setting
         startCellCoord = document.getElementById(enemies[0].id).getBoundingClientRect();
         openList.push({coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0});
         currentCell = {coordTop: startCellCoord.top, coordLeft: startCellCoord.left, g: 0, h: 0, f: 0};
+        alert("Initial setting complete!");
         // populate blockedTerrain
         for (i = 1; i < enemies.length; i++) {
             allCoord = document.getElementById(enemies[i].id).getBoundingClientRect();
@@ -313,6 +291,7 @@ function battleMain(locationName) {
             allCoord = document.getElementById(heroParty[i].name).getBoundingClientRect();
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
+        alert("BlockedTerrain populated! - " + blockedTerrain.length);
         // main action
         checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
     }
@@ -322,7 +301,7 @@ function battleMain(locationName) {
         closedList.push(openList.shift());
         // check adjacent cells and populate openList
         var path = [];
-        while (!path) {
+        while (path.length === 0) {
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top + 20, currentCell.left);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top - 20, currentCell.left);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.top, currentCell.left + 20);
@@ -345,7 +324,7 @@ function battleMain(locationName) {
 
     function checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, topCoord, leftCoord) {
         if (heroCoords.top === topCoord && heroCoords.left === leftCoord) {
-            path = setPath(currentCell);
+            setPath(path, currentCell);
             return;
         }
         var isBlocked = checkList(blockedTerrain, topCoord, leftCoord);
@@ -359,13 +338,12 @@ function battleMain(locationName) {
         checkOpenList(currentCell, heroCoords, openList, topCoord, leftCoord);
     }
 
-    function setPath(currentCell) {
-        var path = [];
+    function setPath(path, currentCell) {
+        path.push(currentCell);
         while (currentCell.parent) {
             path.push(currentCell.parent);
             currentCell = currentCell.parent;
         }
-        return path;
     }
 
     function checkList(list, topCoord, leftCoord) {
@@ -404,12 +382,6 @@ function battleMain(locationName) {
         return Math.abs(startTopCoord - endTopCoord) + Math.abs(startLeftCoord - endLeftCoord)
     }
 
-    function findPath() {
-        var allPaths = [];
-        for (i = 0; i < heroParty.length; i++) {
-            allPaths.push(preparePathfinding(heroParty[i]));
-        }
-    }
 
 //////////////////////////////////////
 
