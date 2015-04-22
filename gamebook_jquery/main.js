@@ -26,12 +26,13 @@ $(document).ready(function() {
         heroTitles.animate({"opacity": "1", "top": "-14px"});
     }
     function highlightHero(heroTitle, heroName) {
-        $(heroTitle).toggleClass('highlighted');
-        if ($(heroTitle).hasClass('highlighted')) {
-            $(heroTitle).animate({'top': '-10px'}, 'fast');
+        var selectHeroTitle = $(heroTitle);
+        selectHeroTitle.toggleClass('highlighted');
+        if (selectHeroTitle.hasClass('highlighted')) {
+            selectHeroTitle.animate({'top': '-10px'}, 'fast');
         }
         else {
-            $(heroTitle).animate({'top': '0px'}, 'fast');
+            selectHeroTitle.animate({'top': '0px'}, 'fast');
         }
         action.filter(".highlight").removeClass("highlight");
         action.filter(heroName).addClass("highlight");
