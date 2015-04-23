@@ -9,6 +9,8 @@
     <script type="text/javascript" src="../gamebook_angular/js/app.js"></script>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../gamebook_angular/css/main.css">
+
     <title></title>
 </head>
 <body ng-controller="DreamsController as dreams">
@@ -18,10 +20,7 @@
         {{"- Choose your mercenary today! -"}}
     </p>
         <div class="list-group-item" ng-repeat="mercenary in dreams.mercenaries">
-            <h3>
-                {{mercenary.name}}
-                <em class="pull-right">{{mercenary.price | currency}}</em>
-            </h3>
+            <merc-title></merc-title>
             <div ng-show="mercenary.images.length" ng-controller="GalleryController as gallery">
                 <div class="img-wrap">
                     <img ng-src="{{mercenary.images[gallery.current]}}" />
@@ -58,11 +57,12 @@
                         <blockquote>
                             <strong>{{review.stars}} Stars</strong>
                             {{review.body}}
-                            <cite class="clearfix">-- {{review.author}}</cite>
+                            <cite class="clearfix">-- {{review.author}} on {{review.createdOn | date}}</cite>
                         </blockquote>
                     </li>
                     <!--  Review Form -->
-                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(mercenary)">
+                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+                          ng-submit="reviewForm.$valid && reviewCtrl.addReview(mercenary)" novalidate>
                         <!--  Live Preview -->
                         <blockquote>
                             <strong>{{reviewCtrl.review.stars}} Stars</strong>
@@ -73,15 +73,18 @@
                         <!--  Review Form -->
                         <h4>Submit a Review</h4>
                         <fieldset class="form-group">
-                            <select class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" ng-model="reviewCtrl.review.stars">
+                            <select class="form-control" ng-options="stars for stars in [5,4,3,2,1]"
+                                    title="Stars" ng-model="reviewCtrl.review.stars" required>
                                 <option value="">Rate the Product</option>
                             </select>
                         </fieldset>
                         <fieldset class="form-group">
-                            <textarea class="form-control" placeholder="Write a short review of the product..." title="Review" ng-model="reviewCtrl.review.body"></textarea>
+                            <textarea class="form-control" placeholder="Write a short review of the product..."
+                                      title="Review" ng-model="reviewCtrl.review.body" required></textarea>
                         </fieldset>
                         <fieldset class="form-group">
-                            <input type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" ng-model="reviewCtrl.review.author" />
+                            <input type="email" class="form-control" placeholder="jimmyDean@example.org"
+                                   title="Email" ng-model="reviewCtrl.review.author" required />
                         </fieldset>
                         <fieldset class="form-group">
                             <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />

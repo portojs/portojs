@@ -26,8 +26,16 @@
     app.controller('ReviewController', function() {
         this.review = {};
         this.addReview = function(mercenary) {
+            this.review.createdOn = Date.now();
             mercenary.reviews.push(this.review);
             this.review = {};
+        };
+    });
+
+    app.directive('MercTitle', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'merc-title.html'
         };
     });
 
