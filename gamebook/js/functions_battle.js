@@ -226,9 +226,9 @@ function battleMain(locationName) {
         else {
             // find the shortest path
             var shortestPath = findPath();
-            alert("Shortest path found!");
+            alert("Shortest path length: " + shortestPath.length);
             while (enemyAPs > 0) {
-                for (i = shortestPath.length; i >= 0; i--) {
+                for (i = shortestPath.length - 1; i >= 0; i--) {
                     if (heroNear() === true) {
                         alert("Attacking!");
                         enemyAPs = 0;
@@ -236,8 +236,8 @@ function battleMain(locationName) {
                     }
                     alert("APs left: " + enemyAPs);
                     enemyAPs--;
-                    enemyOffset = enemyIdJq.offset();
-                    enemyIdJq.offset({top: (shortestPath[i].coordTop - 20), left: shortestPath[i].coordLeft});
+                    enemyOffset = $("#" + enemies[0].id).offset();
+                    enemyOffset.offset({top: (shortestPath[i].coordTop - 20), left: shortestPath[i].coordLeft});
                 }
             }
         }
@@ -248,7 +248,9 @@ function battleMain(locationName) {
         // create array with all paths
         var allPaths = [];
         for (i = 0; i < heroParty.length; i++) {
+            alert("Hero chosen: " + heroParty[i].name);
             allPaths.push(preparePathfinding(heroParty[i]));
+            alert(allPaths.length);
         }
         alert("All paths found!");
         // sort this array with the shortest path first
@@ -288,17 +290,19 @@ function battleMain(locationName) {
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
         // main action
-        checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
+        return checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
     }
 
     function checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords) {
         // move currentCell from openList into closedList
         closedList.push(openList.shift());
         // check adjacent cells and populate openList
+        alert("Current cell: " + currentCell.coordTop + " " + currentCell.coordLeft);
+        alert("Hero: " + heroCoords.top + " " + heroCoords.left);
         var path = [];
         while (path.length === 0) {
-            alert("Current cell: " + currentCell.coordTop + " " + currentCell.coordLeft);
-            alert("Hero: " + heroCoords.top + " " + heroCoords.left);
+//            alert("Current cell: " + currentCell.coordTop + " " + currentCell.coordLeft);
+//            alert("Hero: " + heroCoords.top + " " + heroCoords.left);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop + 20, currentCell.coordLeft);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop - 20, currentCell.coordLeft);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop, currentCell.coordLeft + 20);
@@ -306,6 +310,7 @@ function battleMain(locationName) {
             // sort openList (item with lowest F comes first)
 //            alert("openList sorted");
             closedList.push(openList.shift());
+//            alert("openList first entry - H:" + openList[0].h + "F:" + openList[0].f);
             openList.sort(function (a, b) {
                 if (a.f < b.f) {
                     return -1;
@@ -315,10 +320,13 @@ function battleMain(locationName) {
                 }
                 return 0;
             });
+//            alert("openList first entry - H:" + openList[0].h + "F:" + openList[0].f);
             // set new currentCell
 //            alert("New current cell set");
             currentCell = openList[0];
+//            alert("New currentCell - H:" + currentCell.h + "F:" + currentCell.f);
         }
+        alert("Path length: " + path.length);
         return path;
     }
 
@@ -373,6 +381,7 @@ function battleMain(locationName) {
                 return;
             }
         }
+//        alert("Going to add a new open cell");
         openList.push({
             coordTop: checkCellTop,
             coordLeft: checkCellLeft,
@@ -381,6 +390,10 @@ function battleMain(locationName) {
             h: calculateH(checkCellTop, checkCellLeft, heroCoords.top, heroCoords.left),
             f: this.g + this.h
         });
+        openList[openList.length-1].f = openList[openList.length-1].g + openList[openList.length-1].h;
+//        alert("New cell G: " + openList[openList.length-1].g);
+//        alert("New cell H: " + openList[openList.length-1].h);
+//        alert("New cell F: " + openList[openList.length-1].f);
 //        alert("openList got bigger: " + openList.length);
 //        alert("openList has a new cell: " + openList[0].coordTop + " " + openList[0].coordLeft);
     }
