@@ -226,9 +226,13 @@ function battleMain(locationName) {
         else {
             // find the shortest path
             var shortestPath = findPath();
-            alert("Shortest path length: " + shortestPath.length);
+//            alert("Shortest path length: " + shortestPath.length);
+//            alert("Shortest path[0] coords: " + shortestPath[0].coordTop + ' ' + shortestPath[0].coordLeft);
+//            alert("Shortest path[1] coords: " + shortestPath[1].coordTop + ' ' + shortestPath[1].coordLeft);
+//            alert("Shortest path[2] coords: " + shortestPath[2].coordTop + ' ' + shortestPath[2].coordLeft);
+//            alert("Shortest path[3] coords: " + shortestPath[3].coordTop + ' ' + shortestPath[3].coordLeft);
             while (enemyAPs > 0) {
-                for (i = shortestPath.length - 1; i >= 0; i--) {
+                for (var j = shortestPath.length - 1; j >= 0; j--) {
                     if (heroNear() === true) {
                         alert("Attacking!");
                         enemyAPs = 0;
@@ -236,8 +240,8 @@ function battleMain(locationName) {
                     }
                     alert("APs left: " + enemyAPs);
                     enemyAPs--;
-                    enemyOffset = $("#" + enemies[0].id).offset();
-                    enemyOffset.offset({top: (shortestPath[i].coordTop - 20), left: shortestPath[i].coordLeft});
+//                    alert("j: " + j);
+                    $("#" + enemies[0].id).offset({top: (shortestPath[j].coordTop), left: shortestPath[j].coordLeft});
                 }
             }
         }
@@ -247,10 +251,8 @@ function battleMain(locationName) {
     function findPath() {
         // create array with all paths
         var allPaths = [];
-        for (i = 0; i < heroParty.length; i++) {
-            alert("Hero chosen: " + heroParty[i].name);
-            allPaths.push(preparePathfinding(heroParty[i]));
-            alert(allPaths.length);
+        for (var j = 0; j < heroParty.length; j++) {
+            allPaths.push(preparePathfinding(heroParty[j]));
         }
         alert("All paths found!");
         // sort this array with the shortest path first
@@ -284,11 +286,14 @@ function battleMain(locationName) {
         for (i = 1; i < enemies.length; i++) {
             allCoord = document.getElementById(enemies[i].id).getBoundingClientRect();
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
+//            alert("blockedTerrain length: " + blockedTerrain.length);
         }
+        alert("blockedTerrain length: " + blockedTerrain.length);
         for (i = 0; i < heroParty.length; i++) {
             allCoord = document.getElementById(heroParty[i].name).getBoundingClientRect();
             blockedTerrain.push({coordTop: allCoord.top, coordLeft: allCoord.left});
         }
+        alert("blockedTerrain length: " + blockedTerrain.length);
         // main action
         return checkCurrentCell(blockedTerrain, openList, closedList, currentCell, heroCoords);
     }
@@ -297,20 +302,14 @@ function battleMain(locationName) {
         // move currentCell from openList into closedList
         closedList.push(openList.shift());
         // check adjacent cells and populate openList
-        alert("Current cell: " + currentCell.coordTop + " " + currentCell.coordLeft);
-        alert("Hero: " + heroCoords.top + " " + heroCoords.left);
         var path = [];
         while (path.length === 0) {
-//            alert("Current cell: " + currentCell.coordTop + " " + currentCell.coordLeft);
-//            alert("Hero: " + heroCoords.top + " " + heroCoords.left);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop + 20, currentCell.coordLeft);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop - 20, currentCell.coordLeft);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop, currentCell.coordLeft + 20);
             checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, currentCell.coordTop, currentCell.coordLeft - 20);
             // sort openList (item with lowest F comes first)
-//            alert("openList sorted");
             closedList.push(openList.shift());
-//            alert("openList first entry - H:" + openList[0].h + "F:" + openList[0].f);
             openList.sort(function (a, b) {
                 if (a.f < b.f) {
                     return -1;
@@ -320,19 +319,15 @@ function battleMain(locationName) {
                 }
                 return 0;
             });
-//            alert("openList first entry - H:" + openList[0].h + "F:" + openList[0].f);
             // set new currentCell
-//            alert("New current cell set");
             currentCell = openList[0];
-//            alert("New currentCell - H:" + currentCell.h + "F:" + currentCell.f);
         }
-        alert("Path length: " + path.length);
         return path;
     }
 
     function checkCell(path, blockedTerrain, openList, closedList, currentCell, heroCoords, topCoord, leftCoord) {
         if (heroCoords.top === topCoord && heroCoords.left === leftCoord) {
-            alert("Hero reached!");
+//            alert("Hero reached!");
             setPath(path, currentCell);
             return;
         }
