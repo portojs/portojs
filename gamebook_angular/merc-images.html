@@ -1,0 +1,10 @@
+<div ng-show="mercenary.images.length">
+    <div class="img-wrap">
+        <img ng-src="{{mercenary.images[gallery.current]}}" />
+    </div>
+    <ul class="img-thumbnails clearfix">
+        <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
+            <img ng-src="{{image}}" />
+        </li>
+    </ul>
+</div>

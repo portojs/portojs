@@ -7,6 +7,7 @@
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/angular.min.js"></script>
     <script type="text/javascript" src="../gamebook_angular/js/app.js"></script>
+    <script type="text/javascript" src="../gamebook_angular/js/dreams-directives.js"></script>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../gamebook_angular/css/main.css">
@@ -21,16 +22,7 @@
     </p>
         <div class="list-group-item" ng-repeat="mercenary in dreams.mercenaries">
             <merc-title></merc-title>
-            <div ng-show="mercenary.images.length" ng-controller="GalleryController as gallery">
-                <div class="img-wrap">
-                    <img ng-src="{{mercenary.images[gallery.current]}}" />
-                </div>
-                <ul class="img-thumbnails clearfix">
-                    <li class="small-image pull-left thumbnail" ng-repeat="image in mercenary.images">
-                        <img ng-src="{{image}}" />
-                    </li>
-                </ul>
-            </div>
+            <merc-gallery></merc-gallery>
             <merc-tabs></merc-tabs>
             <button ng-show="mercenary.canPurchase">Add to Cart</button>
         </div>

@@ -2,27 +2,12 @@
  * Created by Peter on 16.04.2015.
  */
 (function() {
-    var app = angular.module('dreams', []);
+    var app = angular.module('dreams', ['dreams-directives']);
 
     app.controller('DreamsController', function() {
         this.mercenaries = army;
     });
 
-    app.controller('GalleryController', function() {
-        this.current = 0;
-        this.setCurrent = function(newValue) {
-            this.current = newValue;
-        }
-    });
-    app.controller('TabController', function() {
-        this.tab = 1;
-        this.setTab = function(newValue) {
-            this.tab = newValue;
-        };
-        this.isSet = function(tabName) {
-            return this.tab === tabName;
-        };
-    });
     app.controller('ReviewController', function() {
         this.review = {};
         this.addReview = function(mercenary) {
@@ -32,37 +17,6 @@
         };
     });
 
-    app.directive('mercTitle', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'merc-title.html'
-        };
-    });
-
-    app.directive('mercSpecs', function() {
-        return {
-            restrict: 'A',
-            templateUrl: 'merc-specs.html'
-        };
-    });
-
-    app.directive('mercTabs', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'merc-tabs.html',
-            controller: function () {
-                this.tab = 1;
-                this.setTab = function (newValue) {
-                    this.tab = newValue;
-                };
-                this.isSet = function (tabName) {
-                    return this.tab === tabName;
-                };
-
-            },
-            controllerAs: 'tab'
-        };
-    });
     var army = [
         {
             name: 'Snake',
