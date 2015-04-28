@@ -187,7 +187,9 @@ li:hover {
 .enemy_miniature_adjacent:hover {
     background: #800000;
 }
-
+.enemy_miniature_dead {
+    background: grey;
+}
 #battle_field {
     display: table;
     position: relative;
