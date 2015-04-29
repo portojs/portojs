@@ -188,7 +188,8 @@ li:hover {
     background: #800000;
 }
 .enemy_miniature_dead {
-    background: grey;
+    background: black;
+    opacity: 1.0;
 }
 #battle_field {
     display: table;

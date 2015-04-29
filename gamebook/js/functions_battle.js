@@ -192,7 +192,10 @@ function battleMain(locationName) {
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
             battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
             if (enemyFind.hp <= 0) {
-                document.getElementById(enemyId).className = ".enemy_miniature_dead";
+                document.getElementById(enemyId).style.backgroundColor = "black";
+                alert("Enemy number: " + enemies.length);
+                enemies.splice(enemyFind, 1);
+                alert("Enemy number: " + enemies.length);
             }
         }
         else {
@@ -222,7 +225,7 @@ function battleMain(locationName) {
 
     function enemyTurn() {
         enemyAPs = locationName.encounter1.enemies1Name.move;
-        alert("Current enemy: " + enemies[0].id);
+//        alert("Current enemy: " + enemies[0].id);
         // are there adjacent heroes?
         if (heroNear() === true) {
             // attack random adjacent hero
@@ -416,12 +419,12 @@ function battleMain(locationName) {
                 enemyLocation.top == heroLocation.top - 20 && enemyLocation.left == heroLocation.left ||
                 enemyLocation.left == heroLocation.left + 20 && enemyLocation.top == heroLocation.top ||
                 enemyLocation.left == heroLocation.left - 20 && enemyLocation.top == heroLocation.top) {
-                alert("Adjacent hero found!");
+//                alert("Adjacent hero found!");
                 adjacentHeroes.push(i);
-                alert("Adjacent hero name: " + heroParty[i].name);
+//                alert("Adjacent hero name: " + heroParty[i].name);
             }
         }
-        alert("Adjacent heroes nr: " + adjacentHeroes.length);
+//        alert("Adjacent heroes nr: " + adjacentHeroes.length);
         return adjacentHeroes.length >= 1;
     }
 
