@@ -185,17 +185,23 @@ function battleMain(locationName) {
         var enemyId = evt.target.myId;
         heroAttackRoll = hero.tohit + rolls.d20();
         battleLog.innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
+        alert("Hero attacks: " + enemyId);
         if (heroAttackRoll >= enemyName.ac) {
             var enemyFind = findEnemy(enemyId);
+            alert("findEnemy returns: " + enemyFind);
+            alert("findEnemy finds enemy: " + enemyFind.id);
             var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
             battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
             if (enemyFind.hp <= 0) {
+                alert("Hero killed: " + enemyId);
                 document.getElementById(enemyId).style.backgroundColor = "black";
-                alert("Enemy number: " + enemies.length);
-                enemies.splice(enemyFind, 1);
-                alert("Enemy number: " + enemies.length);
+                alert("Enemies number: " + enemies.length);
+                var deleted = enemies.splice(enemyFind, 1);
+                alert("Deleted enemy: " + deleted[0].id);
+                changeInitOrder(enemies);
+                alert("Enemies number: " + enemies.length);
             }
         }
         else {
