@@ -4,13 +4,16 @@
 (function() {
     var app = angular.module('dreams', ['dreams-directives']);
 
-    app.controller('DreamsController', [ '$http', function($http) {
-        var dreams = this;
-        dreams.mercenaries = [];
-        $http.get('js/mercs.json').success(function(data) {
-            dreams.mercenaries = data;
-        });
-    }]);
+    app.controller('DreamsController', function() {
+        this.mercenaries = army;
+    });
+//    app.controller('DreamsController', [ '$http', function($http) {
+//        var dreams = this;
+//        dreams.mercenaries = [ ];
+//        $http.get('../gamebook_angular/mercs.json').success(function(data) {
+//            dreams.mercenaries = data;
+//        });
+//    }]);
 
     app.controller('ReviewController', function() {
         this.review = {};
