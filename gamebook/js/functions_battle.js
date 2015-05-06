@@ -188,17 +188,19 @@ function battleMain(locationName) {
         alert("Hero attacks: " + enemyId);
         if (heroAttackRoll >= enemyName.ac) {
             var enemyFind = findEnemy(enemyId);
-            alert("findEnemy returns: " + enemyFind);
+//            alert("findEnemy returns: " + enemyFind);
             alert("findEnemy finds enemy: " + enemyFind.id);
+            alert("findEnemy finds enemy: " + enemyId);
             var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
             battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
             if (enemyFind.hp <= 0) {
-                alert("Hero killed: " + enemyId);
+                alert("Hero killed: " + enemyFind.id);
                 document.getElementById(enemyId).style.backgroundColor = "black";
                 alert("Enemies number: " + enemies.length);
-                var deleted = enemies.splice(enemyFind, 1);
+                var enemyIndex = findEnemyIndex(enemyId);
+                var deleted = enemies.splice(enemyIndex, 1);
                 alert("Deleted enemy: " + deleted[0].id);
                 changeInitOrder(enemies);
                 alert("Enemies number: " + enemies.length);
@@ -460,7 +462,7 @@ function battleMain(locationName) {
         endEnemyTurn();
     }
 
-    // find array index of a particular enemy from his/her id property
+    // find details(hp, ac) of a particular enemy from his/her id property
     function findEnemy(enemy_id) {
         var look = {};
         for (i = 0; i < enemies.length; i++) {
@@ -468,6 +470,15 @@ function battleMain(locationName) {
         }
         return look[enemy_id]
     }
+
+    function findEnemyIndex(enemy_id) {
+        for (i = 0; i < enemies.length; i++) {
+            if (enemies[i].id === enemy_id) {
+                return i;
+            }
+        }
+    }
+
 
     //+++ untested & uncleared
     function heroMove(miniature, hero) {
