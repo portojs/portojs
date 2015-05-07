@@ -185,25 +185,27 @@ function battleMain(locationName) {
         var enemyId = evt.target.myId;
         heroAttackRoll = hero.tohit + rolls.d20();
         battleLog.innerHTML += hero.name + " атакує. Атака: " + heroAttackRoll + "</br>";
-        alert("Hero attacks: " + enemyId);
+//        alert("Hero attacks: " + enemyId);
         if (heroAttackRoll >= enemyName.ac) {
             var enemyFind = findEnemy(enemyId);
 //            alert("findEnemy returns: " + enemyFind);
-            alert("findEnemy finds enemy: " + enemyFind.id);
-            alert("findEnemy finds enemy: " + enemyId);
+//            alert("findEnemy finds enemy: " + enemyFind.id);
+//            alert("findEnemy finds enemy: " + enemyId);
             var heroHit = hero.damage;
             enemyFind.hp = enemyFind.hp - heroHit;
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
             battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
             if (enemyFind.hp <= 0) {
-                alert("Hero killed: " + enemyFind.id);
+//                alert("Hero killed: " + enemyFind.id);
                 document.getElementById(enemyId).style.backgroundColor = "black";
-                alert("Enemies number: " + enemies.length);
+//                alert("Enemies number: " + enemies.length);
                 var enemyIndex = findEnemyIndex(enemyId);
                 var deleted = enemies.splice(enemyIndex, 1);
-                alert("Deleted enemy: " + deleted[0].id);
+//                alert("Deleted enemy: " + deleted[0].id);
                 changeInitOrder(enemies);
-                alert("Enemies number: " + enemies.length);
+//                alert("Enemies number: " + enemies.length);
+//                alert("Enemies array: " + enemies);
+//                alert("Enemies array length: " + enemies.length);
             }
         }
         else {
@@ -215,6 +217,9 @@ function battleMain(locationName) {
     function endHeroTurn() {
         document.getElementById(heroParty[0].name).className = "hero_miniature";
         for (i = 0; i < enemies.length; i++) {
+            if (document.getElementById(enemies === undefined) {
+                alert("The battle is won!");
+            }
             document.getElementById(enemies[i].id).className = "enemy_miniature";
             document.getElementById(enemies[i].id).removeEventListener("click", heroHits, false);
         }
@@ -250,7 +255,7 @@ function battleMain(locationName) {
             while (enemyAPs > 0) {
                 for (var j = shortestPath.length - 1; j >= 0; j--) {
                     if (heroNear() === true) {
-                        alert("Attacking!");
+//                        alert("Attacking!");
                         enemyAPs = 0;
                         return attackRandomHero();
                     }
@@ -457,7 +462,7 @@ function battleMain(locationName) {
         else {
             battleLog.innerHTML += enemyName.name + " не влучив." + "</br>";
         }
-        alert("Turn ended!");
+//        alert("Turn ended!");
         adjacentHeroes = [];
         endEnemyTurn();
     }
