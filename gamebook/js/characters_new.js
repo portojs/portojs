@@ -48,7 +48,7 @@ var enemy_1 = {
     name: 'Гоблін',
     move: 5,
     hp: rolls.d6,
-    ac: 14,
+    ac: 2,
     tohit: 2,
     damage: rolls.d4,
     hpModifier: 1,
