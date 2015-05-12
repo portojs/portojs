@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="store">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- stylesheets -->
+    <!--    <link rel="stylesheet" type="text/css" href="#">
+
+    <!-- vendor -->
+    <script src="../project.angular.001/vendor/angular.min.js"></script>
+    <script src="../project.angular.001/vendor/jquery-1.11.2.js"></script>
+    <script src="../project.angular.001/vendor/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <!-- local script files -->
+    <script src="../project.angular.001/js/main.js" defer="defer"></script>
+</head>
+<body ng-controller="StoreController as store">
+    <h1>EXECUTIVE DECISIONS Inc.</h1>
+    <h2>Make your decision today:</h2>
+    <div class="list-group">
+        <div class="list-group-item" ng-repeat="product in store.products">
+            <div ng-hide="product.soldOut">
+                <h4>{{product.name}}</h4>
+                <h5>${{product.price}}</h5>
+                <p>{{product.description}}</p>
+                <button ng-show="product.canPurchase">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <ul>
+        <li class="decision">
+            <h3>Our missions</h3>
+            <div>
+                <button>Get quote!</button>
+            </div>
+        </li>
+        <li class="decision">
+            <h3>South Africa</h3>
+            <div>
+                <button>Get quote!</button>
+            </div>
+        </li>
+        <li class="decision">
+            <h3>Tobago</h3>
+            <div>
+                <button>Get quote!</button>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
