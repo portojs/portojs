@@ -192,9 +192,10 @@ function battleMain(locationName) {
             battleLog.innerHTML += hero.name + " влучив." + "</br>";
             battleLog.innerHTML += enemyName.name + " втратив " + heroHit + " здоров'я. Залишлиося: " + enemyFind.hp + "</br>";
             if (enemyFind.hp <= 0) {
-//                document.getElementById(enemyId).className = "enemy_miniature_dead";
-                document.getElementById(enemyId).style.backgroundColor = "black";
-                document.getElementById(enemyId).style.zIndex = 0;
+                document.getElementById(enemyId).className = "";
+                document.getElementById(enemyId).className = "enemy_miniature_dead";
+//                document.getElementById(enemyId).style.backgroundColor = "black";
+//                document.getElementById(enemyId).style.zIndex = 0;
                 var enemyIndex = findEnemyIndex(enemyId);
                 var deleted = enemies.splice(enemyIndex, 1);
                 changeInitOrder(enemies);
