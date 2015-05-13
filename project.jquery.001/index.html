@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <!-- stylesheets -->
-<!--    <link rel="stylesheet" type="text/css" href="#">
+    <link rel="stylesheet" type="text/css" href="../project.jquery.001/css/index.css">
 
     <!-- vendor -->
     <script src="../project.jquery.001/vendor/jquery-1.11.2.js"></script>
@@ -15,22 +15,28 @@
     <script src="../project.jquery.001/js/main.js" defer="defer"></script>
 </head>
 <body>
-    <h1>EXECUTIVE DECISIONS Inc.</h1>
-    <h2>Make your decision today:</h2>
+    <div class="jumbotron">
+        <h1>EXECUTIVE DECISIONS Inc.</h1>
+        <h2>Make your decision today:</h2>
+    </div>
+    <div id="filters">
+        <button class="standard-filter">Standard decisions</button>
+        <button class="exclusive-filter">Exclusive decisions</button>
+    </div>
     <ul>
-        <li class="decision">
+        <li class="decision standard" data-price="4599">
             <h3>Trinidad</h3>
             <div>
-                <button>Get quote!</button>
+                <button >Get quote!</button>
             </div>
         </li>
-        <li class="decision">
+        <li class="decision exclusive" data-price="7599">
             <h3>South Africa</h3>
             <div>
                 <button>Get quote!</button>
             </div>
         </li>
-        <li class="decision">
+        <li class="decision standard" data-price="3199">
             <h3>Tobago</h3>
             <div>
                 <button>Get quote!</button>
