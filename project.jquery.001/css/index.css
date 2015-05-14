@@ -10,3 +10,6 @@
 .highlighted {
     background-color: darkgrey;
 }
+.comments {
+    display: none;
+}
