@@ -8,6 +8,15 @@
         this.products = missions;
     });
 
+    app.controller('PanelController', function() {
+        this.tab = 1;
+        this.selectTab = function(setTab) {
+            this.tab = setTab;
+        };
+        this.isSelectecd = function(checkTab) {
+            return this.tab === checkTab;
+        };
+    });
     var missions = [
         {
             name: 'Recon',
@@ -19,6 +28,18 @@
                 {full: 'pics/Gunman.jpg', thumb: 'pics/Gunman_thumb.jpg'},
                 {full: 'pics/Gunwoman.jpg', thumb: 'pics/Gunwoman_thumb.jpg'},
                 {full: 'pics/Thug.jpg', thumb: 'pics/Thug_thumb.jpg'}
+            ],
+            reviews: [
+                {
+                    stars: 5,
+                    body: "Cheap and denedable!",
+                    author: "john_doe@gmail.com"
+                },
+                {
+                    stars: 2,
+                    body: "Little point in this, Recon-2 is much better",
+                    author: "tarantino@hotmail.com"
+                }
             ],
             canPurchase: true,
             soldOut: false
@@ -34,6 +55,18 @@
                 {full: 'pics/Gunwoman.jpg', thumb: 'pics/Gunwoman_thumb.jpg'},
                 {full: 'pics/Thug.jpg', thumb: 'pics/Thug_thumb.jpg'}
             ],
+            reviews: [
+                {
+                    stars: 4,
+                    body: "Quite good. would recommend to friends",
+                    author: "alpacino@gmail.com"
+                },
+                {
+                    stars: 1,
+                    body: "This company employs amateurs!",
+                    author: "steven_seagul@mail.ru"
+                }
+            ],
             canPurchase: true,
             soldOut: false
         },
@@ -48,6 +81,18 @@
                 {full: 'pics/Chuck.jpg', thumb: 'pics/Chuck_thumb.jpg'},
                 {full: 'pics/Thug.jpg', thumb: 'pics/Thug_thumb.jpg'}
             ],
+            reviews: [
+                {
+                    stars: 5,
+                    body: "The best of all Recon series, look no further",
+                    author: "shwarzenegger@hotmail.com"
+                },
+                {
+                    stars: 4,
+                    body: "Agree with the colleagues, this is the best offer!",
+                    author: "stallone@hotmail.com"
+                }
+            ],
             canPurchase: true,
             soldOut: false
         },
@@ -61,6 +106,18 @@
                 {full: 'pics/Gunman.jpg', thumb: 'pics/Gunman_thumb.jpg'},
                 {full: 'pics/Gunwoman.jpg', thumb: 'pics/Gunwoman_thumb.jpg'},
                 {full: 'pics/Chuck.jpg', thumb: 'pics/Chuck_thumb.jpg'}
+            ],
+            reviews: [
+                {
+                    stars: 1,
+                    body: "Don't waste your money on these fellas! They suck royally!",
+                    author: "vandamme@gmail.com"
+                },
+                {
+                    stars: 3,
+                    body: "Not good enough, choose something from the upper tier",
+                    author: "adamsandler@hotmail.com"
+                }
             ],
             canPurchase: true,
             soldOut: false
