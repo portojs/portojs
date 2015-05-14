@@ -1,3 +1,12 @@
+.decisions {
+    list-style-type: none;
+}
+.decision-details {
+    display: none;
+}
+.decision {
+    background-color: lightgrey;
+}
 .highlighted {
-    background-color: yellow;
+    background-color: darkgrey;
 }

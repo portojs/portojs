@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
@@ -14,34 +15,73 @@
     <!-- local script files -->
     <script src="../project.jquery.001/js/main.js" defer="defer"></script>
 </head>
+
 <body>
+
     <div class="jumbotron">
         <h1>EXECUTIVE DECISIONS Inc.</h1>
         <h2>Make your decision today:</h2>
     </div>
+
     <div id="filters">
         <button class="standard-filter">Standard decisions</button>
         <button class="exclusive-filter">Exclusive decisions</button>
     </div>
-    <ul>
+
+    <ul id="decisions">
         <li class="decision standard" data-price="4599">
             <h3>Trinidad</h3>
+            <p>$4599 per operative involved</p>
+            <p>
+                Operatives:
+                <input type="number" class="quantity" value="1" />
+            </p>
+            <p>Total price: $<span id="total">4599</span></p>
             <div>
-                <button >Get quote!</button>
+                <button class="quote-button">Get quote!</button>
+                <button class="details-button">Decision details</button>
+                <ul class="decision-details">
+                    <li>None</li>
+                    <li>None</li>
+                </ul>
             </div>
         </li>
         <li class="decision exclusive" data-price="7599">
             <h3>South Africa</h3>
+            <p>$7599 per operative involved</p>
+            <p>
+                Operatives:
+                <input type="number" class="quantity" value="1" />
+            </p>
+            <p>Total price: $<span id="total">7599</span></p>
             <div>
-                <button>Get quote!</button>
+                <button class="quote-button">Get quote!</button>
+                <button class="details-button">Decision details</button>
+                <ul class="decision-details">
+                    <li>None</li>
+                    <li>None</li>
+                </ul>
             </div>
         </li>
         <li class="decision standard" data-price="3199">
             <h3>Tobago</h3>
+            <p>$3199 per operative involved</p>
+            <p>
+                Operatives:
+                <input type="number" class="quantity" value="1" />
+            </p>
+            <p>Total price: $<span id="total">3199</span></p>
             <div>
-                <button>Get quote!</button>
+                <button class="quote-button">Get quote!</button>
+                <button class="details-button">Decision details</button>
+                <ul class="decision-details">
+                    <li>None</li>
+                    <li>None</li>
+                </ul>
             </div>
         </li>
     </ul>
+
 </body>
+
 </html>
