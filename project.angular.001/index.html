@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title></title>
     <!-- stylesheets -->
-    <!--    <link rel="stylesheet" type="text/css" href="#">
+    <link rel="stylesheet" type="text/css" href="../project.angular.001/css/main.css">
 
     <!-- vendor -->
     <script src="../project.angular.001/vendor/angular.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="../project.angular.001/js/main.js" defer="defer"></script>
 </head>
 
-<body ng-controller="StoreController as store">
+<body ng-controller="StoreController as storeCtrl">
 
     <div class="jumbotron">
         <h1>EXECUTIVE DECISIONS Inc.</h1>
@@ -25,58 +25,11 @@
     </div>
 
     <div class="list-group">
-        <div class="list-group-item" ng-repeat="product in store.products | limitTo:3">
-            <div ng-hide="product.soldOut">
-                <h4>{{product.name}}</h4>
-                <em class="pull-right">{{product.price | currency}}</em>
+        <div class="list-group-item" ng-repeat="product in storeCtrl.products | limitTo:3">
+            <div ng-hide="storeCtrl.soldOut">
+                <product-title></product-title>
                 <img ng-src="{{product.images[0].full}}"/>
-                <section ng-init="tab = 1" ng-controller="PanelController as panel">
-                    <ul class="nav nav-pills">
-                        <li ng-class="{active:panel.isSelectecd(1)}">
-                            <a href="" ng-click="panel.selectTab(1)">Description</a>
-                        </li>
-                        <li ng-class="{active:panel.isSelectecd(2)}">
-                            <a href="" ng-click="panel.selectTab(2)">Specifications</a>
-                        </li>
-                        <li ng-class="{active:panel.isSelectecd(3)}">
-                            <a href="" ng-click="panel.selectTab(3)">Reviews</a>
-                        </li>
-                    </ul>
-                    <div class="panel" ng-show="panel.isSelectecd(1)">
-                        <h4>Description</h4>
-                        <p>{{product.description}}</p>
-                    </div>
-                    <div class="panel" ng-show="panel.isSelectecd(2)">
-                        <h4>Specifications</h4>
-                        <p>None yet</p>
-                    </div>
-                    <div class="panel" ng-show="panel.isSelectecd(3)">
-                        <h4>Reviews</h4>
-                        <blockquote ng-repeat="review in product.reviews">
-                            <b>Stars: {{review.stars}}</b>
-                            {{review.body}}
-                            <cite>by {{review.author}}</cite>
-                        </blockquote>
-                        <form name="reviewForm">
-                            <blockquote>
-                                <b>Stars: {{review.stars}}</b>
-                                {{review.body}}
-                                <cite>---{{review.author}}</cite>
-                            </blockquote>
-                            <select ng-model="review.stars">
-                                <option value="1">1 star</option>
-                                <option value="2">2 star</option>
-                                <option value="3">3 star</option>
-                                <option value="4">4 star</option>
-                                <option value="5">5 star</option>
-                            </select>
-                            <textarea ng-model="review.body"></textarea>
-                            <label>by:</label>
-                            <input type="email" ng-model="review.author" />
-                            <input type="submit" value="Submit" />
-                        </form>
-                    </div>
-                </section>
+                <product-panels></product-panels>
             </div>
         </div>
     </div>
