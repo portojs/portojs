@@ -1,14 +1,20 @@
-.decisions {
-    list-style-type: none;
+#decisions {
+    margin-top: 20px;
 }
 .decision-details {
     display: none;
 }
 .decision {
-    background-color: lightgrey;
+    -moz-transition: top 0.2s;
+    -o-transition: top 0.2s;
+    -webkit-transition: top 0.2s;
+    transition: top 0.2s;
+    background-color: darkgrey;
+    height: 300px;
 }
 .highlighted {
-    background-color: darkgrey;
+    background-color: darkseagreen;
+    top: -10px;
 }
 .comments {
     display: none;

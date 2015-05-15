@@ -37,6 +37,14 @@ $(document).ready(function(){
         $(this).closest('.decision').find('.comments').fadeToggle();
     });
     $('#decisions').on('click', '.decision', function(){
-        $(this).css({'border': '1px solid #967'});
+        $(this).toggleClass('highlighted');
+ /*
+        if ($(this).hasClass('highlighted')) {
+            $(this).animate({'top': '-10px'}, 'fast');
+        }
+        else {
+            $(this).animate({'top': '0px'}, 'fast');
+        }
+        */
     });
 });
