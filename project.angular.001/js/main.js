@@ -2,11 +2,15 @@
  * Created by Peter on 12.05.2015.
  */
 (function(){
-    var app = angular.module('store', []);
+    var app = angular.module('store', ['store-products']);
 
-    app.controller('StoreController', function(){
-        this.products = missions;
-    });
+    app.controller('StoreController',['$http', function($http){
+        var store = this;
+        store.products = [];
+        $http.get('json/resource.json').success(function(data) {
+            store.products = data;
+        });
+    }]);
 
     app.controller('ReviewController', function() {
         this.review = {};
@@ -15,31 +19,7 @@
             this.review = {};
         };
     });
-
-    app.directive('productTitle', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'templates/product-title.html'
-        };
-    });
-
-    app.directive('productPanels', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'templates/product-panels.html',
-            controller: function() {
-                this.tab = 1;
-                this.selectTab = function(setTab) {
-                    this.tab = setTab;
-                };
-                this.isSelected = function(checkTab) {
-                    return this.tab === checkTab;
-                };
-            },
-            controllerAs: 'panels'
-        };
-    });
-
+/*
     var missions = [
         {
             name: 'Recon',
@@ -146,4 +126,5 @@
             soldOut: false
         }
     ];
+    */
 })();
