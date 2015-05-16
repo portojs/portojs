@@ -25,12 +25,19 @@ $(document).ready(function(){
         $('.highlighted').removeClass('highlighted');
         decision.filter('.exclusive').addClass('highlighted');
     });
-    decision.on('click', '.details-button',showDecisionDetails);
+    decision.on('click', '.details-button', showDecisionDetails);
+    decision.on('click', '.details-button', function() {
+        $.ajax('html/decision-details.html', {
+            success: function(response) {
+                $(this).closest('.decision').find('.decision-details-test').html(response).slideToggle();
+            }
+        });
+    });
     decision.on('mouseenter', 'h3', showDecisionDetails);
     decision.on('keyup', '.quantity', function(){
         var price = +$(this).closest('.decision').data('price');
         var quantity = +$(this).val();
-        $('#total').text(price * quantity);
+        $(this).closest('.decision').find('.total').text(price * quantity);
     });
     decision.on('click', '.expand', function(event){
         event.preventDefault();
@@ -38,13 +45,13 @@ $(document).ready(function(){
     });
     $('#decisions').on('click', '.decision', function(){
         $(this).toggleClass('highlighted');
- /*
+
         if ($(this).hasClass('highlighted')) {
             $(this).animate({'top': '-10px'}, 'fast');
         }
         else {
             $(this).animate({'top': '0px'}, 'fast');
         }
-        */
+
     });
 });

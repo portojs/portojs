@@ -13,8 +13,8 @@
     height: 300px;
 }
 .highlighted {
-    background-color: darkseagreen;
     top: -10px;
+    background-color: darkseagreen;
 }
 .comments {
     display: none;
