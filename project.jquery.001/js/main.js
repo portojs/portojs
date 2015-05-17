@@ -25,15 +25,32 @@ $(document).ready(function(){
         $('.highlighted').removeClass('highlighted');
         decision.filter('.exclusive').addClass('highlighted');
     });
+    /* AJAX testing*/
     decision.on('click', '.details-button', showDecisionDetails);
     decision.on('click', '.details-button', function() {
+        var test = $(this);
         $.ajax('html/decision-details.html', {
             success: function(response) {
-                $(this).closest('.decision').find('.decision-details-test').html(response).slideToggle();
-            }
+                test.closest('.decision').find('.decision-details-test').html(response).slideToggle();
+            },
+            error: function(request, errorType, errorMessage) {
+                alert('Error: ' + errorType + ' with message: ' + errorMessage);
+            },
+            timeout: 3000,
+            beforeSend: function(){},
+            complete: function(){}
         });
     });
-    decision.on('mouseenter', 'h3', showDecisionDetails);
+    decision.on('click', '.details-button2', function() {
+        var test = $(this);
+        $.get('html/decision-details-2.html', function(response) {
+            test.closest('.decision').find('.decision-details-test-2').html(response).slideToggle();
+        })
+    });
+    $('.decision .decision-details-2-sneaky').on('click', function() {
+        $(this).addClass('highlighted');
+    });
+//    decision.on('mouseenter', 'h3', showDecisionDetails);
     decision.on('keyup', '.quantity', function(){
         var price = +$(this).closest('.decision').data('price');
         var quantity = +$(this).val();
