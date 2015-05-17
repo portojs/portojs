@@ -2,7 +2,7 @@
  * Created by Peter on 12.05.2015.
  */
 (function(){
-    var app = angular.module('store', ['store-products']);
+    var app = angular.module('store', ['ngRoute', 'store-products']);
 
     app.controller('StoreController',['$http', function($http){
         var store = this;
