@@ -26,14 +26,8 @@
         <h2>Make your decision today:</h2>
     </div>
 
-    <div class="list-group">
-        <div class="list-group-item" ng-repeat="product in storeCtrl.products | limitTo:3">
-            <div ng-hide="storeCtrl.soldOut">
-                <product-title></product-title>
-                <product-gallery></product-gallery>
-                <product-panels></product-panels>
-            </div>
-        </div>
+    <div class="main-wrapper">
+        <div ng-view></div>
     </div>
 
 </body>
