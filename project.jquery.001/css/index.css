@@ -5,15 +5,15 @@
     display: none;
 }
 .decision {
-    -moz-transition: top 0.2s;
+/*    -moz-transition: top 0.2s;
     -o-transition: top 0.2s;
     -webkit-transition: top 0.2s;
-    transition: top 0.2s;
+    transition: top 0.2s; */
     background-color: darkgrey;
     height: 300px;
 }
 .highlighted {
-    top: -10px;
+/*    top: -10px; */
     background-color: darkseagreen;
 }
 .comments {
