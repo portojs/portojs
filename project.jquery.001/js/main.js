@@ -1,27 +1,36 @@
 /**
  * Created by Peter on 12.05.2015.
  */
-function DecisionTest(element) {
-    this.el = element;
 
-    element.on('click', '.quantity', function() {
-        $(this).val(999999);
-    });
-    this.showAvailability = function() {
-        var closestDecision = $(this).closest('.decision');
-        var amount = closestDecision.data('price');
-        var quoteReply = $('<p>Available from $' + amount + '</p>');
-        closestDecision.append(quoteReply);
-        $(this).remove();
+function General() {
+    var $filters = $('#filters');
+    var $decision = $('.decision');
+    this.addHighlightStandard = function() {
+        if ($decision.filter('.standard').hasClass('highlighted')) {
+            $('.highlighted').removeClass('highlighted');
+        }
+        else {
+            $('.highlighted').removeClass('highlighted');
+            $decision.filter('.standard').addClass('highlighted');
+        }
     };
-    this.el.on('click', '.availability-button', this.showAvailability);
+    this.addHighlightExclusive = function() {
+        if ($decision.filter('.exclusive').hasClass('highlighted')) {
+            $('.highlighted').removeClass('highlighted');
+        }
+        else {
+            $('.highlighted').removeClass('highlighted');
+            $decision.filter('.exclusive').addClass('highlighted');
+        }
+    };
+    $filters.on('click', '.standard-filter', this.addHighlightStandard);
+    $filters.on('click', '.exclusive-filter', this.addHighlightExclusive);
 }
 
 function Decision(el) {
     this.el = el;
     this.decisionDetails = this.el.find('.decision-details');
     var decision = this;
-    var filters = $('#filters');
 
     /* helper methods go here */
     this.loadDetails = function() {
@@ -57,19 +66,6 @@ function Decision(el) {
     this.addHighlight = function() {
         $(this).addClass('highlighted');
     };
-    this.addHighlightStandard = function() {
-        if ($('.decision').filter('.standard').hasClass('highlighted')) {
-            $('.highlighted').removeClass('highlighted');
-            $('.decision').filter('.standard').addClass('highlighted');
-        }
-        else {
-            $('.highlighted').removeClass('highlighted');
-        }
-    };
-    this.addHighlightExclusive = function() {
-        $('.highlighted').removeClass('highlighted');
-        $('.decision').filter('.exclusive').addClass('highlighted');
-    };
     this.calculateTotalPrice = function() {
         var price = +$(this).closest('.decision').data('price');
         var quantity = +$(this).val();
@@ -91,22 +87,20 @@ function Decision(el) {
 
     /* event handlers go here */
     this.el.on('click', '.availability-button', this.showAvailability);
-    filters.on('click', '.standard-filter', this.addHighlightStandard);
-    filters.on('click', '.exclusive-filter', this.addHighlightExclusive);
     this.el.on('click', '.details-button', this.showDecisionDetails);
     this.el.on('click', '.details-button', this.loadDetails);
     this.el.on('click', '.details-button2', this.loadDetails2);
     this.el.on('click', '.decision-details-2-sneaky', this.addHighlight);
     this.el.on('keyup', '.quantity', this.calculateTotalPrice);
     this.el.on('click', '.expand', this.showComments);
-    $('#decisions').on('click', '.decision', this.animateDecision);
+    this.el.on('click', this.animateDecision);
 }
 
 $(document).ready(function(){
+    var general = new General();
     var trinidad = new Decision($('#trinidad'));
     var southAfrica = new Decision($('#southAfrica'));
     var tobago = new Decision($('#tobago'));
-//    var testing = new DecisionTest($('.decision'));
 });
 
 /* object declaration
