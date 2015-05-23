@@ -42,7 +42,7 @@
                 <div>
                     <button class="availability-button">Check availability!</button>
                     <button class="details-button">Decision details</button>
-                    <div class="decision-details"></div>
+                    <div class="decision-details" data-address="html/decision-details-trinidad.html"></div>
                 </div>
                 <a class="expand">Show comments</a>
                 <ul class="comments">
@@ -61,8 +61,8 @@
                 <p>Total price: $<span class="total">7599</span></p>
                 <div>
                     <button class="availability-button">Check availability!</button>
-                    <button class="details-button2">Decision details</button>
-                    <div class="decision-details"></div>
+                    <button class="details-button">Decision details</button>
+                    <div class="decision-details" data-address="html/decision-details-southAfrica.html"></div>
                 </div>
                 <a class="expand">Show comments</a>
                 <ul class="comments">
@@ -74,24 +74,24 @@
             <div id="tobago" class="col-md-4 decision standard" data-price="3199">
                 <h3>Tobago</h3>
                 <p>$3199 per operative involved</p>
-                <p>
-                    Operatives:
-                    <input type="number" class="quantity" value="1" />
-                </p>
-                <p>Total price: $<span class="total">3199</span></p>
-                <div>
-                    <button class="availability-button">Check availability!</button>
-                    <button class="details-button">Decision details</button>
-                    <ul class="decision-details">
-                        <li>Deep diving</li>
-                        <li>12 bomb attacks</li>
+                <form>
+                    <p>
+                        Operatives:
+                        <input type="number" class="quantity" value="1" />
+                    </p>
+                    <p>Total price: $<span class="total">3199</span></p>
+                    <div>
+                        <button class="availability-button">Check availability!</button>
+                        <button class="details-button">Decision details</button>
+                        <button type="submit">Quote a price</button>
+                        <div class="decision-details" data-address="html/decision-details-tobago.html"></div>
+                    </div>
+                    <a class="expand">Show comments</a>
+                    <ul class="comments">
+                        <li>These operative are just street thugs!</li>
+                        <li>Bombed my entire opposition out</li>
                     </ul>
-                </div>
-                <a class="expand">Show comments</a>
-                <ul class="comments">
-                    <li>These operative are just street thugs!</li>
-                    <li>Bombed my entire opposition out</li>
-                </ul>
+                </form>
             </div>
 
         </div>

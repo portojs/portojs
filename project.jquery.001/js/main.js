@@ -33,6 +33,7 @@ function Decision(el) {
     var decision = this;
 
     /* helper methods go here */
+    /*
     this.loadDetails = function() {
         $.ajax('html/decision-details.html', {
             context: decision,
@@ -47,10 +48,11 @@ function Decision(el) {
             complete: function(){}
         });
     };
+    */
     this.loadDetails2 = function() {
         var test = $(this);
-        $.get('html/decision-details-2.html', function(response) {
-            test.closest('.decision').find('.decision-details-test-2').html(response).slideToggle();
+        $.get(test.closest('.decision').find('.decision-details').data('address'), function(response) {
+            test.closest('.decision').find('.decision-details').html(response).slideToggle();
         })
     };
     this.showAvailability = function() {
@@ -60,9 +62,11 @@ function Decision(el) {
         closestDecision.append(quoteReply);
         $(this).remove();
     };
+    /*
     this.showDecisionDetails = function() {
         $(this).closest('.decision').find('.decision-details').slideToggle();
     };
+    */
     this.addHighlight = function() {
         $(this).addClass('highlighted');
     };
@@ -87,10 +91,10 @@ function Decision(el) {
 
     /* event handlers go here */
     this.el.on('click', '.availability-button', this.showAvailability);
-    this.el.on('click', '.details-button', this.showDecisionDetails);
-    this.el.on('click', '.details-button', this.loadDetails);
-    this.el.on('click', '.details-button2', this.loadDetails2);
-    this.el.on('click', '.decision-details-2-sneaky', this.addHighlight);
+//    this.el.on('click', '.details-button', this.showDecisionDetails);
+//    this.el.on('click', '.details-button', this.loadDetails);
+    this.el.on('click', '.details-button', this.loadDetails2);
+//    this.el.on('click', '.decision-details-2-sneaky', this.addHighlight);
     this.el.on('keyup', '.quantity', this.calculateTotalPrice);
     this.el.on('click', '.expand', this.showComments);
     this.el.on('click', this.animateDecision);
