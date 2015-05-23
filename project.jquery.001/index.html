@@ -71,19 +71,27 @@
                 </ul>
             </div>
 
-            <div id="tobago" class="col-md-4 decision standard" data-price="3199">
+            <div id="tobago" class="col-md-4 decision standard" data-price="3199" data-destination="Tobago">
                 <h3>Tobago</h3>
                 <p>$3199 per operative involved</p>
-                <form>
+                <form action="/book">
                     <p>
                         Operatives:
                         <input type="number" class="quantity" value="1" />
+                    </p>
+                    <p>
+                        Destination:
+                        <select id="destination" name="destination">
+                            <option value="capital" selected>Capital</option>
+                            <option value="suburbs">Suburbs</option>
+                            <option value="jungle">Jungle</option>
+                        </select>
                     </p>
                     <p>Total price: $<span class="total">3199</span></p>
                     <div>
                         <button class="availability-button">Check availability!</button>
                         <button class="details-button">Decision details</button>
-                        <button type="submit">Quote a price</button>
+                        <input type="submit" value="Quote a price" />
                         <div class="decision-details" data-address="html/decision-details-tobago.html"></div>
                     </div>
                     <a class="expand">Show comments</a>

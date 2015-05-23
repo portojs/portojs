@@ -49,10 +49,11 @@ function Decision(el) {
         });
     };
     */
-    this.loadDetails2 = function() {
-        var test = $(this);
-        $.get(test.closest('.decision').find('.decision-details').data('address'), function(response) {
-            test.closest('.decision').find('.decision-details').html(response).slideToggle();
+    this.loadDetails2 = function(event) {
+        event.preventDefault();
+        var loadDets = $(this).closest('.decision').find('.decision-details');
+        $.get(loadDets.data('address'), function(response) {
+            loadDets.html(response).slideToggle();
         })
     };
     this.showAvailability = function() {
@@ -98,6 +99,23 @@ function Decision(el) {
     this.el.on('keyup', '.quantity', this.calculateTotalPrice);
     this.el.on('click', '.expand', this.showComments);
     this.el.on('click', this.animateDecision);
+    this.el.on('click', 'submit', function(event) {
+        event.preventDefault();
+        $.ajax('/book', {
+            context: decision,
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(result) {
+                $('form').remove();
+                $('#tobago').hide().html(result).fadeIn();
+            }
+
+                /*
+            { "destination": decision.closest('.decision').find('#destination').val(),
+                    "quantity": decision.closest('.decision').find('.quantity').val()}
+                    */
+        })
+    })
 }
 
 $(document).ready(function(){
