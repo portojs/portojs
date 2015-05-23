@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSS files -->
-    <link rel="stylesheet" href="bower_components/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="app.css">
+    <html ng-app="readingList">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AngularJS Reading List</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="app.css">
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="app.js"></script>
+    </head>
 
-</head>
-<body ng-app="readingList">
+    <body>
 
+        <h1>Angular Reading List of Awesome</h1>
 
+        <div class="row" ng-controller="ReadingListController as readingListCtrl">
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="app.js"></script>
-    <script src="view1/view1.js"></script>
-</body>
+            <button class="btn btn-default">Create a Review</button>
+            <hr />
+
+            <hr />
+
+            <ul class="list-unstyled col-sm-8">
+                <li class="book row" ng-repeat="book in readingListCtrl.books">
+                    <aside class="col-sm-3">
+
+                        <a href="http://www.amazon.com/gp/product/{{ book.isbn }}">
+                            <img ng-src="http://images.amazon.com/images/P/{{ book.isbn }}.01.ZTZZZZZZ.jpg" alt="Cover of Book Title" class="full">
+                        </a>
+                        <p class="goodRating rating">{{ book.rating }}/5</p>
+                    </aside>
+                    <div class="col-sm-9">
+                        <h3><a href="http://www.amazon.com/gp/product/{{ book.isbn }}"
+                                >{{ book.title }}</a></h3>
+
+                        <cite class="text-muted">Written by {{ book.author}}</cite>
+
+                        <p>{{ book.review }}</p>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="label label-primary" ng-repeat="(genre, state) in book.genres" ng-show="state">{{ genre }}</span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </body>
+
 </html>
