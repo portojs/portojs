@@ -101,14 +101,23 @@ function Decision(el) {
     this.el.on('click', this.animateDecision);
     this.el.on('click', 'submit', function(event) {
         event.preventDefault();
-        $.ajax('/book', {
+        $.ajax($('form').attr('action'), {
             context: decision,
             type: 'POST',
             data: $('form').serialize(),
+            dataType: 'json',
             success: function(result) {
                 $('form').remove();
-                $('#tobago').hide().html(result).fadeIn();
-            }
+                var msg = $("<p></p>");
+                msg.append("Destination: " + result.locaion + ". ");
+                msg.append("Region: " + result.region + ". ");
+                msg.append("Operatives Nr.: " + result.operatives + ". ");
+                $('#tobago').hide().html(msg).fadeIn();
+            },
+            error: function (request, errorType, errorMessage) {
+                alert("Error: " + errorType + " with message: " + errorMessage);
+            },
+            contentType: 'application/json'
 
                 /*
             { "destination": decision.closest('.decision').find('#destination').val(),
