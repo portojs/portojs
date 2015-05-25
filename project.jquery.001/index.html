@@ -31,7 +31,7 @@
     <div id="decisions">
         <div class="row">
 
-            <div id="trinidad" class="col-md-4 decision standard" data-price="4599">
+            <div id="trinidad" class="col-md-4 decision standard" data-price="4599" data-operatives="json/operatives.json">
                 <h3>Trinidad</h3>
                 <p>$4599 per operative involved</p>
                 <p>
@@ -42,6 +42,7 @@
                 <div>
                     <button class="availability-button">Check availability!</button>
                     <button class="details-button">Decision details</button>
+                    <button class="show-operatives-button">Show operatives</button>
                     <div class="decision-details" data-address="html/decision-details-trinidad.html"></div>
                 </div>
                 <a class="expand">Show comments</a>
@@ -51,7 +52,7 @@
                 </ul>
             </div>
 
-            <div id="southAfrica" class="col-md-4 decision exclusive" data-price="7599">
+            <div id="southAfrica" class="col-md-4 decision exclusive" data-price="7599" data-address="json/package.json">
                 <h3>South Africa</h3>
                 <p>$7599 per operative involved</p>
                 <p>
@@ -62,6 +63,7 @@
                 <div>
                     <button class="availability-button">Check availability!</button>
                     <button class="details-button">Decision details</button>
+                    <button class="test-button">Test JSON</button>
                     <div class="decision-details" data-address="html/decision-details-southAfrica.html"></div>
                 </div>
                 <a class="expand">Show comments</a>
@@ -71,7 +73,7 @@
                 </ul>
             </div>
 
-            <div id="tobago" class="col-md-4 decision standard" data-price="3199" data-destination="Tobago">
+            <div id="tobago" class="col-md-4 decision standard" data-price="3199" data-destination="Tobago" data-address="json/package.json">
                 <h3>Tobago</h3>
                 <p>$3199 per operative involved</p>
                 <form action="/book">
@@ -92,6 +94,7 @@
                         <button class="availability-button">Check availability!</button>
                         <button class="details-button">Decision details</button>
                         <input type="submit" value="Quote a price" />
+                        <button class="test-button">Test JSON</button>
                         <div class="decision-details" data-address="html/decision-details-tobago.html"></div>
                     </div>
                     <a class="expand">Show comments</a>

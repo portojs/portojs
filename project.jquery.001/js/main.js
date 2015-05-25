@@ -124,6 +124,37 @@ function Decision(el) {
                     "quantity": decision.closest('.decision').find('.quantity').val()}
                     */
         })
+    });
+    this.el.on('click', '.test-button', function(event) {
+        event.preventDefault();
+        $.ajax(el.data('address'), {
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function(result) {
+                var msg = $("<p></p>");
+                msg.append("Name: " + result.name + ". ");
+                msg.append("Version: " + result.version + ".");
+                this.el.hide().html(msg).fadeIn();
+            }
+        });
+    });
+    this.el.on('click', '.show-operatives-button', function(event) {
+        event.preventDefault();
+        var operatives = $("<div class='operative-0'><p><img/></p></div>" +
+        "<div class='operative-1'><p><img/></p></div>" +
+        "<div class='operative-2'><p><img/></p></div>");
+        el.hide().html(operatives).fadeIn();
+        $.ajax(el.data('operatives'), {
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function(result) {
+                $.each(result, function(index, operative) {
+                    var op = $('.operative-' + index);
+                    op.find("p").html(operative.name);
+                    op.find("img").attr("src", operative.image);
+                });
+            }
+        });
     })
 }
 
