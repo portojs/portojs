@@ -11,7 +11,10 @@ angular.module('readingList', [])
     .directive('bookGenres', function(){
         return {
             restrict: 'E',
-            templateUrl: 'partials/book-genres.html'
+            templateUrl: 'partials/book-genres.html',
+            scope: {
+                genres: '='
+            }
         };
     })
 
@@ -30,6 +33,13 @@ angular.module('readingList', [])
             replace: true,
             controller: function() {
                 this.showForm = false;
+                this.book = {genres:{}};
+
+                this.addReview = function(form){
+                    books.push(this.book);
+                    this.book = {genres:{}};
+                    form.$setPristine();
+                };
             },
             controllerAs: 'reviewFormCtrl',
             scope: {

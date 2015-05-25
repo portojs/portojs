@@ -1,4 +1,4 @@
-<form name="reviewForm" class="form-horizontal" ng-submit="reviewFormCtrl.addReview(reviewForm, reviewFormCtrl.book)">
+<form name="reviewForm" class="form-horizontal" ng-submit="reviewFormCtrl.addReview(reviewForm)">
 
     <section class="row well live-preview" ng-show="reviewFormCtrl.book.isbn">
         <aside class="col-sm-3">
@@ -18,11 +18,8 @@
 
             <p>{{reviewFormCtrl.book.review || "No review yet."}}</p>
 
-            <ul class="list-unstyled">
-                <li ng-repeat="(genre, state) in reviewFormCtrl.book.genres">
-                    <span class="label label-primary" ng-show="state">{{genre}}</span>
-                </li>
-            </ul>
+            <book-genres genres="reviewFormCtrl.book.genres"></book-genres>
+
         </div>
     </section>
 
