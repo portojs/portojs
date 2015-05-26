@@ -138,11 +138,12 @@ function Decision(el) {
             }
         });
     });
+    /*
     this.el.on('click', '.show-operatives-button', function(event) {
         event.preventDefault();
-        var operatives = $("<div class='operative-0'><p><img/></p></div>" +
-        "<div class='operative-1'><p><img/></p></div>" +
-        "<div class='operative-2'><p><img/></p></div>");
+        var operatives = $("<div class='operative-0'><p></p><img src=''/></div>" +
+        "<div class='operative-1'><p></p><img src=''/></div>" +
+        "<div class='operative-2'><p></p><img src=''/></div>");
         el.hide().html(operatives).fadeIn();
         $.ajax(el.data('operatives'), {
             dataType: 'json',
@@ -150,10 +151,24 @@ function Decision(el) {
             success: function(result) {
                 $.each(result, function(index, operative) {
                     var op = $('.operative-' + index);
-                    op.find("p").html(operative.name);
-                    op.find("img").attr("src", operative.image);
+                    op.find('p').html(operative.name);
+                    op.find('img').attr('src', operative.image);
                 });
             }
+        });
+    });
+    */
+    this.el.on('click', '.show-operatives-button', function(event) {
+        event.preventDefault();
+        $.getJSON(el.data('operatives'), function(result){
+           var newOperatives = $.map(result, function(operative, index) {
+               var operativeItem = $('<div></div>');
+               $('<p>'+operative.name+'</p>').appendTo(operativeItem);
+               $('<img src="" />').appendTo(operativeItem);
+               operativeItem.find('img').attr('src', operative.image);
+               return operativeItem;
+           });
+           el.html(newOperatives);
         });
     })
 }
