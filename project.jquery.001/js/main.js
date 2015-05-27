@@ -25,6 +25,14 @@ function General() {
     };
     $filters.on('click', '.standard-filter', this.addHighlightStandard);
     $filters.on('click', '.exclusive-filter', this.addHighlightExclusive);
+    $('.show-all-details').on('click', function(event){
+        event.preventDefault();
+        $('.decision').trigger('show.details');
+    });
+    $('.show-all-availability').on('click', function(event){
+        event.preventDefault();
+        $('.decision').trigger('show.availability');
+    })
 }
 
 function Decision(el) {
@@ -61,7 +69,7 @@ function Decision(el) {
         var amount = closestDecision.data('price');
         var quoteReply = $('<p>Available from $' + amount + '</p>');
         closestDecision.append(quoteReply);
-        $(this).remove();
+//        $(this).remove();
     };
     /*
     this.showDecisionDetails = function() {
@@ -91,15 +99,17 @@ function Decision(el) {
     };
 
     /* event handlers go here */
-    this.el.on('click', '.availability-button', this.showAvailability);
+    this.el.on('click.availability', '.availability-button', this.showAvailability);
 //    this.el.on('click', '.details-button', this.showDecisionDetails);
 //    this.el.on('click', '.details-button', this.loadDetails);
-    this.el.on('click', '.details-button', this.loadDetails2);
+    this.el.on('click.details', '.details-button', this.loadDetails2);
+    this.el.on('show.details', this.showComments);
+    this.el.on('show.availability', this.showAvailability);
 //    this.el.on('click', '.decision-details-2-sneaky', this.addHighlight);
-    this.el.on('keyup', '.quantity', this.calculateTotalPrice);
-    this.el.on('click', '.expand', this.showComments);
+    this.el.on('keyup.quantity', '.quantity', this.calculateTotalPrice);
+    this.el.on('click.details', '.expand', this.showComments);
     this.el.on('click', this.animateDecision);
-    this.el.on('click', 'submit', function(event) {
+    this.el.on('click.decision', 'submit', function(event) {
         event.preventDefault();
         $.ajax($('form').attr('action'), {
             context: decision,
@@ -125,7 +135,7 @@ function Decision(el) {
                     */
         })
     });
-    this.el.on('click', '.test-button', function(event) {
+    this.el.on('click.operative', '.test-button', function(event) {
         event.preventDefault();
         $.ajax(el.data('address'), {
             dataType: 'json',
@@ -134,7 +144,7 @@ function Decision(el) {
                 var msg = $("<p></p>");
                 msg.append("Name: " + result.name + ". ");
                 msg.append("Version: " + result.version + ".");
-                this.el.hide().html(msg).fadeIn();
+                el.hide().html(msg).fadeIn();
             }
         });
     });
@@ -158,7 +168,7 @@ function Decision(el) {
         });
     });
     */
-    this.el.on('click', '.show-operatives-button', function(event) {
+    this.el.on('click.operatives', '.show-operatives-button', function(event) {
         event.preventDefault();
         $.getJSON(el.data('operatives'), function(result){
            var newOperatives = $.map(result, function(operative, index) {
@@ -170,7 +180,7 @@ function Decision(el) {
            });
            el.html(newOperatives);
         });
-    })
+    });
 }
 
 $(document).ready(function(){
