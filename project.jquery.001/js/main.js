@@ -68,8 +68,7 @@ function Decision(el) {
         var closestDecision = $(this).closest('.decision');
         var amount = closestDecision.data('price');
         var quoteReply = $('<p>Available from $' + amount + '</p>');
-        closestDecision.append(quoteReply);
-//        $(this).remove();
+        closestDecision.find('.quoteReply').html(quoteReply).toggle(400);
     };
     /*
     this.showDecisionDetails = function() {
