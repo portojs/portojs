@@ -1,6 +1,15 @@
 /**
  * Created by Peter on 12.05.2015.
  */
+$.fn.decisioning = function() {
+    this.each(function(){
+        var decision_current = $(this);
+        decision_current.on('click.details', '.expand', function(){
+            event.preventDefault();
+            $(this).closest('.decision').find('.comments').fadeToggle();
+        });
+    });
+};
 
 function General() {
     var $filters = $('#filters');
@@ -184,9 +193,10 @@ function Decision(el) {
 
 $(document).ready(function(){
     var general = new General();
-    var trinidad = new Decision($('#trinidad'));
-    var southAfrica = new Decision($('#southAfrica'));
-    var tobago = new Decision($('#tobago'));
+//    var trinidad = new Decision($('#trinidad'));
+//    var southAfrica = new Decision($('#southAfrica'));
+//    var tobago = new Decision($('#tobago'));
+    $(".decision").decisioning();
 });
 
 /* object declaration
